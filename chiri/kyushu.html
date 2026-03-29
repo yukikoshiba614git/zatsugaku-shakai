@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>九州地方の雑学</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --orange: #E8621A;
+    --orange-light: #F5895A;
+    --orange-pale: #FFF0E8;
+    --bg: #FFFBF7;
+    --card-bg: #FFFFFF;
+    --text: #2D1B00;
+    --text-sub: #7A5A3A;
+    --border: #F0D5B8;
+    --green: #2E7D52;
+    --green-light: #E8F5EE;
+    --red: #C0392B;
+    --red-light: #FDECEA;
+    --navy: #2E3A5F;
+    --shadow: 0 4px 24px rgba(232,98,26,0.10);
+    --radius: 18px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Zen Maru Gothic', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+
+  header { background: linear-gradient(135deg, var(--orange) 0%, #C94A08 100%); color: white; text-align: center; padding: 16px 20px 12px; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 12px rgba(232,98,26,0.3); }
+  header .region { font-size: 12px; opacity: 0.85; letter-spacing: 2px; margin-bottom: 2px; }
+  header h1 { font-size: 20px; font-weight: 900; }
+  header .stage-label { font-size: 11px; opacity: 0.75; margin-top: 2px; }
+
+  .tabs { display: flex; background: white; border-bottom: 2px solid var(--border); position: sticky; top: 72px; z-index: 99; }
+  .tab { flex: 1; padding: 11px 6px; text-align: center; font-size: 13px; font-weight: 700; color: var(--text-sub); cursor: pointer; border-bottom: 3px solid transparent; transition: all 0.2s; margin-bottom: -2px; }
+  .tab.active { color: var(--orange); border-bottom-color: var(--orange); }
+
+  .progress-wrap { background: white; padding: 10px 16px 8px; border-bottom: 1px solid var(--border); }
+  .progress-meta { display: flex; justify-content: space-between; font-size: 12px; color: var(--text-sub); margin-bottom: 5px; }
+  .progress-bar { height: 7px; background: var(--border); border-radius: 99px; overflow: hidden; }
+  .progress-fill { height: 100%; background: linear-gradient(90deg, var(--orange-light), var(--orange)); border-radius: 99px; transition: width 0.4s ease; }
+
+  .dots { display: flex; gap: 5px; justify-content: center; padding: 8px 16px; flex-wrap: wrap; }
+  .dot { width: 26px; height: 26px; border-radius: 50%; border: 2px solid var(--border); background: white; font-size: 10px; font-weight: 700; display: flex; align-items: center; justify-content: center; color: var(--text-sub); cursor: pointer; transition: all 0.2s; }
+  .dot.current { border-color: var(--orange); background: var(--orange); color: white; }
+  .dot.done { border-color: var(--orange); background: var(--orange-pale); color: var(--orange); }
+
+  main { padding: 0 16px 40px; max-width: 640px; margin: 0 auto; }
+  .card { background: var(--card-bg); border-radius: var(--radius); box-shadow: var(--shadow); border: 1px solid var(--border); overflow: hidden; margin-top: 10px; animation: fadeUp 0.3s ease; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+
+  .card-badge { background: linear-gradient(90deg, var(--orange), var(--orange-light)); color: white; font-size: 11px; font-weight: 700; padding: 5px 14px; letter-spacing: 1px; }
+  .card-title { padding: 14px 16px 10px; font-size: 17px; font-weight: 900; line-height: 1.45; border-bottom: 1px dashed var(--border); }
+  .img-placeholder { width: 100%; height: 180px; background: var(--orange-pale); display: flex; align-items: center; justify-content: center; }
+  .card-img { width: 100%; height: 180px; object-fit: cover; display: block; }
+  .img-caption { font-size: 10px; color: var(--text-sub); padding: 3px 12px; text-align: right; background: var(--orange-pale); }
+
+  .card-story { padding: 16px 16px 6px; font-size: 14px; line-height: 2.0; }
+  .card-q { font-weight: 700; color: var(--text); margin-bottom: 4px; }
+  .card-a { font-weight: 700; color: var(--orange); margin-bottom: 12px; }
+  .card-body { white-space: pre-line; color: var(--text); margin-bottom: 10px; }
+  .card-summary { font-weight: 700; color: var(--text); display: block; padding: 10px 16px 14px; border-top: 1px dashed var(--border); margin: 0 -16px; }
+
+  .reality-box { margin: 0 16px 12px; background: var(--orange-pale); border-left: 4px solid var(--orange); border-radius: 10px; padding: 10px 12px; }
+  .reality-label { font-size: 11px; font-weight: 700; color: var(--orange); letter-spacing: 1px; margin-bottom: 5px; }
+  .reality-text { font-size: 13px; line-height: 1.7; }
+  .vocab-box { margin: 0 16px 16px; background: var(--green-light); border-radius: 10px; padding: 10px 12px; }
+  .vocab-label { font-size: 11px; font-weight: 700; color: var(--green); letter-spacing: 1px; margin-bottom: 6px; }
+  .vocab-item { font-size: 12px; line-height: 1.65; margin-bottom: 3px; }
+  .vocab-item strong { color: var(--green); }
+
+  .nav-buttons { display: flex; gap: 10px; padding: 12px 0 0; }
+  .btn { flex: 1; padding: 13px 10px; border-radius: 12px; border: none; font-family: 'Zen Maru Gothic', sans-serif; font-size: 14px; font-weight: 700; cursor: pointer; transition: all 0.2s; }
+  .btn-prev { background: white; border: 2px solid var(--border); color: var(--text-sub); }
+  .btn-prev:hover { border-color: var(--orange); color: var(--orange); }
+  .btn-next { background: linear-gradient(135deg, var(--orange), #C94A08); color: white; box-shadow: 0 4px 14px rgba(232,98,26,0.35); }
+  .btn-next:hover { transform: translateY(-1px); }
+  .btn:disabled { opacity: 0.35; cursor: not-allowed; transform: none !important; }
+
+  .complete-card { background: linear-gradient(135deg, #FFF7F2, #FFEDE0); border: 2px solid var(--orange-light); border-radius: var(--radius); text-align: center; padding: 28px 20px; margin-top: 12px; animation: fadeUp 0.35s ease; }
+  .complete-emoji { font-size: 48px; margin-bottom: 8px; }
+  .complete-stars { font-size: 26px; letter-spacing: 4px; margin-bottom: 12px; }
+  .complete-title { font-size: 20px; font-weight: 900; color: var(--orange); margin-bottom: 8px; }
+  .complete-desc { font-size: 13px; line-height: 1.8; color: var(--text-sub); margin-bottom: 18px; }
+
+  .quiz-header { background: linear-gradient(135deg, var(--navy) 0%, #1A2540 100%); color: white; text-align: center; padding: 14px 20px 10px; margin-top: 12px; border-radius: var(--radius) var(--radius) 0 0; }
+  .quiz-header h2 { font-size: 17px; font-weight: 900; }
+  .quiz-header p { font-size: 11px; opacity: 0.7; margin-top: 2px; }
+  .quiz-card { background: white; border: 1px solid var(--border); border-top: none; border-radius: 0 0 var(--radius) var(--radius); padding: 18px 16px 22px; animation: fadeUp 0.3s ease; }
+  .quiz-q-num { font-size: 11px; color: var(--navy); font-weight: 700; margin-bottom: 7px; letter-spacing: 1px; }
+  .quiz-q-text { font-size: 15px; font-weight: 700; line-height: 1.6; margin-bottom: 14px; }
+  .quiz-options { display: flex; flex-direction: column; gap: 9px; }
+  .quiz-opt { padding: 12px 14px; border-radius: 10px; border: 2px solid var(--border); background: white; font-family: 'Zen Maru Gothic', sans-serif; font-size: 13px; font-weight: 500; cursor: pointer; text-align: left; transition: all 0.2s; }
+  .quiz-opt:hover:not(:disabled) { border-color: var(--navy); background: #F0F3FA; }
+  .quiz-opt.correct { border-color: var(--green) !important; background: var(--green-light) !important; color: var(--green); font-weight: 700; }
+  .quiz-opt.wrong { border-color: var(--red) !important; background: var(--red-light) !important; color: var(--red); }
+  .quiz-opt:disabled { cursor: default; }
+  .quiz-result { margin-top: 12px; padding: 10px 12px; border-radius: 10px; font-size: 13px; line-height: 1.6; display: none; }
+  .quiz-result.show { display: block; }
+  .quiz-result.ok { background: var(--green-light); color: var(--green); border-left: 4px solid var(--green); }
+  .quiz-result.ng { background: var(--red-light); color: var(--red); border-left: 4px solid var(--red); }
+  .quiz-nav { display: flex; justify-content: flex-end; margin-top: 14px; }
+  .btn-quiz-next { padding: 11px 22px; border-radius: 10px; border: none; background: linear-gradient(135deg, var(--navy), #1A2540); color: white; font-family: 'Zen Maru Gothic', sans-serif; font-size: 14px; font-weight: 700; cursor: pointer; display: none; transition: all 0.2s; }
+  .btn-quiz-next:hover { transform: translateY(-1px); }
+
+  .score-card { background: linear-gradient(135deg, var(--navy), #1A2540); color: white; border-radius: var(--radius); text-align: center; padding: 28px 20px; margin-top: 12px; animation: fadeUp 0.35s ease; }
+  .score-num { font-size: 54px; font-weight: 900; color: #FFD700; }
+  .score-label { font-size: 15px; opacity: 0.8; margin-top: -4px; margin-bottom: 12px; }
+  .score-comment { font-size: 14px; line-height: 1.7; margin-bottom: 20px; }
+  .btn-retry { padding: 12px 26px; border-radius: 12px; border: 2px solid rgba(255,255,255,0.4); background: transparent; color: white; font-family: 'Zen Maru Gothic', sans-serif; font-size: 14px; font-weight: 700; cursor: pointer; transition: all 0.2s; }
+  .btn-retry:hover { background: rgba(255,255,255,0.1); }
+  .hidden { display: none !important; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="region">九州地方</div>
+  <h1>🌋 九州まるごと雑学</h1>
+  <div class="stage-label">雑学30選 + クイズ15問</div>
+</header>
+
+<div class="tabs">
+  <div class="tab active" id="tab-zatsu" onclick="switchTab('zatsu')">📖 雑学</div>
+  <div class="tab" id="tab-quiz" onclick="switchTab('quiz')">📝 クイズ</div>
+</div>
+
+<div id="zatsu-section">
+  <div class="progress-wrap">
+    <div class="progress-meta"><span>読んだ雑学</span><span id="progress-text">0 / 30</span></div>
+    <div class="progress-bar"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
+  </div>
+  <div class="dots" id="dots"></div>
+  <main>
+    <div id="zatsuqaku-section">
+      <div class="card" id="card"></div>
+      <div class="nav-buttons">
+        <button class="btn btn-prev" id="btn-prev" onclick="go(-1)" disabled>← 前へ</button>
+        <button class="btn btn-next" id="btn-next" onclick="go(1)">次の雑学へ →</button>
+      </div>
+    </div>
+    <div class="complete-card hidden" id="complete-card">
+      <div class="complete-emoji">🎉</div>
+      <div class="complete-stars">⭐⭐⭐⭐⭐</div>
+      <div class="complete-title">30の雑学コンプリート！</div>
+      <div class="complete-desc">九州地方の自然・火山・農業・産業・南西諸島…<br>全部読んだね！<br><br><strong>さあ、クイズで腕試しをしよう！</strong></div>
+      <button class="btn btn-next" onclick="switchTab('quiz')" style="max-width:260px;margin:0 auto;display:block;">クイズに挑戦！ →</button>
+      <div style="margin-top:10px;"><button class="btn btn-prev" onclick="resetZatsuqaku()" style="border:none;background:transparent;font-size:13px;color:var(--text-sub);">もう一度読む 🔄</button></div>
+    </div>
+  </main>
+</div>
+
+<div id="quiz-section" class="hidden">
+  <main>
+    <div class="quiz-header"><h2>📝 九州地方クイズ</h2><p>雑学で学んだことを試してみよう！全15問</p></div>
+    <div class="quiz-card" id="quiz-card"></div>
+    <div class="score-card hidden" id="score-card">
+      <div class="score-num" id="score-num"></div>
+      <div class="score-label">/ 15問正解</div>
+      <div class="score-comment" id="score-comment"></div>
+      <button class="btn-retry" onclick="retryQuiz()">もう一度チャレンジ 🔄</button>
+      <br><br>
+      <button class="btn-retry" onclick="switchTab('zatsu')" style="font-size:12px;opacity:0.7;">← 雑学に戻る</button>
+    </div>
+  </main>
+</div>
+
+<script>
+const SECTIONS = ["🌋 自然環境","🔥 火山と人々の生活","🌾 農業","🏙️ 都市・産業・環境","🏝️ 南西諸島"];
+
+const ITEMS = [
+  {num:"01",section:0,keyword:"熊本県",emoji:"🌋",title:"火山の中に、人が住んでいる",q:"火山が大噴火した場所に、人って住めると思う？",a:"住めるよ！しかも、普通に暮らしてる人がいる。",body:`熊本県の阿蘇には、約9万年前の超巨大噴火でできた「阿蘇カルデラ」がある。
+噴火のあとに地面が一気に沈み込んでできた、とてつもなく大きいくぼ地だ。
+
+その大きさは、東西約18km、南北約25km。
+くぼ地っていうより、町が丸ごと一つ入るくらいの広さってこと。
+
+しかもその中には今も約5万人が暮らしていて、
+畑もあるし、道路もあるし、鉄道まで普通に走ってる。
+
+だから見た目は完全にふつうの町。
+なんだけど――`,summary:"🌋 実はここ、巨大な火山の中なんだよね。",reality:"阿蘇カルデラの面積は約380km²で東京23区の約6割。九州が「火の国」と呼ばれる理由がここにある。",realityIcon:"📏",vocab:[{word:"カルデラ",def:"火山の大噴火後に地面が陥没してできた巨大なくぼ地"},{word:"外輪山",def:"カルデラの外側をぐるりと囲む山々"}]},
+
+  {num:"02",section:0,keyword:"鹿児島県",emoji:"🌋",title:"桜島は、もともと「島」じゃなかった",q:"桜島って、昔から陸続きだったと思う？",a:"実は違うよ！もともとは本当の「島」だった。",body:`鹿児島湾に浮かぶ桜島は、かつては完全に海で囲まれた島だった。
+それが変わったのは1914年（大正3年）の大噴火がきっかけ。
+
+溶岩が勢いよく流れ出して、約30億トン。
+その量が海峡を埋め尽くして、対岸の大隅半島とつながってしまった。
+わずか数日間での出来事だ。
+
+今も年間1,000回前後噴火を繰り返していて、
+鹿児島市民には火山灰が降る「降灰」が日常。
+傘の代わりにマスクとほうきを持ち歩く人もいる。`,summary:"🌋 地形が変わるくらいの噴火が、ついこないだ起きてたってこと。",reality:"鹿児島市では傘の代わりに灰用マスクとほうきを常備。学校に「灰捨て場」があるのは鹿児島ならではの光景だ。",realityIcon:"🌋",vocab:[{word:"活火山",def:"現在も噴火活動を続けている火山"},{word:"降灰",def:"火山灰が空から降り積もる現象"}]},
+
+  {num:"03",section:0,keyword:"大分県",emoji:"♨️",title:"なぜ九州だけ温泉がこんなに多いのか",q:"温泉の源泉数、日本一はどこだと思う？",a:"大分県だよ！しかも2位も鹿児島で、九州が圧倒的に多い。",body:`全国の温泉源泉数で1位が大分県、2位が鹿児島県。
+この2県だけで、全国の源泉の約25%を占めている。
+
+理由はシンプルで、九州が「火山の島」だから。
+地下のマグマが地下水を温めることで温泉になる。
+
+大分県の別府温泉は源泉数・湧出量ともに日本一で、
+1日あたりの湧出量は約13万キロリットル。
+オリンピックプールに換算すると、約52杯分になる。`,summary:"♨️ 地下に何があるかで、地上の景色がまるで変わるってこと。",reality:"別府温泉の1日湧出量は約13万キロリットル。オリンピックプール約52杯分で、日本全国の温泉湧出量の約10分の1が別府一か所から出ている。",realityIcon:"♨️",vocab:[{word:"源泉",def:"温泉が地中から湧き出している場所"},{word:"湧出量",def:"温泉が1日に湧き出す量"}]},
+
+  {num:"04",section:0,keyword:"長崎県",emoji:"🗺️",title:"長崎の海岸線は、なぜあんなに長いのか",q:"長崎県の海岸線の長さ、全国何位だと思う？",a:"2位だよ！北海道の次に長い。",body:`長崎県の海岸線の総延長は約4,183km。
+面積が小さい県なのに、海岸線の長さは全国2位というのは不思議に思えるかもしれない。
+
+理由はリアス海岸だ。
+山地が海に沈んでできた地形で、海岸線が複雑に入り組んでいる。
+入り江や半島が無数にあるため、直線距離とはまったく違う長さになる。
+
+この複雑な地形は平地を少なくするけど、
+波が穏やかな入り江は養殖漁業にぴったりで、長崎の漁業を支えている。`,summary:"🗺️ 地形の複雑さが、そのまま産業の形に影響してるってこと。",reality:"長崎県の海岸線の長さを直線に延ばすと、日本列島の端から端まで届く長さになる。",realityIcon:"🗺️",vocab:[{word:"リアス海岸",def:"山地が沈んでできた複雑に入り組んだ海岸線"},{word:"入り江",def:"海が陸地に深く入り込んだ地形"}]},
+
+  {num:"05",section:0,keyword:"宮崎県",emoji:"🌀",title:"台風が九州を狙いやすい理由がある",q:"なんで九州にこんなに台風が来ると思う？",a:"海流の影響だよ！黒潮が台風のエネルギー源になってる。",body:`九州の南側には「黒潮（日本海流）」という暖かい海流が流れている。
+この海流が海面の温度を高く保って、大量の水蒸気を供給している。
+
+台風はその水蒸気をエネルギーにして発達して、北上しながら九州に向かってくる。
+
+さらに九州は南側が完全に開けていて、
+ブロックになる山がないため、直撃しやすい地形になっている。
+
+過去30年で九州に上陸した台風は、全国の約50%。
+宮崎の年間降水量は、東京の約1.5倍になる年もある。`,summary:"🌀 地形と海流が重なって、台風が来やすい条件が整ってるってこと。",reality:"過去30年で九州に上陸した台風は全国の約50%。宮崎の年間降水量は東京の約1.5倍に達する年もある。",realityIcon:"🌀",vocab:[{word:"黒潮（日本海流）",def:"日本の南岸を流れる暖流。気候に大きく影響する"},{word:"暖流",def:"周囲より水温が高い海流"}]},
+
+  {num:"06",section:0,keyword:"福岡県",emoji:"🌾",title:"筑紫平野は、川が作った平野だ",q:"平野ってどうやってできると思う？",a:"川が土砂を運んで積み重ねてできたものが多いよ。",body:`九州最大の平野、筑紫平野は福岡県と佐賀県にまたがっている。
+この平野は、筑後川という九州最大の川が長い時間をかけて作ったものだ。
+
+山地から土砂を運んで、河口付近に積み重ねた。
+こうしてできた平野を「沖積平野」という。
+
+積もった土砂は肥沃で、稲作にとても向いている。
+だから筑紫平野は九州有数の米どころになった。
+
+夏に稲を育て、冬に麦を育てる「二毛作」も盛んで、
+同じ土地を1年中フルに活用している。`,summary:"🌾 川のはたらきが地形を作って、農業の形も決めてきたってこと。",reality:"筑後川の流域面積は約2,863km²。筑紫平野は九州農業の中心地で、「夢つくし」「元気つくし」などブランド米も生まれている。",realityIcon:"🌾",vocab:[{word:"沖積平野",def:"川が運んだ土砂が積み重なってできた平野。肥沃で農業に向く"},{word:"二毛作",def:"同じ農地で1年間に2種類の異なる作物を育てること"}]},
+
+  {num:"07",section:1,keyword:"長崎県",emoji:"🔥",title:"43人が犠牲になった、雲仙岳の火砕流",q:"火砕流って、どれくらいの速さか知ってる？",a:"時速100km以上だよ！車の高速道路並みのスピード。",body:`1991年6月3日、長崎県の雲仙岳で大規模な火砕流が発生して、43人が犠牲になった。
+
+火砕流は高温のガス・岩石・灰が混ざって斜面を一気に流れ下る現象。
+温度は800℃を超えることもあって、逃げる間もなく到達してしまう。
+
+この噴火では溶岩が積み重なって新しい山が生まれた。
+「平成新山」という名前で、長崎県の最高峰（1,483m）になった。
+
+今も立入禁止が続いていて、日本で唯一、登山が禁止されている山だ。`,summary:"🔥 火山は景色を作るだけじゃなくて、命に関わる力を持ってるってこと。",reality:"1991年の噴火で流出した土砂は約1億㎥以上。平成新山は現在も日本で唯一、登山が禁止されている山だ。",realityIcon:"🔥",vocab:[{word:"火砕流",def:"高温のガス・岩石・灰が混合して斜面を高速で流れる現象"},{word:"平成新山",def:"雲仙岳の噴火で溶岩が積み上がってできた山。長崎県最高峰"}]},
+
+  {num:"08",section:1,keyword:"鹿児島県",emoji:"🐄",title:"稲作に向かない土地が、畜産王国を作った",q:"鹿児島が畜産で有名なのって、なんで？",a:"火山灰の台地が農業に向かなかったからだよ。",body:`鹿児島県には「シラス台地」という地形が広がっている。
+火山の噴火でできた白っぽい砂や灰（シラス）が積もった台地で、
+水はけが良すぎて稲作には向かない。
+
+でもこの「弱点」が逆に活きた。
+牧草を育てる牧場としては、むしろ最適な環境だったんだ。
+
+今や鹿児島は豚の飼育頭数全国1位（約130万頭）。
+黒牛・黒豚はブランド食材として全国に流通していて、
+鹿児島黒牛は国の地理的表示（GI）保護制度にも登録されている。`,summary:"🐄 土地の弱点が、産業の強みに変わるってことがある。",reality:"鹿児島黒牛は2020年に国の地理的表示（GI）保護制度に登録。鹿児島は豚の飼育頭数全国1位（約130万頭）で、黒豚は旨みが強くもちっとした食感が特徴だ。",realityIcon:"🐄",vocab:[{word:"シラス台地",def:"火山灰が積もった水はけの良い台地。稲作に不向き"},{word:"地理的表示（GI）",def:"特定地域の産品であることを国が証明する制度"}]},
+
+  {num:"09",section:1,keyword:"熊本県",emoji:"💧",title:"熊本市の水道水は、阿蘇の雨からできている",q:"熊本市の水道水って、どこから来てると思う？",a:"100%地下水だよ！日本でもかなり珍しい。",body:`熊本市は水道水の100%を地下水でまかなっている都市だ。
+
+その水の元をたどると、阿蘇山に行き着く。
+阿蘇山に降った雨が、溶岩の層を通って長い時間をかけてろ過される。
+それが市内各地から湧き出してくる。
+
+1日あたりの湧水量は約60万トン。
+この水の質が高くて、そのまま飲めると言われている。
+
+ただ最近は農薬や生活排水による水質悪化が課題になっていて、
+地下水を守る取り組みが続けられている。`,summary:"💧 火山が水を作って、それが都市の暮らしを支えてるってこと。",reality:"熊本市の地下水は「日本名水百選」に選ばれた清らかな水。1日あたりの湧水量は約60万トンで、水道水100%を地下水でまかなう日本でも珍しい都市だ。",realityIcon:"💧",vocab:[{word:"湧水",def:"地下水が地表に自然に湧き出したもの"},{word:"地下水",def:"地中に浸透して蓄えられた水"}]},
+
+  {num:"10",section:1,keyword:"大分県",emoji:"⛰️",title:"九州最高峰は、火山の山だった",q:"九州で一番高い山はどこか知ってる？",a:"大分県の九重連山にある中岳だよ！標高1,791m。",body:`九重連山（くじゅう連山）は大分県中部にある火山群で、
+その中の中岳が九州の最高峰になっている。
+
+火山性の地形なので、至るところに温泉が湧いている。
+長者原という場所には湿原と温泉が共存する珍しいエリアがあって、
+ラムサール条約の湿地にも登録されている。
+
+夏になると、ミヤマキリシマという固有種のツツジが咲いて、
+山肌がピンク色に染まる。
+この景色が「九州のアルプス」と呼ばれる理由だ。`,summary:"⛰️ 火山の地形が、温泉も絶景も両方作ってるってこと。",reality:"九重連山の中岳（1,791m）は九州の最高峰。年間登山者数は約30万人以上で、晴れた日には阿蘇山まで360度見渡せる。",realityIcon:"⛰️",vocab:[{word:"固有種",def:"その地域にしか生息・生育していない生物"},{word:"ラムサール条約",def:"国際的に重要な湿地を保護するための条約"}]},
+
+  {num:"11",section:1,keyword:"熊本県",emoji:"🏞️",title:"草千里は、かつての火口だった",q:"草千里ヶ浜って、もともと何だったか知ってる？",a:"火口の跡だよ！噴火でできたくぼ地に草が生えた場所。",body:`阿蘇山の火口付近に広がる草千里ヶ浜は、直径約1kmの草原の中に池がある。
+
+これはかつての火口跡で、噴火でできたくぼ地に
+長い年月をかけて草が生えてできた地形だ。
+
+今は牛や馬が放牧されていて、外輪山を背景に草を食む景色が広がっている。
+標高は約1,140mで、年間100万人以上が訪れる観光地になっている。
+
+近くには火山博物館もあって、
+今も活動中の中岳の様子をライブカメラで見ることができる。`,summary:"🏞️ 噴火の跡が、時間をかけて風景に変わっていくってこと。",reality:"草千里ヶ浜の標高は約1,140m。近くには阿蘇火山博物館があり、現在も活動中の中岳火口をライブカメラで観察できる。",realityIcon:"🏞️",vocab:[{word:"火口",def:"火山から溶岩やガスが噴き出す穴・くぼみ"},{word:"放牧",def:"家畜を広い土地で自由に草を食べさせて育てること"}]},
+
+  {num:"12",section:1,keyword:"福岡県",emoji:"🐟",title:"博多の明太子は、外国の食文化から生まれた",q:"辛子明太子って、どこで生まれた食べ物か知ってる？",a:"博多だよ！でも元になったのは朝鮮半島の食文化。",body:`辛子明太子は朝鮮半島にあった魚卵の塩辛文化が博多に伝わって、
+日本風にアレンジされて生まれた食べ物だ。
+
+福岡市の北に広がる玄界灘は波が荒く、古くから大陸との交流が盛んな海だった。
+その地理的な近さが、食文化の交流も生んだってこと。
+
+今や辛子明太子は年間売上数百億円の大産業になっている。
+ただ原料のスケトウダラの卵の多くはアラスカ産で、
+博多で加工して「博多の味」になる。`,summary:"🐟 地理的な近さが、文化の混ざり合いを生んできたってこと。",reality:"福岡県の辛子明太子の年間生産量は約2万トン以上。原料のスケトウダラの卵の大半はアラスカ産で、博多で加工して「博多の味」になる。",realityIcon:"🐟",vocab:[{word:"玄界灘",def:"九州北部と朝鮮半島の間にある海。波が荒く漁業が盛ん"},{word:"加工食品",def:"原材料に手を加えて作った食品"}]},
+
+  {num:"13",section:2,keyword:"宮崎県",emoji:"🥒",title:"冬のキュウリは、宮崎から来ている",q:"キュウリって夏野菜なのに、なんで冬も売ってるの？",a:"宮崎の促成栽培のおかげだよ！旬をずらして出荷してる。",body:`宮崎県では、ビニールハウスを使って温度管理しながら、
+本来は夏野菜のキュウリやピーマンを冬から春にかけて出荷している。
+これを「促成栽培」という。
+
+旬をずらして出荷することで、市場価格が高い時期に売れる。
+農業の経営戦略でもあるってこと。
+
+宮崎県はきゅうり生産量で全国1〜2位を争う大産地。
+冬のスーパーに並ぶきゅうりの多くは、宮崎産だったりする。`,summary:"🥒 旬をずらすという工夫が、産地の強みになってるってこと。",reality:"宮崎県のきゅうり生産量は全国トップクラス。冬から春にかけて全国に出荷され、「宮崎きゅうり」は市場でも高く評価されている。",realityIcon:"🥒",vocab:[{word:"促成栽培",def:"ビニールハウスなどを使い、旬より早い時期に収穫する栽培方法"},{word:"抑制栽培",def:"高冷地などを使って旬より遅い時期に収穫する栽培方法"}]},
+
+  {num:"14",section:2,keyword:"熊本県",emoji:"🌿",title:"日本の畳の95%は、熊本で作られている",q:"畳の原料のい草って、どこで作られてると思う？",a:"ほぼ熊本県だよ！全国の約95%が八代市産。",body:`い草は水田で育てる植物で、収穫後に泥に漬けることで
+あの独特の緑色と香りが出る。
+八代平野の豊富な水と柔らかい土壌が、い草の栽培に最適な環境だ。
+
+ただ近年は状況が変わってきていて、
+フローリング住宅の増加と中国産の流入で需要が減っている。
+1960年代に約8,000戸あったい草農家は、現在400戸以下にまで減ってしまった。
+
+畳1枚に約4,000〜5,000本のい草が使われる伝統産業が、今岐路に立っている。`,summary:"🌿 産業のあり方が、暮らしの変化とともに変わっていくってこと。",reality:"1960年代に約8,000戸あったい草農家が現在は400戸以下に激減。畳1枚には約4,000〜5,000本のい草が使われる。",realityIcon:"🌿",vocab:[{word:"い草",def:"畳の表面（畳表）に使われるイグサ科の植物。水田で栽培"},{word:"伝統的工芸品",def:"長い歴史を持つ手工業製品"}]},
+
+  {num:"15",section:2,keyword:"福岡県",emoji:"🍵",title:"玉露はなぜ、あんなに高いのか",q:"お茶の最高級品「玉露」が高い理由って何だと思う？",a:"日光を遮って育てるからだよ！手間が全然違う。",body:`玉露は収穫の前に遮光シートで茶葉を覆って、日光を遮断して育てる。
+日光が当たると渋み成分が増えるけど、遮ることで旨み成分（テアニン）が増える。
+その結果、渋みが少なくて旨みが強いお茶になるってこと。
+
+福岡県南部の八女茶は室町時代から続く高級ブランドで、
+玉露の生産量は全国1位。
+
+100gあたり数千円から数万円になるものもあって、
+その価格差は品質だけでなく、手間のかかり方の差でもある。`,summary:"🍵 手間をかけるほど味が変わる。農業の奥深さがここにある。",reality:"八女茶の玉露生産量は全国1位。鹿児島県の「知覧茶」も全国上位を争う産地で、九州は日本茶の二大産地を抱えている。",realityIcon:"🍵",vocab:[{word:"玉露",def:"収穫前に日光を遮って育てた最高級緑茶"},{word:"テアニン",def:"お茶の旨み成分。日光を遮ると増える"}]},
+
+  {num:"16",section:2,keyword:"佐賀県",emoji:"🌊",title:"海苔の品質は、干満差で決まる",q:"有明海の海苔がおいしい理由、何だと思う？",a:"干満差が日本一大きいからだよ！それが品質につながってる。",body:`有明海は最大干満差が約6mで日本一。
+干潮のとき、養殖網が空気にさらされる「干出」が1日2回必ず起きる。
+
+この干出が海苔を乾燥・殺菌して、病気に強く品質の高い海苔に育てる。
+
+有明海の海苔生産量は全国の約40%を占めていて、
+秋から冬にかけて収穫される「初摘み海苔」が最高ブランド。
+高級おにぎりや寿司に使われる海苔の多くが、有明産だ。`,summary:"🌊 自然の条件が、そのまま食品の品質を決めてるってこと。",reality:"有明海の干潟面積は約207km²。干潮時には「ムツゴロウ」など珍しい生物が見られ、生物多様性の宝庫でもある。",realityIcon:"🌊",vocab:[{word:"干出",def:"干潮時に養殖網が空気にさらされること。海苔の品質を高める"},{word:"養殖",def:"魚介類や海藻を人工的に管理・育てて収穫する漁業方法"}]},
+
+  {num:"17",section:2,keyword:"長崎県",emoji:"🍊",title:"急斜面が、長崎のびわ畑になった",q:"長崎がびわの生産量全国1位なのって、なんで？",a:"平地が少ない分、斜面を上手く使ったからだよ。",body:`長崎県はリアス海岸が発達していて平地が少ない。
+農家はその急な斜面を逆手に取って、びわとみかんを育てた。
+
+斜面は日当たりが良くて水はけも良いため、果樹にとって最適な環境だ。
+さらに急な斜面を段々に削って作った「段々畑」で、
+土砂崩れを防ぎながら農地を確保してきた。
+
+長崎のびわは全国シェアの約30〜40%を占めていて、
+旬が5〜6月と短いため、高級フルーツとして扱われることが多い。`,summary:"🍊 弱点に見える地形が、工夫次第で強みに変わるってこと。",reality:"長崎県のびわは全国シェアの約30〜40%を占める全国1位の産地。旬が5〜6月と短く、1パック（8〜10個）が1,000〜3,000円することも珍しくない。",realityIcon:"🍊",vocab:[{word:"段々畑",def:"急な斜面を階段状に削って作った畑。土砂崩れを防ぐ工夫"},{word:"果樹",def:"果実を収穫するために育てる木"}]},
+
+  {num:"18",section:2,keyword:"大分県",emoji:"🍄",title:"「一村一品」が、大分のしいたけを世界に広めた",q:"大分県って、しいたけで有名なのはなぜか知ってる？",a:"一村一品運動がきっかけだよ！地域をブランドにした取り組み。",body:`1979年、大分県が「一村一品運動」を始めた。
+各市町村が一つの特産品を磨き上げてブランド化するという考え方だ。
+
+その代表例がしいたけ。
+クヌギやコナラの原木に菌を植えて育てる「原木栽培」が広まって、
+大分県は原木しいたけの生産量全国1位になった。
+
+この運動は世界70か国以上に伝わっていて、国連からも評価されている。
+かぼす・豊後牛・麦焼酎など、100品目以上の特産品が生まれた。`,summary:"🍄 地域の強みを掘り起こす発想が、産業を変えることがある。",reality:"一村一品運動で生まれた大分の特産品はしいたけ・かぼす・豊後牛・麦焼酎など100品目以上。この運動は世界70か国以上に広まり、国連からも評価されている。",realityIcon:"🍄",vocab:[{word:"一村一品運動",def:"各地域が一つの特産品をブランド化する地域振興運動。1979年大分県発祥"},{word:"原木栽培",def:"天然の木にきのこの菌を植えて育てる伝統的な栽培方法"}]},
+
+  {num:"19",section:3,keyword:"福岡県",emoji:"✈️",title:"福岡からソウルは、東京より近い",q:"福岡空港からソウルまで、どのくらいの時間がかかると思う？",a:"約1時間15分だよ！東京より断然近い。",body:`福岡からソウルまでの距離は約550km。
+東京からソウルまでは約1,200kmなので、福岡の方がずっと近いってこと。
+
+この地理的な優位性を活かして、福岡空港と博多港は
+韓国・中国・台湾とのアジア航路の玄関口になっている。
+
+しかも博多駅から福岡空港まで地下鉄で約5分という、
+日本最短クラスのアクセスも強みだ。
+アジアとつながりやすい国際都市として成長している。`,summary:"✈️ 場所の近さが、都市の役割を決めることがあるってこと。",reality:"福岡空港から仁川国際空港（ソウル）まで約1時間15分。博多駅から空港まで地下鉄で約5分という日本最短クラスのアクセスも武器だ。",realityIcon:"✈️",vocab:[{word:"玄関口",def:"ある地域に入るための主要な入口となる場所"},{word:"国際都市",def:"多国籍の人々が集まり国際的な交流が盛んな都市"}]},
+
+  {num:"20",section:3,keyword:"北九州市",emoji:"🏭",title:"かつて日本を支えた工業地帯が、衰退した理由",q:"北九州工業地帯って、なんで衰退したか知ってる？",a:"石炭から石油へのエネルギー転換が大きかったよ。",body:`北九州工業地帯は1901年に官営八幡製鉄所が設立されたことで発展した。
+近くの筑豊炭田から石炭を使い、中国から鉄鉱石を輸入して鉄を作る、
+絶好の立地条件だった。
+
+でも戦後、エネルギーの主役が石炭から石油に変わった。
+さらに安い輸入鉄鋼が流入して、競争力を失った。
+
+現在は環境・リサイクル産業に転換するエコタウンとして再生を図っていて、
+世界から注目される環境都市になっている。`,summary:"🏭 時代の変化に対応できるかどうかで、産業の命運が変わる。",reality:"北九州市は1960〜70年代の公害問題が深刻で「死の海」と呼ばれた洞海湾が、住民・企業・行政の努力で復活。現在は環境都市として世界から注目されている。",realityIcon:"🏭",vocab:[{word:"官営八幡製鉄所",def:"1901年設立の日本初の近代的製鉄所。現在は世界文化遺産"},{word:"エコタウン",def:"廃棄物のリサイクルや環境産業を中心とした産業団地"}]},
+
+  {num:"21",section:3,keyword:"北九州市",emoji:"🌿",title:"「死の海」が、命の海に戻った",q:"北九州市の洞海湾、かつて「死の海」と呼ばれてたって知ってる？",a:"知らなかったかも。工場排水で魚が全滅した時代があったんだ。",body:`1960年代の洞海湾は、工場排水で魚が一匹もいない状態だった。
+空は煤煙で黒く染まり、住民の健康被害も深刻だった。
+
+そこで立ち上がったのは地元の女性たちで、「青い空を返して」と声を上げた。
+市民・企業・行政が一体となって環境対策に取り組んだ結果、
+今や洞海湾には魚が戻ってきた。
+
+北九州市は今、国連から「環境モデル都市」として世界に紹介されていて、
+アジアやアフリカの都市に環境技術を輸出している。`,summary:"🌿 変えようとする意志が、環境を取り戻すことがあるってこと。",reality:"北九州市の環境改善の取り組みは世界中の都市のモデルになっており、アジアやアフリカの都市に環境技術を輸出している。",realityIcon:"🌿",vocab:[{word:"公害",def:"工場などの活動が原因で起きる環境汚染や健康被害"},{word:"環境モデル都市",def:"環境問題への取り組みが優れた都市として国連などが認定"}]},
+
+  {num:"22",section:3,keyword:"熊本県",emoji:"⚠️",title:"水俣病は、工場が海に何かを流したことで起きた",q:"水俣病って、何が原因で起きたか知ってる？",a:"工場が流したメチル水銀が原因だよ。",body:`1950〜60年代、熊本県水俣市で深刻な病気が相次いだ。
+手足のしびれ・視野が狭くなる・体が自由に動かせなくなる。
+原因は、化学工場が海に流し続けたメチル水銀だった。
+
+水銀が魚介類に蓄積して、それを食べた人々が次々と発症した。
+患者は長年にわたって差別・偏見にさらされた。
+
+この教訓から、水銀の使用を世界規模で規制する
+「水俣条約」が2013年に熊本市で採択されて、140か国以上が署名している。`,summary:"⚠️ 一つの地域の悲劇が、世界のルールを変えることがある。",reality:"水俣条約は2013年に熊本市で採択された水銀に関する国際条約。140か国以上が署名し、水銀の使用・排出を世界規模で規制している。",realityIcon:"⚠️",vocab:[{word:"水俣病",def:"メチル水銀中毒による神経疾患。日本四大公害病の一つ"},{word:"水俣条約",def:"水銀の使用・排出を規制する国際条約。2013年熊本市で採択"}]},
+
+  {num:"23",section:3,keyword:"福岡県",emoji:"🚄",title:"九州新幹線で、鹿児島が1時間20分になった",q:"博多から鹿児島まで、新幹線でどのくらいかかると思う？",a:"最速1時間20分だよ！開通前は3時間半かかってた。",body:`2011年に全線開通した九州新幹線は、博多〜鹿児島中央を最速1時間20分で結んでいる。
+開通前は特急で約3時間30分だったから、2時間以上の短縮になった。
+
+博多〜熊本は最速32分。
+東京〜横浜とほぼ同じ時間になって、熊本が福岡の通勤圏に入りつつある。
+
+一方で「ストロー現象」の懸念もある。
+交通が便利になると、人や経済が大都市に吸い取られてしまう現象だ。`,summary:"🚄 便利さが地域をつなぐ一方で、別の課題を生むこともあるってこと。",reality:"九州新幹線の開通で博多〜熊本は最速32分。東京〜横浜（約30km）とほぼ同じ時間で、熊本が福岡の通勤圏になりつつある。",realityIcon:"🚄",vocab:[{word:"ストロー現象",def:"交通網の整備で大都市への人や経済が吸い取られてしまう現象"},{word:"沿線",def:"鉄道路線に沿った地域・エリア"}]},
+
+  {num:"24",section:3,keyword:"福岡県",emoji:"🌍",title:"食べ物を遠くから運ぶほど、環境に負担がかかる",q:"「フードマイレージ」って聞いたことある？",a:"食品の重量×輸送距離で計算する環境負荷の指標だよ。",body:`遠くから食品を運ぶほどCO₂の排出が増えるという考え方で、
+日本のフードマイレージはアメリカの約3倍、イギリスの約5倍と世界最高クラスだ。
+
+日本の食料自給率はカロリーベースで約38%しかなくて、多くを輸入に頼っている。
+
+だから「地産地消」が注目される。
+地元で作ったものを地元で食べることで、輸送距離が短くなってCO₂も減る。
+
+農業が盛んな九州は、地産地消のポテンシャルが最も高い地域の一つだ。`,summary:"🌍 何を食べるかの選択が、環境にもつながってるってこと。",reality:"日本のフードマイレージはアメリカの約3倍、イギリスの約5倍。九州は農業生産額が全国上位で、地産地消のポテンシャルが最も高い地域の一つだ。",realityIcon:"🌍",vocab:[{word:"フードマイレージ",def:"食品の重量×輸送距離で計算した環境負荷の指標"},{word:"地産地消",def:"地元で生産したものを地元で消費すること"}]},
+
+  {num:"25",section:4,keyword:"沖縄県",emoji:"☀️",title:"なんで沖縄って一年中あったかいの？",q:"なんで沖縄って一年中あったかいの？",a:"場所と海の影響だよ！日本の中でもかなり南にある。",body:`沖縄は北緯26度あたりにあって、本州よりずっと低い緯度に位置している。
+さらに南側には黒潮という暖かい海流が流れていて、
+空気や海水の温度を高く保っている。
+
+その結果、年間の平均気温は約23℃。
+冬でも10℃を下回ることがほとんどなくて、一年中あたたかい気候になる。`,summary:"☀️ 日本の中でも、かなり特別な気候の場所ってこと。",reality:"沖縄の年間降水量は那覇で約2,000mm（東京の約1.3倍）。ただし梅雨と台風の時期に集中し、乾季と雨季がはっきり分かれる。",realityIcon:"☀️",vocab:[{word:"亜熱帯気候",def:"熱帯と温帯の中間の気候。一年中温暖で冬でも気温が下がりにくい"},{word:"緯度",def:"赤道からの南北の角度。低緯度ほど気温が高い"}]},
+
+  {num:"26",section:4,keyword:"沖縄県",emoji:"🪸",title:"サンゴって、どうして白くなると思う？",q:"サンゴって、どうして白くなると思う？",a:"原因は水温だよ！高くなりすぎると起きる。",body:`サンゴは中に共生している藻と一緒に生きていて、その藻が色を作っている。
+でも海水温が上がると、その藻がいなくなってしまう。
+その結果、サンゴは白くなってしまう。これが「白化現象」。
+
+さらにそのまま戻らないと、サンゴは死んでしまうこともある。
+2016〜17年に沖縄周辺で起きた大規模白化では、
+調査したサンゴの約70%が白化して約30%が死滅した。`,summary:"🪸 気温の変化が、そのまま生き物に影響してるってことだね。",reality:"2016〜17年に沖縄周辺で起きた大規模白化現象では、調査したサンゴの約70%が白化し約30%が死滅した。",realityIcon:"🪸",vocab:[{word:"サンゴ礁",def:"サンゴが積み重なってできた浅い海の地形。多様な生物が暮らす"},{word:"白化現象",def:"海水温上昇などでサンゴが共生する藻を失い白くなる現象"}]},
+
+  {num:"27",section:4,keyword:"沖縄県",emoji:"🌺",title:"なんで沖縄って長寿のイメージがあるの？",q:"なんで沖縄って長寿のイメージがあるの？",a:"食べ物の影響が大きいよ！かなりバランスがいい。",body:`沖縄ではゴーヤーチャンプルーや豆腐、海藻などをよく食べる。
+野菜や植物性の食材が多くて、栄養のバランスがいい食事になっている。
+こうした食生活が、健康や長寿につながってきたと考えられている。
+
+ただ最近は食生活が変わってきて、その傾向も少しずつ変わってきている。
+若い世代の肥満率が全国最高水準になっていて、「長寿の危機」が課題になっている。`,summary:"🌺 食べ方ひとつで、体への影響ってかなり変わるんだね。",reality:"沖縄の伝統的な食事は野菜・豆腐・豚肉・海藻をバランスよく使う。豚は「鳴き声以外はすべて食べる」と言われるほど無駄なく使う食文化がある。",realityIcon:"🌺",vocab:[{word:"チャンプルー",def:"沖縄の方言で「混ぜこぜにしたもの」。野菜・豆腐・肉などを炒めた料理"},{word:"発酵食品",def:"微生物の働きで変化させた食品。豆腐よう・みそ・納豆など"}]},
+
+  {num:"28",section:4,keyword:"屋久島",emoji:"🌲",title:"何千年も生きる木って、本当にあると思う？",q:"何千年も生きる木って、本当にあると思う？",a:"あるよ！屋久島にはそれが残ってる。",body:`屋久島は雨がとても多い地域で、年間降水量は場所によっては1万mmを超える。
+その環境の中で育つ「屋久杉」は、樹脂が多くて腐りにくい。
+そのため数千年も生きることができる。
+
+中でも縄文杉は、樹齢7,000年以上とも言われている。
+縄文時代からずっと、同じ場所に立ち続けているかもしれない木だ。
+
+屋久島は1993年に日本初の世界自然遺産に登録されていて、
+島の面積の21%が遺産エリアになっている。`,summary:"🌲 時間のスケールが、ちょっと想像を超えてくるよね。",reality:"屋久島の年間降水量は山頂付近で東京の約5倍。島の面積の21%が世界遺産に指定され、全て原生的な自然の森だ。",realityIcon:"🌲",vocab:[{word:"世界自然遺産",def:"ユネスコが定める地球規模で保護すべき価値を持つ自然地域"},{word:"屋久杉",def:"屋久島に自生する樹齢1,000年以上のスギ"}]},
+
+  {num:"29",section:4,keyword:"長崎県",emoji:"🌏",title:"日本にいながら外国が見える場所ってあると思う？",q:"日本にいながら外国が見える場所ってあると思う？",a:"あるよ！長崎の対馬はかなり近い。",body:`対馬から韓国の釜山までは約50km。
+条件が良ければ肉眼で見えることもある。
+むしろ日本本土よりも韓国の方が近いくらい。
+
+そのため昔から交易や交流の拠点になってきた。
+江戸時代は対馬藩が朝鮮との貿易を独占していた。
+
+今でも韓国とのつながりは強くて観光客も多い。
+島内の案内板は日韓2言語表記が多い。`,summary:"🌏 場所ひとつで、国との距離感も変わってくるってこと。",reality:"対馬から見える釜山まで約49.5km。東京〜横浜（約30km）より少し遠い程度で、近年は韓国人観光客が多く島内は日韓2言語表記が多い。",realityIcon:"🌏",vocab:[{word:"ツシマヤマネコ",def:"対馬にのみ生息する野生のヤマネコ。絶滅危惧種"},{word:"対馬暖流",def:"対馬海峡を通って日本海に流れ込む暖流"}]},
+
+  {num:"30",section:4,keyword:"沖縄県",emoji:"🎵",title:"沖縄って、昔から日本の一部だったと思う？",q:"沖縄って、昔から日本の一部だったと思う？",a:"実は違うよ！もともとは独立した国だった。",body:`沖縄はかつて「琉球王国」という国で、約500年にわたって存在していた。
+中国や東南アジア、日本との貿易で栄えて、独自の文化が発展した。
+音楽や踊り、建築なども、本土とは違う特徴を持っている。
+
+その後1879年に日本に編入されて、今の沖縄県になった。
+首里城は世界文化遺産に登録されていて、
+2019年の火災で焼失したが、現在復元工事が進んでいる。`,summary:"🎵 今の文化の違いは、歴史の違いから来てるってことだね。",reality:"首里城は2019年の火災で正殿などが焼失したが、復元工事が進んでいる。三線（さんしん）は蛇皮を使った弦楽器で、本土の三味線のルーツとも言われる。",realityIcon:"🎵",vocab:[{word:"琉球王国",def:"現在の沖縄県にあった独立した王国。1429〜1879年まで続いた"},{word:"中継貿易",def:"他国から輸入した商品を別の国に売る貿易形式"}]}
+];
+
+const QUIZZES = [
+  {q:"阿蘇カルデラはどのようにして生まれたか？",options:["川の侵食","超巨大噴火の後に地面が陥没した","地震によるくぼみ","海が引いて陸化した"],ans:1,exp:"約9万年前の超巨大噴火後に地面が陥没してできたのがカルデラです。東西18km・南北25kmの世界最大級の大きさです。"},
+  {q:"桜島が「島」から「半島」になった理由は？",options:["地震で海底が隆起","人間が埋め立てた","1914年の大噴火で溶岩が海峡を埋めた","干ばつで海が干上がった"],ans:2,exp:"1914年（大正3年）の大噴火で約30億トンの溶岩が流れ出し、対岸の大隅半島と陸続きになりました。"},
+  {q:"別府温泉の1日あたりの湧出量はどのくらいか？",options:["約1万キロリットル","約5万キロリットル","約13万キロリットル","約50万キロリットル"],ans:2,exp:"別府温泉の1日湧出量は約13万キロリットルで、オリンピックプール約52杯分。日本全国の約10分の1が別府一か所から出ています。"},
+  {q:"鹿児島の畜産が盛んな最大の理由は？",options:["温暖な気候","シラス台地が稲作に不向きで牧草に適していたから","江戸時代からの伝統","台風が少ないから"],ans:1,exp:"火山灰が積もったシラス台地は稲作に不向きですが、牧草に適しており、戦後に畜産が発展しました。"},
+  {q:"宮崎の促成栽培で冬に出荷される代表的な野菜は？",options:["大根・白菜","キュウリ・ピーマン","じゃがいも・にんじん","れんこん・ごぼう"],ans:1,exp:"促成栽培はビニールハウスで旬より早く育てる方法。宮崎では本来夏野菜のキュウリやピーマンを冬から春に出荷します。"},
+  {q:"熊本県八代市のい草生産量は全国の約何%か？",options:["約30%","約50%","約70%","約95%"],ans:3,exp:"熊本県のい草生産量は全国の約95%を占めます。フローリング普及と中国産流入で農家数は激減しています。"},
+  {q:"有明海の海苔品質が高い主な理由は？",options:["水温が低いから","干満差が大きく干出で乾燥・殺菌されるから","養殖コストが低いから","外海の栄養が入るから"],ans:1,exp:"干潮時に養殖網が空気にさらされる「干出」が品質を高めます。有明海の最大干満差は約6mで日本一です。"},
+  {q:"北九州工業地帯が衰退した主な理由は？",options:["労働者不足","エネルギー革命と安い輸入鉄鋼の流入","大地震による被害","政府の政策変更"],ans:1,exp:"石炭から石油へのエネルギー革命と、安い輸入鉄鋼の流入で北九州の鉄鋼業は衰退しました。"},
+  {q:"水俣病の原因となった物質は何か？",options:["硫黄","カドミウム","メチル水銀","鉛"],ans:2,exp:"化学工場が海に流したメチル水銀が魚介類に蓄積し、それを食べた住民に深刻な神経障害が起きました。"},
+  {q:"屋久杉が長寿になれる主な理由は？",options:["温暖で冬がないから","豊富な雨と樹脂が多く腐りにくい性質があるから","世界遺産に登録されているから","人間が古くから保護してきたから"],ans:1,exp:"年間降水量1万mm以上の豊富な雨と、樹脂（ヤニ）が多く腐りにくい性質のおかげで屋久杉は長寿になります。"},
+  {q:"沖縄が亜熱帯気候になる主な理由は？",options:["海に囲まれているから","低緯度と黒潮の影響","山が多いから","台風が多いから"],ans:1,exp:"北緯26度付近という低緯度の位置と、南側を流れる黒潮の影響で一年中温暖な亜熱帯気候になります。"},
+  {q:"サンゴの「白化現象」の主な原因は？",options:["海の汚染","地球温暖化による海水温上昇","台風の影響","観光客による踏み荒らし"],ans:1,exp:"地球温暖化による海水温の上昇でサンゴが共生する藻を失い白くなる白化現象が起き、死滅につながります。"},
+  {q:"対馬から最も近い外国の都市はどこか？",options:["北京","上海","釜山（韓国）","台北"],ans:2,exp:"対馬から韓国の釜山まで約50km。東京〜横浜（約30km）より少し遠い程度の近さです。"},
+  {q:"大分県の「一村一品運動」とは何か？",options:["各村が同じ作物を作って品質を競う運動","各市町村が一つの特産品をブランド化する地域振興運動","外国から一品だけ輸入を認める制度","農家が協力して共同経営する運動"],ans:1,exp:"1979年に大分県が始めた一村一品運動は、各地域が特産品をブランド化する取り組みで世界70か国以上に広まりました。"},
+  {q:"琉球王国について正しいものはどれか？",options:["江戸幕府が作った沖縄の藩","500年以上続いた独立した王国で1879年に日本に編入された","太平洋戦争後にアメリカが作った国","現在も独立国として存在する"],ans:1,exp:"琉球王国は1429〜1879年まで続いた独立した王国です。中国・日本・東南アジアとの中継貿易で栄えました。"}
+];
+
+let current=0, readFlags=new Array(30).fill(false), quizCurrent=0, quizScore=0, quizAnswered=false;
+const STORAGE_KEY='kyushu_v3';
+
+function init() {
+  try {
+    const s=JSON.parse(localStorage.getItem(STORAGE_KEY));
+    if(s&&s.readFlags){readFlags=s.readFlags;const f=readFlags.indexOf(false);current=f===-1?29:f;}
+  }catch(e){}
+  renderDots();renderCard();
+}
+function save(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify({readFlags}));}catch(e){}}
+
+function switchTab(tab){
+  document.getElementById('tab-zatsu').classList.toggle('active',tab==='zatsu');
+  document.getElementById('tab-quiz').classList.toggle('active',tab==='quiz');
+  document.getElementById('zatsu-section').classList.toggle('hidden',tab!=='zatsu');
+  document.getElementById('quiz-section').classList.toggle('hidden',tab!=='quiz');
+  if(tab==='quiz'){quizCurrent=0;quizScore=0;renderQuiz();}
+}
+
+function renderDots(){
+  document.getElementById('dots').innerHTML=ITEMS.map((_,i)=>{
+    let c='dot';if(i===current)c+=' current';else if(readFlags[i])c+=' done';
+    return `<div class="${c}" onclick="jumpTo(${i})">${i+1}</div>`;
+  }).join('');
+}
+function jumpTo(i){readFlags[current]=true;current=i;save();renderDots();renderCard();}
+
+function updateProgress(){
+  const d=readFlags.filter(Boolean).length;
+  document.getElementById('progress-text').textContent=`${d} / 30`;
+  document.getElementById('progress-fill').style.width=`${d/30*100}%`;
+}
+
+function renderCard(){
+  const d=ITEMS[current];updateProgress();
+  document.getElementById('card').innerHTML=`
+    <div class="card-badge">雑学 ${d.num} ／ ${SECTIONS[d.section]}</div>
+    <div class="card-title">${d.title}</div>
+    <div class="img-placeholder" id="img-wrap-${current}"><span style="font-size:14px;color:var(--text-sub)">📷 読み込み中...</span></div>
+    <div class="img-caption" id="img-cap-${current}"></div>
+    <div class="card-story">
+      <div class="card-q">🤔「${d.q}」</div>
+      <div class="card-a">${d.a}</div>
+      <div class="card-body">${d.body}</div>
+    </div>
+    <div class="card-summary">${d.summary}</div>
+    <div class="reality-box">
+      <div class="reality-label">${d.realityIcon} リアリティ DATA</div>
+      <div class="reality-text">${d.reality}</div>
+    </div>
+    <div class="vocab-box">
+      <div class="vocab-label">📖 用語解説</div>
+      ${d.vocab.map(v=>`<div class="vocab-item">・<strong>【${v.word}】</strong>：${v.def}</div>`).join('')}
+    </div>
+  `;
+  document.getElementById('btn-prev').disabled=current===0;
+  document.getElementById('btn-next').textContent=current===29?'✨ 読み終えた！':'次の雑学へ →';
+  loadWikiImage(current,d.keyword,d.emoji);
+}
+
+async function loadWikiImage(idx,keyword,emoji){
+  try{
+    const res=await fetch(`https://ja.wikipedia.org/w/api.php?action=query&titles=${encodeURIComponent(keyword)}&prop=pageimages&format=json&pithumbsize=640&origin=*`);
+    const data=await res.json();
+    const page=Object.values(data.query.pages)[0];
+    const wrap=document.getElementById(`img-wrap-${idx}`);
+    if(!wrap)return;
+    if(page&&page.thumbnail){
+      wrap.innerHTML=`<img class="card-img" src="${page.thumbnail.source}" alt="${keyword}">`;
+      const cap=document.getElementById(`img-cap-${idx}`);
+      if(cap)cap.textContent=`${keyword} © Wikipedia`;
+    }else{wrap.innerHTML=`<div class="img-placeholder"><span style="font-size:48px">${emoji}</span></div>`;}
+  }catch(e){const wrap=document.getElementById(`img-wrap-${idx}`);if(wrap)wrap.innerHTML=`<div class="img-placeholder"><span style="font-size:48px">${emoji}</span></div>`;}
+}
+
+function go(dir){
+  readFlags[current]=true;save();
+  const next=current+dir;
+  if(next<0)return;
+  if(next>=30){
+    document.getElementById('card').style.display='none';
+    document.getElementById('btn-prev').style.display='none';
+    document.getElementById('btn-next').style.display='none';
+    document.getElementById('complete-card').classList.remove('hidden');
+    updateProgress();renderDots();return;
+  }
+  current=next;renderDots();renderCard();
+}
+
+function resetZatsuqaku(){
+  current=0;readFlags=new Array(30).fill(false);save();
+  document.getElementById('card').style.display='';
+  document.getElementById('btn-prev').style.display='';
+  document.getElementById('btn-next').style.display='';
+  document.getElementById('complete-card').classList.add('hidden');
+  renderDots();renderCard();
+}
+
+function renderQuiz(){
+  if(quizCurrent>=QUIZZES.length){showScore();return;}
+  const q=QUIZZES[quizCurrent];quizAnswered=false;
+  document.getElementById('quiz-card').innerHTML=`
+    <div class="quiz-q-num">問題 ${quizCurrent+1} / ${QUIZZES.length}</div>
+    <div class="quiz-q-text">${q.q}</div>
+    <div class="quiz-options">${q.options.map((opt,i)=>`<button class="quiz-opt" onclick="answerQuiz(${i})">${opt}</button>`).join('')}</div>
+    <div class="quiz-result" id="quiz-result"></div>
+    <div class="quiz-nav"><button class="btn-quiz-next" id="quiz-next-btn" onclick="nextQuiz()">${quizCurrent===QUIZZES.length-1?'結果を見る →':'次の問題へ →'}</button></div>
+  `;
+  document.getElementById('score-card').classList.add('hidden');
+}
+
+function answerQuiz(idx){
+  if(quizAnswered)return;quizAnswered=true;
+  const q=QUIZZES[quizCurrent];if(idx===q.ans)quizScore++;
+  document.querySelectorAll('.quiz-opt').forEach((btn,i)=>{
+    btn.disabled=true;
+    if(i===q.ans)btn.classList.add('correct');
+    else if(i===idx&&idx!==q.ans)btn.classList.add('wrong');
+  });
+  const res=document.getElementById('quiz-result');res.classList.add('show');
+  if(idx===q.ans){res.classList.add('ok');res.innerHTML=`✅ 正解！ ${q.exp}`;}
+  else{res.classList.add('ng');res.innerHTML=`❌ 不正解。正解は「${q.options[q.ans]}」<br>${q.exp}`;}
+  document.getElementById('quiz-next-btn').style.display='block';
+}
+
+function nextQuiz(){quizCurrent++;if(quizCurrent>=QUIZZES.length){showScore();return;}renderQuiz();}
+
+function showScore(){
+  document.getElementById('quiz-card').innerHTML='';
+  document.getElementById('score-card').classList.remove('hidden');
+  document.getElementById('score-num').textContent=quizScore;
+  const p=quizScore/QUIZZES.length;
+  document.getElementById('score-comment').textContent=p===1?'満点！九州地方マスター確定！🏆':p>=0.8?'すごい！あと少しで完璧！':p>=0.6?'合格ライン！雑学を読み直してみよう。':p>=0.4?'もう少し！雑学に戻って復習しよう。':'雑学をもう一度ゆっくり読もう！';
+}
+
+function retryQuiz(){quizCurrent=0;quizScore=0;document.getElementById('score-card').classList.add('hidden');renderQuiz();}
+
+init();
+</script>
+</body>
+</html>
