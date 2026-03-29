@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>九州の雑学 – 農業・畜産編</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700;900&family=Noto+Serif+JP:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --orange: #E8621A;
+    --orange-light: #F5895A;
+    --orange-pale: #FFF0E8;
+    --bg: #FFFBF7;
+    --card-bg: #FFFFFF;
+    --text: #2D1B00;
+    --text-sub: #7A5A3A;
+    --border: #F0D5B8;
+    --green: #2E7D52;
+    --green-light: #E8F5EE;
+    --red: #C0392B;
+    --red-light: #FDECEA;
+    --shadow: 0 4px 24px rgba(232,98,26,0.10);
+    --radius: 18px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Zen Maru Gothic', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+
+  header {
+    background: linear-gradient(135deg, var(--orange) 0%, #C94A08 100%);
+    color: white; text-align: center; padding: 18px 20px 14px;
+    position: sticky; top: 0; z-index: 100;
+    box-shadow: 0 2px 12px rgba(232,98,26,0.3);
+  }
+  header .region { font-size: 13px; opacity: 0.85; letter-spacing: 2px; margin-bottom: 2px; }
+  header h1 { font-size: 20px; font-weight: 900; }
+  header .stage-label { font-size: 12px; opacity: 0.75; margin-top: 2px; }
+
+  .progress-wrap { background: white; padding: 12px 20px 10px; border-bottom: 1px solid var(--border); }
+  .progress-meta { display: flex; justify-content: space-between; font-size: 12px; color: var(--text-sub); margin-bottom: 6px; }
+  .progress-bar { height: 8px; background: var(--border); border-radius: 99px; overflow: hidden; }
+  .progress-fill { height: 100%; background: linear-gradient(90deg, var(--orange-light), var(--orange)); border-radius: 99px; transition: width 0.4s ease; }
+
+  .dots { display: flex; gap: 6px; justify-content: center; padding: 10px 20px; flex-wrap: wrap; }
+  .dot { width: 28px; height: 28px; border-radius: 50%; border: 2px solid var(--border); background: white; font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center; color: var(--text-sub); cursor: pointer; transition: all 0.2s; }
+  .dot.current { border-color: var(--orange); background: var(--orange); color: white; }
+  .dot.done { border-color: var(--orange); background: var(--orange-pale); color: var(--orange); }
+
+  main { padding: 0 16px 40px; max-width: 640px; margin: 0 auto; }
+
+  .card { background: var(--card-bg); border-radius: var(--radius); box-shadow: var(--shadow); border: 1px solid var(--border); overflow: hidden; margin-top: 14px; animation: fadeUp 0.35s ease; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+
+  .card-badge { background: linear-gradient(90deg, var(--orange), var(--orange-light)); color: white; font-size: 11px; font-weight: 700; padding: 6px 14px; letter-spacing: 1px; }
+  .card-title { padding: 16px 18px 12px; font-size: 19px; font-weight: 900; line-height: 1.45; border-bottom: 1px dashed var(--border); }
+  .card-img { width: 100%; height: 200px; object-fit: cover; display: block; background: var(--orange-pale); }
+  .img-caption { font-size: 10px; color: var(--text-sub); padding: 4px 12px; text-align: right; background: var(--orange-pale); }
+  .img-placeholder { width: 100%; height: 200px; background: var(--orange-pale); display: flex; align-items: center; justify-content: center; font-size: 48px; }
+  .card-story { padding: 16px 18px; font-size: 15px; line-height: 1.85; color: var(--text); }
+  .card-story strong { color: var(--orange); font-weight: 700; }
+
+  .reality-box { margin: 0 18px 14px; background: var(--orange-pale); border-left: 4px solid var(--orange); border-radius: 10px; padding: 12px 14px; }
+  .reality-label { font-size: 11px; font-weight: 700; color: var(--orange); letter-spacing: 1px; margin-bottom: 6px; display: flex; align-items: center; gap: 5px; }
+  .reality-text { font-size: 14px; line-height: 1.7; color: var(--text); }
+
+  .vocab-box { margin: 0 18px 18px; background: var(--green-light); border-radius: 10px; padding: 12px 14px; }
+  .vocab-label { font-size: 11px; font-weight: 700; color: var(--green); letter-spacing: 1px; margin-bottom: 8px; }
+  .vocab-item { font-size: 13px; line-height: 1.65; margin-bottom: 4px; }
+  .vocab-item strong { color: var(--green); }
+
+  .nav-buttons { display: flex; gap: 10px; padding: 14px 0 0; justify-content: space-between; }
+  .btn { flex: 1; padding: 14px 10px; border-radius: 12px; border: none; font-family: 'Zen Maru Gothic', sans-serif; font-size: 15px; font-weight: 700; cursor: pointer; transition: all 0.2s; }
+  .btn-prev { background: white; border: 2px solid var(--border); color: var(--text-sub); }
+  .btn-prev:hover { border-color: var(--orange); color: var(--orange); }
+  .btn-next { background: linear-gradient(135deg, var(--orange), #C94A08); color: white; box-shadow: 0 4px 14px rgba(232,98,26,0.35); }
+  .btn-next:hover { transform: translateY(-1px); box-shadow: 0 6px 18px rgba(232,98,26,0.45); }
+  .btn:disabled { opacity: 0.35; cursor: not-allowed; transform: none !important; }
+
+  .complete-card { background: linear-gradient(135deg, #FFF7F2, #FFEDE0); border: 2px solid var(--orange-light); border-radius: var(--radius); text-align: center; padding: 30px 24px; margin-top: 14px; animation: fadeUp 0.35s ease; }
+  .complete-emoji { font-size: 52px; margin-bottom: 10px; }
+  .complete-stars { font-size: 28px; letter-spacing: 4px; margin-bottom: 14px; }
+  .complete-title { font-size: 22px; font-weight: 900; color: var(--orange); margin-bottom: 10px; }
+  .complete-desc { font-size: 14px; line-height: 1.8; color: var(--text-sub); margin-bottom: 20px; }
+
+  .quiz-header { background: linear-gradient(135deg, #2E3A5F 0%, #1A2540 100%); color: white; text-align: center; padding: 16px 20px 12px; margin-top: 14px; border-radius: var(--radius) var(--radius) 0 0; }
+  .quiz-header h2 { font-size: 18px; font-weight: 900; }
+  .quiz-header p { font-size: 12px; opacity: 0.7; margin-top: 2px; }
+
+  .quiz-card { background: white; border: 1px solid var(--border); border-top: none; border-radius: 0 0 var(--radius) var(--radius); padding: 20px 18px 24px; animation: fadeUp 0.3s ease; }
+  .quiz-q-num { font-size: 11px; color: #2E3A5F; font-weight: 700; margin-bottom: 8px; letter-spacing: 1px; }
+  .quiz-q-text { font-size: 16px; font-weight: 700; line-height: 1.6; margin-bottom: 16px; }
+  .quiz-options { display: flex; flex-direction: column; gap: 10px; }
+  .quiz-opt { padding: 13px 16px; border-radius: 10px; border: 2px solid var(--border); background: white; font-family: 'Zen Maru Gothic', sans-serif; font-size: 14px; font-weight: 500; cursor: pointer; text-align: left; transition: all 0.2s; }
+  .quiz-opt:hover:not(:disabled) { border-color: #2E3A5F; background: #F0F3FA; }
+  .quiz-opt.correct { border-color: var(--green) !important; background: var(--green-light) !important; color: var(--green); font-weight: 700; }
+  .quiz-opt.wrong { border-color: var(--red) !important; background: var(--red-light) !important; color: var(--red); }
+  .quiz-opt:disabled { cursor: default; }
+
+  .quiz-result { margin-top: 14px; padding: 12px 14px; border-radius: 10px; font-size: 14px; line-height: 1.6; display: none; }
+  .quiz-result.show { display: block; }
+  .quiz-result.ok { background: var(--green-light); color: var(--green); border-left: 4px solid var(--green); }
+  .quiz-result.ng { background: var(--red-light); color: var(--red); border-left: 4px solid var(--red); }
+
+  .quiz-nav { display: flex; justify-content: flex-end; margin-top: 16px; }
+  .btn-quiz-next { padding: 12px 24px; border-radius: 10px; border: none; background: linear-gradient(135deg, #2E3A5F, #1A2540); color: white; font-family: 'Zen Maru Gothic', sans-serif; font-size: 15px; font-weight: 700; cursor: pointer; display: none; transition: all 0.2s; }
+  .btn-quiz-next:hover { transform: translateY(-1px); }
+
+  .score-card { background: linear-gradient(135deg, #2E3A5F, #1A2540); color: white; border-radius: var(--radius); text-align: center; padding: 30px 24px; margin-top: 14px; animation: fadeUp 0.35s ease; }
+  .score-num { font-size: 56px; font-weight: 900; color: #FFD700; }
+  .score-label { font-size: 16px; opacity: 0.8; margin-top: -4px; margin-bottom: 14px; }
+  .score-comment { font-size: 15px; line-height: 1.7; margin-bottom: 22px; }
+  .btn-retry { padding: 13px 28px; border-radius: 12px; border: 2px solid rgba(255,255,255,0.4); background: transparent; color: white; font-family: 'Zen Maru Gothic', sans-serif; font-size: 15px; font-weight: 700; cursor: pointer; transition: all 0.2s; }
+  .btn-retry:hover { background: rgba(255,255,255,0.1); }
+
+  .hidden { display: none !important; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="region">九州地方 · 農業・畜産</div>
+  <h1>🌾 九州の食のひみつ</h1>
+  <div class="stage-label">ステージ② 雑学10選</div>
+</header>
+
+<div class="progress-wrap">
+  <div class="progress-meta">
+    <span>読んだ雑学</span>
+    <span id="progress-text">0 / 10</span>
+  </div>
+  <div class="progress-bar">
+    <div class="progress-fill" id="progress-fill" style="width:0%"></div>
+  </div>
+</div>
+
+<div class="dots" id="dots"></div>
+
+<main>
+  <div id="zatsuqaku-section">
+    <div class="card" id="card"></div>
+    <div class="nav-buttons">
+      <button class="btn btn-prev" id="btn-prev" onclick="go(-1)" disabled>← 前へ</button>
+      <button class="btn btn-next" id="btn-next" onclick="go(1)">次の雑学へ →</button>
+    </div>
+  </div>
+
+  <div class="complete-card hidden" id="complete-card">
+    <div class="complete-emoji">🎉</div>
+    <div class="complete-stars">⭐⭐⭐⭐⭐</div>
+    <div class="complete-title">雑学コンプリート！</div>
+    <div class="complete-desc">
+      九州の農業・畜産について<br>
+      10の雑学を全部読んだよ！<br><br>
+      二毛作・促成栽培・黒牛黒豚…<br>
+      <strong>九州の食卓は、戦略と工夫の結晶だ。</strong>
+    </div>
+    <button class="btn btn-next" onclick="startQuiz()" style="max-width:280px;margin:0 auto;display:block;">
+      クイズに挑戦！ →
+    </button>
+    <div style="margin-top:12px;">
+      <button class="btn btn-prev" onclick="resetZatsuqaku()" style="border:none;background:transparent;font-size:13px;color:var(--text-sub);">もう一度読む 🔄</button>
+    </div>
+  </div>
+
+  <div id="quiz-section" class="hidden">
+    <div class="quiz-header">
+      <h2>📝 確認クイズ</h2>
+      <p>雑学で学んだことを試してみよう！</p>
+    </div>
+    <div class="quiz-card" id="quiz-card"></div>
+    <div class="score-card hidden" id="score-card">
+      <div class="score-num" id="score-num"></div>
+      <div class="score-label">/ 10問正解</div>
+      <div class="score-comment" id="score-comment"></div>
+      <button class="btn-retry" onclick="retryQuiz()">もう一度チャレンジ 🔄</button>
+      <br><br>
+      <button class="btn-retry" onclick="backToZatsuqaku()" style="font-size:13px;opacity:0.7;">← 雑学に戻る</button>
+    </div>
+  </div>
+</main>
+
+<script>
+const ITEMS = [
+  {
+    num: "01",
+    keyword: "福岡県",
+    emoji: "🌾",
+    title: "同じ田んぼで1年に2回収穫？「二毛作」という農業の知恵",
+    story: `筑紫平野を中心に、九州では<strong>二毛作</strong>が古くから行われてきた。二毛作とは、同じ農地で1年間に異なる2種類の作物を育てる農業の方法だ。<br><br>
+典型的なパターンは「夏に稲→冬に麦」。稲を収穫した秋に麦の種をまき、翌春に麦を収穫、また夏に稲を植える。同じ土地を1年中フル活用できるため、農業の生産効率が大幅に上がる。<br><br>
+これができるのは、九州が<strong>温暖な気候</strong>だから。冬でも気温がそこまで下がらないため、麦が育つ。東北や北海道では冬が厳しすぎて二毛作はできない。暖かさが九州農業の最大の武器だ。`,
+    reality: "二毛作が盛んな筑紫平野では、10aあたりの農業収入が一毛作地域の約1.5〜2倍になることもある。福岡県の小麦「ラー麦」はラーメン用に品種改良された九州独自のブランド小麦だ。",
+    realityIcon: "🌾",
+    vocab: [
+      { word: "二毛作", def: "同じ農地で1年間に2種類の異なる作物を順番に栽培すること" },
+      { word: "単作（一毛作）", def: "同じ農地で1年間に1種類だけ作物を育てること。寒冷地に多い" }
+    ]
+  },
+  {
+    num: "02",
+    keyword: "宮崎県",
+    emoji: "🥒",
+    title: "冬にキュウリが食べられるのは、宮崎のビニールハウスのおかげ",
+    story: `スーパーに冬でもキュウリやピーマンが並んでいる。これを可能にしているのが、宮崎県の<strong>促成栽培</strong>だ。<br><br>
+促成栽培とは、ビニールハウスやガラス温室を使って、作物の旬よりも早く（または旬でない季節に）育てる栽培方法だ。宮崎では冬でも温暖な気候を活かし、さらにビニールハウスで保温することで、本来は夏野菜であるキュウリ・ピーマン・トマトなどを冬から春にかけて出荷する。<br><br>
+旬とズラして出荷できるため、<strong>市場価格が高い時期に売れる</strong>という経営戦略でもある。「旬じゃないから高い」野菜の裏には、こういう農家の知恵がある。`,
+    reality: "宮崎県はきゅうりの生産量が全国1〜2位を争う大産地。冬から春にかけて全国に出荷され、「宮崎きゅうり」のブランドは市場でも高く評価されている。ピーマンも全国上位の産地だ。",
+    realityIcon: "🥒",
+    vocab: [
+      { word: "促成栽培", def: "ビニールハウスなどを使い、作物の旬よりも早い時期に収穫できるよう育てる栽培方法" },
+      { word: "抑制栽培", def: "促成栽培の逆で、高冷地などを使って旬より遅い時期に収穫する栽培方法" }
+    ]
+  },
+  {
+    num: "03",
+    keyword: "鹿児島県",
+    emoji: "🐄",
+    title: "鹿児島の「黒牛・黒豚」はなぜブランドになったのか？",
+    story: `鹿児島県は、牛・豚・鶏の生産量が全国トップクラスの「畜産王国」だ。中でも有名なのが<strong>鹿児島黒牛</strong>と<strong>鹿児島黒豚</strong>だ。<br><br>
+黒牛は「黒毛和牛」という品種で、霜降りの美しい肉質が特徴。黒豚は「バークシャー種」という品種で、旨みが強くもちっとした食感が人気だ。どちらも長い年月をかけてブランド化に成功し、今や高級食材として全国に流通している。<br><br>
+なぜ鹿児島で畜産が盛んかというと、<strong>シラス台地</strong>の存在が大きい。水はけが良すぎて稲作に向かないシラス台地は、牧草を育てる牧場としては最適な土地だったのだ。`,
+    reality: "鹿児島県の豚の飼育頭数は全国1位（約130万頭）、肉用牛も全国上位。鹿児島黒牛は2020年に国の地理的表示（GI）保護制度に登録され、偽物が出回らないよう法律で守られている。",
+    realityIcon: "🐄",
+    vocab: [
+      { word: "シラス台地", def: "火山の噴火でできた白っぽい砂や灰（シラス）が積もった台地。水はけが良く稲作に不向き" },
+      { word: "地理的表示（GI）", def: "特定の地域の産品であることを証明する国の制度。ブランドを法律で守る仕組み" }
+    ]
+  },
+  {
+    num: "04",
+    keyword: "宮崎県",
+    emoji: "🐔",
+    title: "鶏肉の消費量日本一！宮崎が「チキン王国」になった理由",
+    story: `宮崎県は、ブロイラー（食肉用鶏）の生産量が全国1位だ。なぜ宮崎で養鶏が発展したのか？<br><br>
+理由のひとつは鹿児島と同じく<strong>シラス台地</strong>だ。稲作に不向きな土地が広がる中で、戦後の食糧難の時代に「鶏を育てよう」という動きが広まった。鶏は牛や豚より狭いスペースで育てられ、成長も早い。農家にとって取り組みやすい畜産だった。<br><br>
+宮崎の鶏肉といえば<strong>「地鶏の王様」と呼ばれる「宮崎地頭鶏（じとっこ）」</strong>が有名。コリコリした食感と濃い旨みが特徴で、宮崎を訪れる観光客が必ず食べたいと言う郷土料理になっている。`,
+    reality: "宮崎県のブロイラー生産量は年間約26万トンで全国1位（鹿児島と争う）。1羽あたりの飼育期間はわずか50〜60日。日本で食べられる鶏肉の約20%以上が九州産だ。",
+    realityIcon: "🐔",
+    vocab: [
+      { word: "ブロイラー", def: "食肉用に品種改良された鶏。成長が早く、約2ヶ月で出荷できる" },
+      { word: "地鶏", def: "在来種（昔からいる品種）を使って、一定の広さで放し飼いにした鶏。ブロイラーより旨みが強い" }
+    ]
+  },
+  {
+    num: "05",
+    keyword: "熊本県",
+    emoji: "🌿",
+    title: "畳の原料「い草」は、なぜ熊本でしか作られないのか？",
+    story: `日本の畳の原料となる<strong>い草</strong>の約9割は、熊本県八代市で生産されている。全国の畳のほぼすべてが熊本産のい草でできているのだ。<br><br>
+い草は水田で育てる植物で、夏に収穫する。八代平野は水が豊富で土壌が柔らかく、い草の栽培に最適な環境が揃っている。また、い草は染土（そめつち）と呼ばれる泥に漬けることで、あの独特の緑色と香りが生まれる。<br><br>
+しかし近年は<strong>フローリング住宅の増加</strong>で畳の需要が激減。さらに安い中国産い草の輸入も増え、八代のい草農家は急速に減っている。日本の伝統文化を支える産業が、今まさに岐路に立っている。`,
+    reality: "熊本県のい草生産量は全国の約95%。1960年代には県内に8,000戸以上あったい草農家が、現在は約400戸以下にまで激減している。畳1枚には約4,000〜5,000本のい草が使われる。",
+    realityIcon: "🌿",
+    vocab: [
+      { word: "い草", def: "畳の表面（畳表）に使われるイグサ科の植物。水田で栽培される" },
+      { word: "伝統的工芸品", def: "経済産業大臣が指定する、長い歴史を持つ手工業製品。八代のい草製品もこれに含まれる" }
+    ]
+  },
+  {
+    num: "06",
+    keyword: "福岡県",
+    emoji: "🍵",
+    title: "「八女茶」は江戸時代から続く高級ブランド──お茶の産地は山の斜面にある",
+    story: `福岡県南部の八女市周辺で作られる<strong>八女茶</strong>は、全国的に知られる高級ブランド茶だ。その歴史は室町時代にさかのぼり、江戸時代には将軍家や大名にも献上された。<br><br>
+なぜ山の斜面でお茶が育つのか？お茶は<strong>霧</strong>が多い環境を好む。山の斜面は昼夜の気温差が大きく、朝に霧が発生しやすい。この霧が直射日光を遮り、茶葉が甘くまろやかに育つ。<br><br>
+また八女茶には特別な「<strong>玉露</strong>」がある。収穫前に遮光シートで茶葉を覆い、日光を遮断することで渋みを抑え、旨み成分（テアニン）を増やす。玉露は日本茶の最高峰とされる。`,
+    reality: "八女茶の産地では、玉露の生産量が全国1位。玉露は高級品で、100gあたり数千円〜数万円もするものがある。鹿児島県の「知覧茶」も同様に全国トップクラスの産地で、生産量は全国2位を争う。",
+    realityIcon: "🍵",
+    vocab: [
+      { word: "玉露", def: "収穫前に日光を遮って育てた最高級の緑茶。旨み成分が多く渋みが少ない" },
+      { word: "テアニン", def: "お茶に含まれる旨み成分のアミノ酸。日光を遮ると増える。リラックス効果もある" }
+    ]
+  },
+  {
+    num: "07",
+    keyword: "佐賀県",
+    emoji: "🌊",
+    title: "日本の海苔の4割は有明海産──なぜこの海で海苔が育つのか？",
+    story: `ステージ①でも登場した有明海だが、農業・畜産の視点でも重要な舞台だ。有明海は日本最大の<strong>のり（海苔）養殖</strong>の産地で、全国の生産量の約40%を占める。<br><br>
+海苔の養殖は「支柱式」と呼ばれる方法で行う。海に柱を立てて網を張り、干潮時に海苔が空気にさらされるようにする。有明海は干満差が日本一（約6m）あるため、1日2回必ず「干出」が起きる。この干出が海苔を乾燥・殺菌し、病気に強く品質の高い海苔に育てる。<br><br>
+有明海の海苔は<strong>「初摘み海苔」</strong>が最高ブランドで、秋から冬にかけて収穫される。おにぎりや寿司に使われる高級海苔の多くが、有明産だ。`,
+    reality: "有明海の海苔養殖の年間生産額は約300億円以上。佐賀・福岡・熊本・長崎の4県が産地だが、佐賀県が特に有名。日本人1人あたり年間約100枚以上の海苔を消費しており、その約4割が有明産だ。",
+    realityIcon: "🌊",
+    vocab: [
+      { word: "干出（かんしゅつ）", def: "干潮時に養殖網が空気にさらされること。海苔を乾燥・殺菌し品質を高める" },
+      { word: "養殖", def: "魚介類や海藻を人工的に管理・育てて収穫する漁業の方法" }
+    ]
+  },
+  {
+    num: "08",
+    keyword: "長崎県",
+    emoji: "🍊",
+    title: "長崎のびわ・みかんは「斜面農業」の産物だ",
+    story: `長崎県はリアス海岸が発達し、平地が少ない県だ。しかし農家たちはその急な斜面を逆手に取り、独自の農業を発展させた。<br><br>
+代表的なのが<strong>びわ</strong>の栽培だ。長崎県は全国1位のびわ産地で、特に諫早市・長崎市の斜面に広がるびわ畑は壮観だ。斜面は日当たりが良く、水はけも良いため、びわのような果樹に最適だ。<br><br>
+また長崎はみかんの産地としても有名で、段々畑（<strong>棚田</strong>のような段々になった畑）を作って栽培している。斜面を段々に削って平らな畑を作る「段々畑」は、大変な労働の結晶だが、土地を最大限活用する知恵だ。`,
+    reality: "長崎県のびわ生産量は全国1位で、全国シェアの約30〜40%を占める。びわの旬は5〜6月と短く、高級フルーツとして贈り物にも使われる。1パック（8〜10個）が1,000〜3,000円することも珍しくない。",
+    realityIcon: "🍊",
+    vocab: [
+      { word: "リアス海岸", def: "山地が沈んでできた、複雑に入り組んだ海岸線。平地が少なく急な斜面が多い" },
+      { word: "段々畑", def: "急な斜面を階段状に削って作った畑。土砂崩れを防ぎながら農地を確保する工夫" }
+    ]
+  },
+  {
+    num: "09",
+    keyword: "大分県",
+    emoji: "🍄",
+    title: "「一村一品運動」が生んだ大分のしいたけ革命",
+    story: `1979年、大分県知事の平松守彦氏が「<strong>一村一品運動</strong>」を始めた。各市町村が一つの特産品を磨き上げ、地域の誇りとブランドにしようという運動だ。<br><br>
+この運動の代表的な成功例が<strong>しいたけ</strong>だ。大分県は現在も原木しいたけの生産量が全国1位。山の木（クヌギ・コナラ）を切って原木にし、そこにしいたけの菌を植えて育てる「原木栽培」は、大分の山村に根付いた伝統産業だ。<br><br>
+一村一品運動はその後、タイやアフリカなど世界70か国以上に伝わり、地域振興のモデルとして国際的に認められた。大分の知恵が世界を変えたのだ。`,
+    reality: "大分県のしいたけ生産量は全国1位（原木しいたけ）。一村一品運動で生まれた大分の特産品は、かぼす・豊後牛・麦焼酎など100品目以上に及ぶ。この運動は国連からも評価され、世界農業遺産の議論にも影響を与えた。",
+    realityIcon: "🍄",
+    vocab: [
+      { word: "一村一品運動", def: "各地域が一つの特産品を磨き上げてブランド化する地域振興運動。1979年に大分県で始まった" },
+      { word: "原木栽培", def: "天然の木（原木）にきのこの菌を植えて育てる伝統的な栽培方法。菌床栽培より旨みが強い" }
+    ]
+  },
+  {
+    num: "10",
+    keyword: "熊本県",
+    emoji: "🍅",
+    title: "フードマイレージって何？「地産地消」が環境を救う理由",
+    story: `九州の農業を学ぶ最後に、現代的な視点を加えよう。<strong>フードマイレージ</strong>とは、食品が生産地から消費地に届くまでの「距離×重量」を計算した指標だ。<br><br>
+距離が長ければ長いほど、輸送に使うエネルギー（石油など）が増え、CO₂の排出が増える。日本は食料の多くを輸入しており、フードマイレージは世界でもトップクラスに高い。<br><br>
+これに対するアンサーが<strong>地産地消</strong>だ。地元で作ったものを地元で食べる。九州の農産物を九州で消費すれば、輸送距離が極端に短くなり、環境負荷が下がる。熊本のトマト・宮崎のキュウリ・鹿児島の黒豚……九州の豊かな農業は、地産地消の最前線でもある。`,
+    reality: "日本のフードマイレージは1人あたり約7,093トン・km（2010年時点）で、アメリカの約3倍、イギリスの約5倍。食料自給率はカロリーベースで約38%（2023年）に過ぎず、多くを海外に依存している。",
+    realityIcon: "🌍",
+    vocab: [
+      { word: "フードマイレージ", def: "食品の重量×輸送距離で計算した環境負荷の指標。数値が大きいほど環境に負担がかかる" },
+      { word: "地産地消", def: "地元で生産したものを地元で消費すること。輸送コストと環境負荷を下げる効果がある" }
+    ]
+  }
+];
+
+const QUIZZES = [
+  {
+    q: "二毛作とはどういう農業の方法か？",
+    options: ["1年間に同じ作物を2回収穫する方法", "同じ農地で1年間に2種類の異なる作物を育てる方法", "2か所の農地で同時に作物を育てる方法", "2人の農家が協力して1つの農地を耕す方法"],
+    ans: 1,
+    exp: "二毛作は同じ農地で1年間に2種類の異なる作物を育てる方法です。筑紫平野では「夏に稲→冬に麦」が典型的なパターンです。"
+  },
+  {
+    q: "宮崎県の促成栽培で、冬に出荷される代表的な野菜はどれか？",
+    options: ["大根・白菜", "キュウリ・ピーマン", "じゃがいも・にんじん", "れんこん・ごぼう"],
+    ans: 1,
+    exp: "促成栽培はビニールハウスを使って旬より早く育てる方法です。宮崎では本来夏野菜のキュウリやピーマンを冬から春に出荷しています。"
+  },
+  {
+    q: "鹿児島の畜産が盛んな理由として最も関係が深いのはどれか？",
+    options: ["鹿児島が島国だから海産物が豊富", "シラス台地が稲作に不向きで牧草に適していたから", "鹿児島は台風が少ないから", "江戸時代から政府が補助金を出していたから"],
+    ans: 1,
+    exp: "シラス台地は火山灰が積もった水はけの良い台地で稲作に不向きですが、牧草を育てる牧場としては最適でした。これが鹿児島の畜産発展の背景です。"
+  },
+  {
+    q: "宮崎県でブロイラー（食肉用鶏）の養鶏が発展した理由はどれか？",
+    options: ["宮崎は雨が少なくて鶏が健康に育つから", "シラス台地で稲作が難しく、戦後に鶏の飼育が広まったから", "宮崎には鶏の飼料となる魚が豊富だから", "宮崎の気温が低く保存に適しているから"],
+    ans: 1,
+    exp: "シラス台地で稲作が難しかった宮崎で、戦後の食糧難の時代に鶏の飼育が広まりました。鶏は狭いスペースで育てられ成長も早いため農家に普及しました。"
+  },
+  {
+    q: "熊本県八代市で生産されるい草の全国シェアはおよそどのくらいか？",
+    options: ["約30%", "約50%", "約70%", "約95%"],
+    ans: 3,
+    exp: "熊本県のい草生産量は全国の約95%を占めます。ほぼ独占状態ですが、フローリング住宅の増加と中国産との競争で農家数は激減しています。"
+  },
+  {
+    q: "八女茶の高級品「玉露」が旨みが強い理由は何か？",
+    options: ["特別な山の湧き水で育てるから", "収穫前に日光を遮断し、旨み成分（テアニン）を増やすから", "八女の土が特別なミネラルを含むから", "江戸時代から受け継がれた秘伝の肥料があるから"],
+    ans: 1,
+    exp: "玉露は収穫前に遮光シートで覆い、日光を遮断して育てます。日光が当たらないと渋み成分が減り、旨み成分（テアニン）が増えます。"
+  },
+  {
+    q: "有明海での海苔養殖に「干満差が大きいこと」が重要な理由は何か？",
+    options: ["干潮時に船が出しやすくなるから", "干出（空気にさらされること）で海苔が乾燥・殺菌されて品質が高まるから", "干満差が大きいと養殖コストが下がるから", "満潮時に栄養豊富な外海の水が入るから"],
+    ans: 1,
+    exp: "干潮時に養殖網が空気にさらされる「干出」が起きます。これにより海苔が乾燥・殺菌されて病気に強く品質の高い海苔に育ちます。"
+  },
+  {
+    q: "長崎県が急な斜面でびわやみかんを栽培できる理由は何か？",
+    options: ["斜面は台風の影響を受けないから", "斜面は日当たりが良く水はけも良いため果樹に適しているから", "斜面は気温が低くて果物が甘くなるから", "長崎は法律で平地での農業が禁止されているから"],
+    ans: 1,
+    exp: "斜面は日当たりが良く水はけも良いため、びわやみかんなどの果樹栽培に適しています。長崎はリアス海岸で平地が少ないため、斜面を活用した農業が発展しました。"
+  },
+  {
+    q: "大分県の「一村一品運動」とはどのような取り組みか？",
+    options: ["各村が同じ作物を作って品質を競う運動", "各市町村が一つの特産品を磨き上げてブランド化する地域振興運動", "1人1品ずつ農産物を持ち寄る交換会", "外国から1品目だけ輸入を認める制度"],
+    ans: 1,
+    exp: "1979年に大分県で始まった一村一品運動は、各地域が一つの特産品をブランド化する取り組みです。しいたけなどが成功例で、世界70か国以上に広まりました。"
+  },
+  {
+    q: "「地産地消」が環境に良いとされる最大の理由は何か？",
+    options: ["地元の食品は農薬を使っていないから", "輸送距離が短くなりCO₂排出量が減るから", "地元の農家が儲かって景気が良くなるから", "地元の食品は栄養価が高いから"],
+    ans: 1,
+    exp: "地産地消は輸送距離を短くすることで、輸送に使うエネルギーとCO₂排出量を減らす効果があります。これがフードマイレージの削減につながります。"
+  }
+];
+
+let current = 0;
+let readFlags = new Array(10).fill(false);
+let quizCurrent = 0;
+let quizScore = 0;
+let quizAnswered = false;
+const STORAGE_KEY = 'kyushuZatsuqaku_stage2';
+
+function init() {
+  try {
+    const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
+    if (saved && saved.readFlags) {
+      readFlags = saved.readFlags;
+      current = readFlags.indexOf(false);
+      if (current === -1) current = 9;
+    }
+  } catch(e) {}
+  renderDots();
+  renderCard();
+}
+
+function save() {
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify({ readFlags })); } catch(e) {}
+}
+
+function renderDots() {
+  const el = document.getElementById('dots');
+  el.innerHTML = ITEMS.map((_, i) => {
+    let cls = 'dot';
+    if (i === current) cls += ' current';
+    else if (readFlags[i]) cls += ' done';
+    return `<div class="${cls}" onclick="jumpTo(${i})">${i+1}</div>`;
+  }).join('');
+}
+
+function jumpTo(i) {
+  readFlags[current] = true;
+  current = i;
+  save();
+  renderDots();
+  renderCard();
+}
+
+function updateProgress() {
+  const done = readFlags.filter(Boolean).length;
+  document.getElementById('progress-text').textContent = `${done} / 10`;
+  document.getElementById('progress-fill').style.width = `${done * 10}%`;
+}
+
+function renderCard() {
+  const d = ITEMS[current];
+  updateProgress();
+  const isLast = current === 9;
+
+  document.getElementById('card').innerHTML = `
+    <div class="card-badge">雑学 ${d.num}</div>
+    <div class="card-title">${d.title}</div>
+    <div class="img-placeholder" id="img-wrap-${current}">
+      <span style="font-size:14px;color:var(--text-sub)">📷 画像を読み込み中...</span>
+    </div>
+    <div class="img-caption" id="img-caption-${current}"></div>
+    <div class="card-story">${d.story}</div>
+    <div class="reality-box">
+      <div class="reality-label">${d.realityIcon} リアリティ DATA</div>
+      <div class="reality-text">${d.reality}</div>
+    </div>
+    <div class="vocab-box">
+      <div class="vocab-label">📖 用語解説</div>
+      ${d.vocab.map(v => `<div class="vocab-item">・<strong>【${v.word}】</strong>：${v.def}</div>`).join('')}
+    </div>
+  `;
+
+  document.getElementById('btn-prev').disabled = current === 0;
+  const nextBtn = document.getElementById('btn-next');
+  nextBtn.textContent = isLast ? '✨ 読み終えた！' : '次の雑学へ →';
+
+  loadWikiImage(current, d.keyword, d.emoji);
+}
+
+async function loadWikiImage(idx, keyword, fallbackEmoji) {
+  try {
+    const url = `https://ja.wikipedia.org/w/api.php?action=query&titles=${encodeURIComponent(keyword)}&prop=pageimages&format=json&pithumbsize=640&origin=*`;
+    const res = await fetch(url);
+    const data = await res.json();
+    const pages = data.query.pages;
+    const page = Object.values(pages)[0];
+    const wrap = document.getElementById(`img-wrap-${idx}`);
+    if (!wrap) return;
+    if (page && page.thumbnail) {
+      wrap.innerHTML = `<img class="card-img" src="${page.thumbnail.source}" alt="${keyword}">`;
+      const cap = document.getElementById(`img-caption-${idx}`);
+      if (cap) cap.textContent = `${keyword} © Wikipedia`;
+    } else {
+      wrap.innerHTML = `<div class="img-placeholder"><span style="font-size:52px">${fallbackEmoji}</span></div>`;
+    }
+  } catch(e) {
+    const wrap = document.getElementById(`img-wrap-${idx}`);
+    if (wrap) wrap.innerHTML = `<div class="img-placeholder"><span style="font-size:52px">${fallbackEmoji}</span></div>`;
+  }
+}
+
+function go(dir) {
+  readFlags[current] = true;
+  save();
+  const next = current + dir;
+  if (next < 0) return;
+  if (next >= 10) {
+    document.getElementById('card').style.display = 'none';
+    document.getElementById('btn-prev').style.display = 'none';
+    document.getElementById('btn-next').style.display = 'none';
+    document.getElementById('complete-card').classList.remove('hidden');
+    updateProgress();
+    renderDots();
+    return;
+  }
+  current = next;
+  renderDots();
+  renderCard();
+}
+
+function resetZatsuqaku() {
+  current = 0;
+  readFlags = new Array(10).fill(false);
+  save();
+  document.getElementById('card').style.display = '';
+  document.getElementById('btn-prev').style.display = '';
+  document.getElementById('btn-next').style.display = '';
+  document.getElementById('complete-card').classList.add('hidden');
+  renderDots();
+  renderCard();
+}
+
+function startQuiz() {
+  document.getElementById('zatsuqaku-section').classList.add('hidden');
+  document.getElementById('complete-card').classList.add('hidden');
+  document.getElementById('quiz-section').classList.remove('hidden');
+  quizCurrent = 0;
+  quizScore = 0;
+  renderQuiz();
+}
+
+function renderQuiz() {
+  const q = QUIZZES[quizCurrent];
+  quizAnswered = false;
+  document.getElementById('quiz-card').innerHTML = `
+    <div class="quiz-q-num">問題 ${quizCurrent + 1} / 10</div>
+    <div class="quiz-q-text">${q.q}</div>
+    <div class="quiz-options">
+      ${q.options.map((opt, i) => `<button class="quiz-opt" onclick="answerQuiz(${i})" id="qopt-${i}">${opt}</button>`).join('')}
+    </div>
+    <div class="quiz-result" id="quiz-result"></div>
+    <div class="quiz-nav">
+      <button class="btn-quiz-next" id="quiz-next-btn" onclick="nextQuiz()">
+        ${quizCurrent === 9 ? '結果を見る →' : '次の問題へ →'}
+      </button>
+    </div>
+  `;
+  document.getElementById('score-card').classList.add('hidden');
+}
+
+function answerQuiz(idx) {
+  if (quizAnswered) return;
+  quizAnswered = true;
+  const q = QUIZZES[quizCurrent];
+  const isCorrect = idx === q.ans;
+  if (isCorrect) quizScore++;
+  document.querySelectorAll('.quiz-opt').forEach((btn, i) => {
+    btn.disabled = true;
+    if (i === q.ans) btn.classList.add('correct');
+    else if (i === idx && !isCorrect) btn.classList.add('wrong');
+  });
+  const res = document.getElementById('quiz-result');
+  res.classList.add('show');
+  if (isCorrect) {
+    res.classList.add('ok');
+    res.innerHTML = `✅ 正解！ ${q.exp}`;
+  } else {
+    res.classList.add('ng');
+    res.innerHTML = `❌ 不正解。正解は「${q.options[q.ans]}」です。<br>${q.exp}`;
+  }
+  document.getElementById('quiz-next-btn').style.display = 'block';
+}
+
+function nextQuiz() {
+  if (quizCurrent === 9) { showScore(); return; }
+  quizCurrent++;
+  renderQuiz();
+}
+
+function showScore() {
+  document.getElementById('quiz-card').innerHTML = '';
+  const sc = document.getElementById('score-card');
+  sc.classList.remove('hidden');
+  document.getElementById('score-num').textContent = quizScore;
+  let comment = '';
+  if (quizScore === 10) comment = '満点！完璧だ！九州の農業・畜産マスターを名乗っていいぞ！🏆';
+  else if (quizScore >= 8) comment = 'すごい！よく覚えている。あと少しで完璧だ！もう一度チャレンジしてみよう。';
+  else if (quizScore >= 6) comment = '合格ライン！雑学をもう一回読んで、苦手なところを確認しよう。';
+  else if (quizScore >= 4) comment = 'もう少し！雑学に戻って、リアリティDATAと用語解説をしっかり読み直そう。';
+  else comment = '雑学をもう一度ゆっくり読もう。読むだけで答えがわかるようになっているよ！';
+  document.getElementById('score-comment').textContent = comment;
+}
+
+function retryQuiz() {
+  quizCurrent = 0;
+  quizScore = 0;
+  document.getElementById('score-card').classList.add('hidden');
+  renderQuiz();
+}
+
+function backToZatsuqaku() {
+  document.getElementById('quiz-section').classList.add('hidden');
+  document.getElementById('zatsuqaku-section').classList.remove('hidden');
+  document.getElementById('card').style.display = '';
+  document.getElementById('btn-prev').style.display = '';
+  document.getElementById('btn-next').style.display = '';
+  document.getElementById('complete-card').classList.add('hidden');
+  current = 0;
+  renderDots();
+  renderCard();
+}
+
+init();
+</script>
+</body>
+</html>

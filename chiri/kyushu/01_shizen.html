@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>九州の雑学 – 自然環境編</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700;900&family=Noto+Serif+JP:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --orange: #E8621A;
+    --orange-light: #F5895A;
+    --orange-pale: #FFF0E8;
+    --bg: #FFFBF7;
+    --card-bg: #FFFFFF;
+    --text: #2D1B00;
+    --text-sub: #7A5A3A;
+    --border: #F0D5B8;
+    --green: #2E7D52;
+    --green-light: #E8F5EE;
+    --red: #C0392B;
+    --red-light: #FDECEA;
+    --shadow: 0 4px 24px rgba(232,98,26,0.10);
+    --radius: 18px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Zen Maru Gothic', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  /* ===== HEADER ===== */
+  header {
+    background: linear-gradient(135deg, var(--orange) 0%, #C94A08 100%);
+    color: white;
+    text-align: center;
+    padding: 18px 20px 14px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 12px rgba(232,98,26,0.3);
+  }
+  header .region { font-size: 13px; opacity: 0.85; letter-spacing: 2px; margin-bottom: 2px; }
+  header h1 { font-size: 20px; font-weight: 900; }
+  header .stage-label { font-size: 12px; opacity: 0.75; margin-top: 2px; }
+
+  /* ===== PROGRESS ===== */
+  .progress-wrap {
+    background: white;
+    padding: 12px 20px 10px;
+    border-bottom: 1px solid var(--border);
+  }
+  .progress-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: var(--text-sub);
+    margin-bottom: 6px;
+  }
+  .progress-bar {
+    height: 8px;
+    background: var(--border);
+    border-radius: 99px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--orange-light), var(--orange));
+    border-radius: 99px;
+    transition: width 0.4s ease;
+  }
+
+  /* ===== DOTS ===== */
+  .dots {
+    display: flex;
+    gap: 6px;
+    justify-content: center;
+    padding: 10px 20px;
+    flex-wrap: wrap;
+  }
+  .dot {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 2px solid var(--border);
+    background: white;
+    font-size: 11px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-sub);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .dot.current { border-color: var(--orange); background: var(--orange); color: white; }
+  .dot.done { border-color: var(--orange); background: var(--orange-pale); color: var(--orange); }
+
+  /* ===== MAIN CONTENT ===== */
+  main { padding: 0 16px 40px; max-width: 640px; margin: 0 auto; }
+
+  /* ===== CARD ===== */
+  .card {
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+    overflow: hidden;
+    margin-top: 14px;
+    animation: fadeUp 0.35s ease;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* badge */
+  .card-badge {
+    background: linear-gradient(90deg, var(--orange), var(--orange-light));
+    color: white;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 6px 14px;
+    letter-spacing: 1px;
+  }
+
+  /* title */
+  .card-title {
+    padding: 16px 18px 12px;
+    font-size: 19px;
+    font-weight: 900;
+    line-height: 1.45;
+    border-bottom: 1px dashed var(--border);
+  }
+
+  /* image */
+  .card-img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+    background: var(--orange-pale);
+  }
+  .img-caption {
+    font-size: 10px;
+    color: var(--text-sub);
+    padding: 4px 12px;
+    text-align: right;
+    background: var(--orange-pale);
+  }
+  .img-placeholder {
+    width: 100%;
+    height: 200px;
+    background: var(--orange-pale);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 48px;
+  }
+
+  /* story */
+  .card-story {
+    padding: 16px 18px;
+    font-size: 15px;
+    line-height: 1.85;
+    color: var(--text);
+  }
+  .card-story strong { color: var(--orange); font-weight: 700; }
+
+  /* reality */
+  .reality-box {
+    margin: 0 18px 14px;
+    background: var(--orange-pale);
+    border-left: 4px solid var(--orange);
+    border-radius: 10px;
+    padding: 12px 14px;
+  }
+  .reality-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--orange);
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .reality-text {
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--text);
+  }
+
+  /* vocab */
+  .vocab-box {
+    margin: 0 18px 18px;
+    background: var(--green-light);
+    border-radius: 10px;
+    padding: 12px 14px;
+  }
+  .vocab-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--green);
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+  .vocab-item { font-size: 13px; line-height: 1.65; margin-bottom: 4px; }
+  .vocab-item strong { color: var(--green); }
+
+  /* ===== NAV BUTTONS ===== */
+  .nav-buttons {
+    display: flex;
+    gap: 10px;
+    padding: 14px 0 0;
+    justify-content: space-between;
+  }
+  .btn {
+    flex: 1;
+    padding: 14px 10px;
+    border-radius: 12px;
+    border: none;
+    font-family: 'Zen Maru Gothic', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn-prev { background: white; border: 2px solid var(--border); color: var(--text-sub); }
+  .btn-prev:hover { border-color: var(--orange); color: var(--orange); }
+  .btn-next { background: linear-gradient(135deg, var(--orange), #C94A08); color: white; box-shadow: 0 4px 14px rgba(232,98,26,0.35); }
+  .btn-next:hover { transform: translateY(-1px); box-shadow: 0 6px 18px rgba(232,98,26,0.45); }
+  .btn:disabled { opacity: 0.35; cursor: not-allowed; transform: none !important; }
+
+  /* ===== COMPLETE CARD ===== */
+  .complete-card {
+    background: linear-gradient(135deg, #FFF7F2, #FFEDE0);
+    border: 2px solid var(--orange-light);
+    border-radius: var(--radius);
+    text-align: center;
+    padding: 30px 24px;
+    margin-top: 14px;
+    animation: fadeUp 0.35s ease;
+  }
+  .complete-emoji { font-size: 52px; margin-bottom: 10px; }
+  .complete-stars { font-size: 28px; letter-spacing: 4px; margin-bottom: 14px; }
+  .complete-title { font-size: 22px; font-weight: 900; color: var(--orange); margin-bottom: 10px; }
+  .complete-desc { font-size: 14px; line-height: 1.8; color: var(--text-sub); margin-bottom: 20px; }
+
+  /* ===== QUIZ SECTION ===== */
+  #quiz-section { display: none; }
+
+  .quiz-header {
+    background: linear-gradient(135deg, #2E3A5F 0%, #1A2540 100%);
+    color: white;
+    text-align: center;
+    padding: 16px 20px 12px;
+    margin-top: 14px;
+    border-radius: var(--radius) var(--radius) 0 0;
+  }
+  .quiz-header h2 { font-size: 18px; font-weight: 900; }
+  .quiz-header p { font-size: 12px; opacity: 0.7; margin-top: 2px; }
+
+  .quiz-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-top: none;
+    border-radius: 0 0 var(--radius) var(--radius);
+    padding: 20px 18px 24px;
+    animation: fadeUp 0.3s ease;
+  }
+  .quiz-q-num { font-size: 11px; color: #2E3A5F; font-weight: 700; margin-bottom: 8px; letter-spacing: 1px; }
+  .quiz-q-text { font-size: 16px; font-weight: 700; line-height: 1.6; margin-bottom: 16px; }
+
+  .quiz-options { display: flex; flex-direction: column; gap: 10px; }
+  .quiz-opt {
+    padding: 13px 16px;
+    border-radius: 10px;
+    border: 2px solid var(--border);
+    background: white;
+    font-family: 'Zen Maru Gothic', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.2s;
+  }
+  .quiz-opt:hover:not(:disabled) { border-color: #2E3A5F; background: #F0F3FA; }
+  .quiz-opt.correct { border-color: var(--green) !important; background: var(--green-light) !important; color: var(--green); font-weight: 700; }
+  .quiz-opt.wrong { border-color: var(--red) !important; background: var(--red-light) !important; color: var(--red); }
+  .quiz-opt:disabled { cursor: default; }
+
+  .quiz-result {
+    margin-top: 14px;
+    padding: 12px 14px;
+    border-radius: 10px;
+    font-size: 14px;
+    line-height: 1.6;
+    display: none;
+  }
+  .quiz-result.show { display: block; }
+  .quiz-result.ok { background: var(--green-light); color: var(--green); border-left: 4px solid var(--green); }
+  .quiz-result.ng { background: var(--red-light); color: var(--red); border-left: 4px solid var(--red); }
+
+  .quiz-nav { display: flex; justify-content: flex-end; margin-top: 16px; }
+  .btn-quiz-next {
+    padding: 12px 24px;
+    border-radius: 10px;
+    border: none;
+    background: linear-gradient(135deg, #2E3A5F, #1A2540);
+    color: white;
+    font-family: 'Zen Maru Gothic', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    display: none;
+    transition: all 0.2s;
+  }
+  .btn-quiz-next:hover { transform: translateY(-1px); }
+
+  /* score */
+  .score-card {
+    background: linear-gradient(135deg, #2E3A5F, #1A2540);
+    color: white;
+    border-radius: var(--radius);
+    text-align: center;
+    padding: 30px 24px;
+    margin-top: 14px;
+    animation: fadeUp 0.35s ease;
+  }
+  .score-num { font-size: 56px; font-weight: 900; color: #FFD700; }
+  .score-label { font-size: 16px; opacity: 0.8; margin-top: -4px; margin-bottom: 14px; }
+  .score-comment { font-size: 15px; line-height: 1.7; margin-bottom: 22px; }
+  .btn-retry {
+    padding: 13px 28px;
+    border-radius: 12px;
+    border: 2px solid rgba(255,255,255,0.4);
+    background: transparent;
+    color: white;
+    font-family: 'Zen Maru Gothic', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn-retry:hover { background: rgba(255,255,255,0.1); }
+
+  .hidden { display: none !important; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="region">九州地方 · 自然環境</div>
+  <h1>🌋 九州の自然のひみつ</h1>
+  <div class="stage-label">ステージ① 雑学10選</div>
+</header>
+
+<div class="progress-wrap">
+  <div class="progress-meta">
+    <span>読んだ雑学</span>
+    <span id="progress-text">0 / 10</span>
+  </div>
+  <div class="progress-bar">
+    <div class="progress-fill" id="progress-fill" style="width:0%"></div>
+  </div>
+</div>
+
+<div class="dots" id="dots"></div>
+
+<main>
+  <div id="zatsuqaku-section">
+    <div class="card" id="card"></div>
+    <div class="nav-buttons">
+      <button class="btn btn-prev" id="btn-prev" onclick="go(-1)" disabled>← 前へ</button>
+      <button class="btn btn-next" id="btn-next" onclick="go(1)">次の雑学へ →</button>
+    </div>
+  </div>
+
+  <div class="complete-card hidden" id="complete-card">
+    <div class="complete-emoji">🎉</div>
+    <div class="complete-stars">⭐⭐⭐⭐⭐</div>
+    <div class="complete-title">雑学コンプリート！</div>
+    <div class="complete-desc">
+      九州の自然環境について<br>
+      10の雑学を全部読んだよ！<br><br>
+      火山・温泉・台風・世界遺産…<br>
+      <strong>九州は地球の力が集まる島だ。</strong>
+    </div>
+    <button class="btn btn-next" onclick="startQuiz()" style="max-width:280px;margin:0 auto;display:block;">
+      クイズに挑戦！ →
+    </button>
+    <div style="margin-top:12px;">
+      <button class="btn btn-prev" onclick="resetZatsuqaku()" style="border:none;background:transparent;font-size:13px;color:var(--text-sub);">もう一度読む 🔄</button>
+    </div>
+  </div>
+
+  <!-- QUIZ -->
+  <div id="quiz-section" class="hidden">
+    <div class="quiz-header">
+      <h2>📝 確認クイズ</h2>
+      <p>雑学で学んだことを試してみよう！</p>
+    </div>
+    <div class="quiz-card" id="quiz-card"></div>
+
+    <div class="score-card hidden" id="score-card">
+      <div class="score-num" id="score-num"></div>
+      <div class="score-label">/ 10問正解</div>
+      <div class="score-comment" id="score-comment"></div>
+      <button class="btn-retry" onclick="retryQuiz()">もう一度チャレンジ 🔄</button>
+      <br><br>
+      <button class="btn-retry" onclick="backToZatsuqaku()" style="font-size:13px;opacity:0.7;">← 雑学に戻る</button>
+    </div>
+  </div>
+</main>
+
+<script>
+// ===== データ =====
+const ITEMS = [
+  {
+    num: "01",
+    keyword: "熊本県",
+    emoji: "🌋",
+    title: "世界最大級のカルデラが、九州のど真ん中にある",
+    story: `熊本県にある<strong>阿蘇山</strong>。その外輪山が囲む「阿蘇カルデラ」は、東西約18km・南北約25kmという巨大なくぼ地だ。<br><br>
+約9万年前の超巨大噴火で生まれたこのカルデラの中に、今も約5万人が暮らしている。畑があり、鉄道が走り、普通の町がある。「火山の中に人が住む」という、世界でも珍しい場所だ。<br><br>
+現在も<strong>中岳</strong>は活発に噴火を繰り返しており、火山ガスで立入禁止になることも多い。九州が「火の国」と呼ばれる理由がここにある。`,
+    reality: "阿蘇カルデラの面積は約380km²。東京23区（619km²）の約6割に相当する広さ。その中に「阿蘇市」という市が丸ごと入っている。",
+    realityIcon: "📏",
+    vocab: [
+      { word: "カルデラ", def: "火山が大噴火した後、地面が陥没してできた大きなくぼ地のこと" },
+      { word: "外輪山", def: "カルデラの外側をぐるりと囲む山々のこと" }
+    ]
+  },
+  {
+    num: "02",
+    keyword: "鹿児島県",
+    emoji: "🌋",
+    title: "「島」なのに、実は半島。桜島はなぜ島ではないのか？",
+    story: `鹿児島湾に浮かぶ<strong>桜島</strong>は、その名の通りかつて本当に「島」だった。ところが1914年（大正3年）の大噴火で大量の溶岩が流れ出し、対岸の大隅半島と陸続きになってしまった。<br><br>
+この噴火は史上最大規模のもので、噴出した溶岩の量は約30億トン。わずか数日で海峡を埋め尽くし、島は半島になった。<br><br>
+現在も桜島は活発に噴火を続けており、鹿児島市には<strong>降灰</strong>（火山灰が降ること）が日常的に起こる。学校に「灰捨て場」があるのは鹿児島ならではの光景だ。`,
+    reality: "桜島は年間1,000回前後噴火することもある「世界有数の活火山」。鹿児島市民は傘の代わりに「灰用マスク」と「灰落とし用のほうき」を常備している。",
+    realityIcon: "🌋",
+    vocab: [
+      { word: "活火山", def: "現在も噴火活動を続けている、または過去1万年以内に噴火した火山" },
+      { word: "降灰", def: "火山灰が空から降り積もる現象。農作物や交通機関に影響を与える" }
+    ]
+  },
+  {
+    num: "03",
+    keyword: "大分県",
+    emoji: "♨️",
+    title: "なぜ九州は日本一の温泉大国なのか？",
+    story: `日本の温泉源泉数ランキングで、1位は大分県、2位は鹿児島県、3位は北海道。九州の2県だけで全国の源泉の約25%を占める。<br><br>
+この理由はシンプルで、九州が「火山の島」だからだ。阿蘇山・桜島・雲仙岳など活火山が集中しており、地下のマグマが地下水を温めて温泉になる。<br><br>
+大分県<strong>別府温泉</strong>は源泉数・湧出量ともに日本一で、「地獄めぐり」として観光地化された池では、血のように赤い「血の池地獄」や、間欠泉のように熱泥が噴き出す「龍巻地獄」など、火山の力を直接体感できる。`,
+    reality: "別府温泉の1日あたりの湧出量は約13万キロリットル。これは1日でオリンピックプールを約52杯分を満たせる量。日本全国の温泉湧出量の約10分の1が別府一か所から出ている。",
+    realityIcon: "♨️",
+    vocab: [
+      { word: "源泉", def: "温泉が地中から湧き出している場所・穴のこと" },
+      { word: "間欠泉", def: "一定の間隔をおいて熱湯や蒸気を噴き出す温泉" }
+    ]
+  },
+  {
+    num: "04",
+    keyword: "長崎県",
+    emoji: "⛰️",
+    title: "平成大噴火で島が消えた？雲仙岳の恐ろしすぎる噴火",
+    story: `長崎県の<strong>雲仙岳</strong>は、1990年から1995年にかけて大噴火を起こした。その中でも1991年6月3日は特に悲惨な日で、火砕流が山のふもとの集落を一瞬で飲み込み、43人が犠牲になった。<br><br>
+<strong>火砕流</strong>とは、高温のガス・岩石・灰が混ざって斜面を猛スピードで駆け下りる現象で、その速度は時速100km以上、温度は800℃を超えることもある。<br><br>
+この噴火で溶岩が積み重なってできた「平成新山」は、標高1,483mで長崎県の最高峰になった。噴火によって新しい山が生まれたのだ。`,
+    reality: "1991年の噴火で流出した土砂の量は約1億㎥以上。現在も平成新山は「立入禁止区域」に指定されており、日本で唯一、登山を禁止されている山だ。",
+    realityIcon: "🔥",
+    vocab: [
+      { word: "火砕流", def: "高温のガス・岩石・灰が混合して斜面を高速で流れ下る現象。溶岩流より危険" },
+      { word: "平成新山", def: "雲仙岳の噴火で溶岩が積み上がってできた新しい山。長崎県最高峰" }
+    ]
+  },
+  {
+    num: "05",
+    keyword: "宮崎県",
+    emoji: "🌀",
+    title: "九州に台風が多いのは、海流と地形のワナがあるから",
+    story: `毎年夏から秋にかけて、九州には多くの台風が上陸する。なぜ九州が「台風の通り道」になるのか？<br><br>
+理由は<strong>黒潮</strong>（日本海流）だ。九州の南側を流れるこの暖流は、海面水温を高く保ち、台風のエネルギー源となる水蒸気を大量に供給する。台風は暖かい海から力をもらって発達し、そのまま北上して九州に向かってくる。<br><br>
+また九州は南側が完全に開けており、台風のブロックとなる山がない。そのため宮崎・鹿児島など南九州の県は、特に台風の直撃を受けやすい地域になっている。`,
+    reality: "過去30年間で、九州に上陸した台風の数は全国の上陸台風の約50%。2度以上上陸する「二刀流台風」も珍しくない。宮崎の年間降水量は東京の約1.5倍に達する年もある。",
+    realityIcon: "🌀",
+    vocab: [
+      { word: "黒潮（日本海流）", def: "日本の南岸を流れる暖流。水温が高く、日本の気候に大きな影響を与える" },
+      { word: "暖流", def: "周囲の海水より水温が高い海流。気候を温暖にする効果がある" }
+    ]
+  },
+  {
+    num: "06",
+    keyword: "福岡県",
+    emoji: "🌾",
+    title: "九州最大の平野「筑紫平野」はどうやって生まれたのか？",
+    story: `福岡県と佐賀県にまたがる<strong>筑紫平野</strong>は、九州最大の平野だ。この平野がなぜここにあるのか、そのルーツは数万年前にさかのぼる。<br><br>
+九州山地から流れ出た<strong>筑後川</strong>（九州最大の川）が、長い年月をかけて土砂を運び、河口付近に堆積させた。この「土砂が積み重なってできた平ら」な土地を<strong>沖積平野</strong>という。<br><br>
+この肥沃な土地は稲作に最適で、筑紫平野は日本有数の米の産地になった。福岡では「筑後米」、特に「夢つくし」「元気つくし」などのブランド米が有名だ。`,
+    reality: "筑後川の流域面積は約2,863km²。この川が運んだ土砂が積み重なってできた筑紫平野の面積は約1,200km²で、九州全体の農業産出額の約30%をこの地域が担っている。",
+    realityIcon: "🌾",
+    vocab: [
+      { word: "沖積平野", def: "川が運んだ土砂（沖積土）が積み重なってできた平野。肥沃で農業に向く" },
+      { word: "流域", def: "その川に雨水が集まる範囲のこと。山の分水嶺（尾根）が境界になる" }
+    ]
+  },
+  {
+    num: "07",
+    keyword: "佐賀県",
+    emoji: "🌊",
+    title: "日本一の干潟「有明海」がつくる不思議な世界",
+    story: `佐賀県の海岸に広がる<strong>有明海</strong>は、干満差（満潮と干潮の水面の高さの差）が最大6mにもなる、日本一の潮の差を誇る海だ。<br><br>
+干潮時には、遠く沖まで干潟が現れる。この干潟には、ムツゴロウという魚が両手でぴょんぴょん跳ねて移動する姿が見られる。干潟は生物多様性の宝庫で、ラムサール条約（国際的な湿地保護条約）の登録候補地にもなっている。<br><br>
+また干潟は<strong>のり</strong>（海苔）の養殖にも最適で、有明海は日本の海苔生産量の約40%を占める「海苔の海」でもある。`,
+    reality: "有明海の最大干満差は約6m。スカイツリーの第1展望台（高さ350m）を縮尺で考えると、その57分の1の変化が毎日繰り返されている。干潮時に現れる干潟の面積は約207km²。",
+    realityIcon: "🌊",
+    vocab: [
+      { word: "干潟", def: "潮が引いたときに現れる泥や砂の平ら。多様な生物が暮らすが、満潮時は海の底になる" },
+      { word: "干満差", def: "満潮（海面が最も高い状態）と干潮（最も低い状態）の水面の高さの差" }
+    ]
+  },
+  {
+    num: "08",
+    keyword: "屋久島",
+    emoji: "🌲",
+    title: "樹齢7,000年？屋久杉が日本の「生きた歴史書」である理由",
+    story: `鹿児島県の南西沖に浮かぶ<strong>屋久島</strong>は、1993年に日本初の世界自然遺産に登録された島だ。この島を有名にしているのが、樹齢1,000年以上の<strong>屋久杉</strong>だ。<br><br>
+屋久杉が長生きできる秘密は、屋久島の気候にある。「月に35日雨が降る」と言われるほど雨が多く（年間降水量は山頂付近で10,000mm超）、この豊富な水が森を育てている。<br><br>
+そして屋久杉の木は樹脂（ヤニ）が多く腐りにくいため、倒木になっても数百年かけてゆっくり分解される。「縄文杉」は推定樹齢7,200年とも言われ、縄文時代から生きている可能性がある。`,
+    reality: "屋久島の年間降水量は山頂付近で約10,000mm以上。東京の約5倍の雨が降る。島の面積の21%が世界遺産に指定され、登録面積はほぼ全て原生的な自然の森だ。",
+    realityIcon: "🌲",
+    vocab: [
+      { word: "世界自然遺産", def: "ユネスコが定める、地球規模で保護すべき価値を持つ自然地域。日本には5か所ある" },
+      { word: "屋久杉", def: "屋久島に自生する樹齢1,000年以上のスギのこと（1,000年未満は「小杉」と呼ぶ）" }
+    ]
+  },
+  {
+    num: "09",
+    keyword: "大分県",
+    emoji: "⛰️",
+    title: "九重連山は「九州のアルプス」──高山植物が咲く大地",
+    story: `大分県中部に位置する<strong>九重連山</strong>（くじゅう連山）は、九州最高峰の中岳（標高1,791m）を含む複数の火山が連なる山地だ。<br><br>
+夏になるとミヤマキリシマという固有種のツツジが山肌を鮮やかなピンクに染め、「九州のアルプス」とも呼ばれる景観が広がる。高山植物が咲くのは、標高が高く本州の高山に似た環境だからだ。<br><br>
+この山地は火山性のため、至るところに温泉が湧く。特に<strong>長者原</strong>（ちょうじゃばる）は湿原と温泉が共存する珍しいエリアで、ラムサール条約湿地にも登録されている。`,
+    reality: "九重連山の主峰・中岳（1,791m）は九州の最高峰。山頂からは、晴れた日に阿蘇山・由布岳・さらには遠く阿蘇まで360度見渡せる。年間登山者数は約30万人以上。",
+    realityIcon: "⛰️",
+    vocab: [
+      { word: "固有種", def: "その地域にしか生息・生育していない生物のこと。屋久島や九州にしかない種がある" },
+      { word: "高山植物", def: "高山帯（おおよそ標高2,000m以上）の厳しい環境に適応した植物" }
+    ]
+  },
+  {
+    num: "10",
+    keyword: "長崎県",
+    emoji: "🏝️",
+    title: "対馬は大陸の生き残り──日本なのに韓国より近い島",
+    story: `長崎県に属する<strong>対馬</strong>は、九州本土から約132kmの場所にある。しかし隣国・韓国の釜山からはたった約50kmしかない。晴れた日には韓国が肉眼で見えるほど近い、日本の島だ。<br><br>
+対馬が特別な理由は、生態系にある。かつて対馬は大陸と陸続きだった時代があり、そのため<strong>ツシマヤマネコ</strong>など、大陸系の動物が今も生息している。本州の野生動物とは異なる独自の生態系が残っているのだ。<br><br>
+また対馬は古くから「海の守り人」として、朝鮮半島との外交・貿易の拠点になってきた。江戸時代も対馬藩が朝鮮との貿易を独占し、重要な役割を果たした。`,
+    reality: "対馬から見える釜山までの距離は約49.5km。東京から横浜（約30km）より少し遠い程度の距離だ。韓国人観光客が大勢訪れるため、島内の案内板は日本語と韓国語の2言語表記が多い。",
+    realityIcon: "🌏",
+    vocab: [
+      { word: "ツシマヤマネコ", def: "対馬にのみ生息する野生のヤマネコ。大陸から渡ってきた種の子孫で、絶滅危惧種" },
+      { word: "対馬暖流", def: "対馬海峡を通って日本海に流れ込む暖流。日本海側の気候を温暖にする" }
+    ]
+  }
+];
+
+const QUIZZES = [
+  {
+    q: "阿蘇カルデラはどのようにして生まれたか？",
+    options: ["川の侵食によって地面がえぐられた", "超巨大噴火の後に地面が陥没した", "地震によって地面がくぼんだ", "海が引いて陸地が現れた"],
+    ans: 1,
+    exp: "約9万年前の超巨大噴火の後、地面が陥没してできたのがカルデラです。阿蘇カルデラは東西18km・南北25kmの世界最大級の大きさです。"
+  },
+  {
+    q: "桜島がかつての「島」から「半島」になった理由は何か？",
+    options: ["地震で海底が隆起した", "人間が埋め立てた", "1914年の大噴火で溶岩が海峡を埋めた", "干ばつで海が干上がった"],
+    ans: 2,
+    exp: "1914年（大正3年）の大噴火で約30億トンの溶岩が流れ出し、対岸の大隅半島と陸続きになりました。"
+  },
+  {
+    q: "大分県別府温泉が日本一の湧出量を誇る最大の理由は何か？",
+    options: ["昔から人工的に掘り続けてきたから", "地下に巨大な水脈があるから", "活火山が集中し、マグマが地下水を温めるから", "台風の雨が地中に染み込みやすいから"],
+    ans: 2,
+    exp: "九州には活火山が集中しており、地下のマグマが地下水を温めることで温泉になります。別府は源泉数・湧出量ともに日本一です。"
+  },
+  {
+    q: "雲仙岳の1991年噴火で誕生した「平成新山」とはどんな山か？",
+    options: ["人工的に盛り土してつくった観光地", "噴火で溶岩が積み上がってできた新しい山", "火砕流が固まってできた平らな台地", "地震で隆起した丘"],
+    ans: 1,
+    exp: "溶岩が積み重なってできた平成新山は、現在も立入禁止の日本唯一の山です。長崎県の最高峰（1,483m）になりました。"
+  },
+  {
+    q: "九州に台風が多く上陸する主な理由は何か？",
+    options: ["九州の北に冷たい海流があるから", "九州の南に黒潮（暖流）が流れ、台風のエネルギー源になるから", "九州は標高が高い山が多いから", "九州は北半球の中で最も北にあるから"],
+    ans: 1,
+    exp: "九州の南を流れる黒潮（日本海流）が海面水温を高く保ち、台風のエネルギー源となる水蒸気を供給します。過去30年で九州上陸台風は全国の約50%です。"
+  },
+  {
+    q: "筑紫平野のような「川が土砂を運んで積み重ねてできた平野」を何という？",
+    options: ["侵食平野", "沖積平野", "高原平野", "盆地型平野"],
+    ans: 1,
+    exp: "川が土砂（沖積土）を運んで堆積させてできた平野を「沖積平野」といいます。肥沃で農業に適しており、筑紫平野は日本有数の稲作地帯です。"
+  },
+  {
+    q: "有明海が日本一と言われる「干満差」の数値はどれか？",
+    options: ["約1m", "約3m", "約6m", "約10m"],
+    ans: 2,
+    exp: "有明海の最大干満差は約6mで日本一。干潮時には広大な干潟が現れ、ムツゴロウや海苔の養殖など独自の生態系が広がります。"
+  },
+  {
+    q: "屋久杉が長寿になれる主な理由として正しいものは？",
+    options: ["温暖な気候で冬がないから", "豊富な雨と樹脂が多く腐りにくい性質があるから", "島全体が世界遺産に指定されているから", "人間が1,000年前から保護してきたから"],
+    ans: 1,
+    exp: "年間降水量が山頂で10,000mm以上の豊富な雨と、樹脂（ヤニ）が多く腐りにくい性質のおかげで、屋久杉は長寿になります。"
+  },
+  {
+    q: "九重連山の主峰・中岳は何県にあり、何のランキングで1位か？",
+    options: ["熊本県にあり、九州最高峰", "大分県にあり、九州最高峰", "宮崎県にあり、日本最高峰", "鹿児島県にあり、四国最高峰"],
+    ans: 1,
+    exp: "中岳（1,791m）は大分県にある九州最高峰です。火山性の地形で、夏にはミヤマキリシマが山肌をピンクに染めます。"
+  },
+  {
+    q: "対馬が「大陸の生き残り」と言われる理由は何か？",
+    options: ["対馬は今も大陸と地続きだから", "昔大陸と陸続きだった時代があり、大陸系の動物が残っているから", "対馬の人々は韓国語を話しているから", "対馬は地理的に韓国の領土だから"],
+    ans: 1,
+    exp: "かつて大陸と陸続きだった対馬には、ツシマヤマネコなど大陸系の生物が今も残っています。韓国の釜山まで約50kmと非常に近い島です。"
+  }
+];
+
+// ===== STATE =====
+let current = 0;
+let readFlags = new Array(10).fill(false);
+let quizCurrent = 0;
+let quizScore = 0;
+let quizAnswered = false;
+const STORAGE_KEY = 'kyushuZatsuqaku_stage1';
+
+// ===== INIT =====
+function init() {
+  try {
+    const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
+    if (saved && saved.readFlags) {
+      readFlags = saved.readFlags;
+      current = readFlags.indexOf(false);
+      if (current === -1) current = 9;
+    }
+  } catch(e) {}
+  renderDots();
+  renderCard();
+}
+
+function save() {
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify({ readFlags })); } catch(e) {}
+}
+
+// ===== DOTS =====
+function renderDots() {
+  const el = document.getElementById('dots');
+  el.innerHTML = ITEMS.map((_, i) => {
+    let cls = 'dot';
+    if (i === current) cls += ' current';
+    else if (readFlags[i]) cls += ' done';
+    return `<div class="${cls}" onclick="jumpTo(${i})">${i+1}</div>`;
+  }).join('');
+}
+
+function jumpTo(i) {
+  readFlags[current] = true;
+  current = i;
+  save();
+  renderDots();
+  renderCard();
+}
+
+// ===== PROGRESS =====
+function updateProgress() {
+  const done = readFlags.filter(Boolean).length;
+  document.getElementById('progress-text').textContent = `${done} / 10`;
+  document.getElementById('progress-fill').style.width = `${done * 10}%`;
+}
+
+// ===== CARD =====
+function renderCard() {
+  const d = ITEMS[current];
+  updateProgress();
+  const isLast = current === 9;
+
+  document.getElementById('card').innerHTML = `
+    <div class="card-badge">雑学 ${d.num}</div>
+    <div class="card-title">${d.title}</div>
+    <div class="img-placeholder" id="img-wrap-${current}">
+      <span style="font-size:14px;color:var(--text-sub)">📷 画像を読み込み中...</span>
+    </div>
+    <div class="img-caption" id="img-caption-${current}"></div>
+    <div class="card-story">${d.story}</div>
+    <div class="reality-box">
+      <div class="reality-label">${d.realityIcon} リアリティ DATA</div>
+      <div class="reality-text">${d.reality}</div>
+    </div>
+    <div class="vocab-box">
+      <div class="vocab-label">📖 用語解説</div>
+      ${d.vocab.map(v => `<div class="vocab-item">・<strong>【${v.word}】</strong>：${v.def}</div>`).join('')}
+    </div>
+  `;
+
+  document.getElementById('btn-prev').disabled = current === 0;
+  const nextBtn = document.getElementById('btn-next');
+  if (isLast) {
+    nextBtn.textContent = '✨ 読み終えた！';
+  } else {
+    nextBtn.textContent = '次の雑学へ →';
+  }
+
+  loadWikiImage(current, d.keyword, d.emoji);
+}
+
+// ===== WIKI IMAGE =====
+async function loadWikiImage(idx, keyword, fallbackEmoji) {
+  try {
+    const url = `https://ja.wikipedia.org/w/api.php?action=query&titles=${encodeURIComponent(keyword)}&prop=pageimages&format=json&pithumbsize=640&origin=*`;
+    const res = await fetch(url);
+    const data = await res.json();
+    const pages = data.query.pages;
+    const page = Object.values(pages)[0];
+    const wrap = document.getElementById(`img-wrap-${idx}`);
+    if (!wrap) return;
+    if (page && page.thumbnail) {
+      wrap.innerHTML = `<img class="card-img" src="${page.thumbnail.source}" alt="${keyword}">`;
+      const cap = document.getElementById(`img-caption-${idx}`);
+      if (cap) cap.textContent = `${keyword} © Wikipedia`;
+    } else {
+      wrap.innerHTML = `<div class="img-placeholder"><span style="font-size:52px">${fallbackEmoji}</span></div>`;
+    }
+  } catch(e) {
+    const wrap = document.getElementById(`img-wrap-${idx}`);
+    if (wrap) wrap.innerHTML = `<div class="img-placeholder"><span style="font-size:52px">${fallbackEmoji}</span></div>`;
+  }
+}
+
+// ===== NAVIGATION =====
+function go(dir) {
+  readFlags[current] = true;
+  save();
+
+  const next = current + dir;
+  if (next < 0) return;
+  if (next >= 10) {
+    // show complete
+    document.getElementById('card').style.display = 'none';
+    document.getElementById('btn-prev').style.display = 'none';
+    document.getElementById('btn-next').style.display = 'none';
+    document.getElementById('complete-card').classList.remove('hidden');
+    updateProgress();
+    renderDots();
+    return;
+  }
+  current = next;
+  renderDots();
+  renderCard();
+}
+
+function resetZatsuqaku() {
+  current = 0;
+  readFlags = new Array(10).fill(false);
+  save();
+  document.getElementById('card').style.display = '';
+  document.getElementById('btn-prev').style.display = '';
+  document.getElementById('btn-next').style.display = '';
+  document.getElementById('complete-card').classList.add('hidden');
+  renderDots();
+  renderCard();
+}
+
+// ===== QUIZ =====
+function startQuiz() {
+  document.getElementById('zatsuqaku-section').classList.add('hidden');
+  document.getElementById('complete-card').classList.add('hidden');
+  document.getElementById('quiz-section').classList.remove('hidden');
+  quizCurrent = 0;
+  quizScore = 0;
+  renderQuiz();
+}
+
+function renderQuiz() {
+  const q = QUIZZES[quizCurrent];
+  quizAnswered = false;
+
+  document.getElementById('quiz-card').innerHTML = `
+    <div class="quiz-q-num">問題 ${quizCurrent + 1} / 10</div>
+    <div class="quiz-q-text">${q.q}</div>
+    <div class="quiz-options">
+      ${q.options.map((opt, i) => `
+        <button class="quiz-opt" onclick="answerQuiz(${i})" id="qopt-${i}">${opt}</button>
+      `).join('')}
+    </div>
+    <div class="quiz-result" id="quiz-result"></div>
+    <div class="quiz-nav">
+      <button class="btn-quiz-next" id="quiz-next-btn" onclick="nextQuiz()">
+        ${quizCurrent === 9 ? '結果を見る →' : '次の問題へ →'}
+      </button>
+    </div>
+  `;
+  document.getElementById('score-card').classList.add('hidden');
+}
+
+function answerQuiz(idx) {
+  if (quizAnswered) return;
+  quizAnswered = true;
+  const q = QUIZZES[quizCurrent];
+  const isCorrect = idx === q.ans;
+  if (isCorrect) quizScore++;
+
+  document.querySelectorAll('.quiz-opt').forEach((btn, i) => {
+    btn.disabled = true;
+    if (i === q.ans) btn.classList.add('correct');
+    else if (i === idx && !isCorrect) btn.classList.add('wrong');
+  });
+
+  const res = document.getElementById('quiz-result');
+  res.classList.add('show');
+  if (isCorrect) {
+    res.classList.add('ok');
+    res.innerHTML = `✅ 正解！ ${q.exp}`;
+  } else {
+    res.classList.add('ng');
+    res.innerHTML = `❌ 不正解。正解は「${q.options[q.ans]}」です。<br>${q.exp}`;
+  }
+
+  document.getElementById('quiz-next-btn').style.display = 'block';
+}
+
+function nextQuiz() {
+  if (quizCurrent === 9) {
+    showScore();
+    return;
+  }
+  quizCurrent++;
+  renderQuiz();
+}
+
+function showScore() {
+  document.getElementById('quiz-card').innerHTML = '';
+  const sc = document.getElementById('score-card');
+  sc.classList.remove('hidden');
+  document.getElementById('score-num').textContent = quizScore;
+
+  let comment = '';
+  if (quizScore === 10) comment = '満点！完璧だ！九州の自然環境マスターを名乗っていいぞ！🏆';
+  else if (quizScore >= 8) comment = 'すごい！よく覚えている。あと少しで完璧だ！もう一度チャレンジしてみよう。';
+  else if (quizScore >= 6) comment = '合格ライン！雑学をもう一回読んで、苦手なところを確認しよう。';
+  else if (quizScore >= 4) comment = 'もう少し！雑学に戻って、リアリティDATAと用語解説をしっかり読み直そう。';
+  else comment = '雑学をもう一度ゆっくり読もう。読むだけで答えがわかるようになっているよ！';
+
+  document.getElementById('score-comment').textContent = comment;
+}
+
+function retryQuiz() {
+  quizCurrent = 0;
+  quizScore = 0;
+  document.getElementById('score-card').classList.add('hidden');
+  renderQuiz();
+}
+
+function backToZatsuqaku() {
+  document.getElementById('quiz-section').classList.add('hidden');
+  document.getElementById('zatsuqaku-section').classList.remove('hidden');
+  document.getElementById('card').style.display = '';
+  document.getElementById('btn-prev').style.display = '';
+  document.getElementById('btn-next').style.display = '';
+  document.getElementById('complete-card').classList.add('hidden');
+  current = 0;
+  renderDots();
+  renderCard();
+}
+
+// ===== START =====
+init();
+</script>
+</body>
+</html>
