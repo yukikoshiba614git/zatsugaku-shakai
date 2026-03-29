@@ -1,0 +1,1174 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>近畿地方の雑学</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --orange: #E8621A;
+    --orange-light: #F5895A;
+    --orange-pale: #FFF0E8;
+    --bg: #FFFBF7;
+    --card-bg: #FFFFFF;
+    --text: #2D1B00;
+    --text-sub: #7A5A3A;
+    --border: #F0D5B8;
+    --green: #2E7D52;
+    --green-light: #E8F5EE;
+    --red: #C0392B;
+    --red-light: #FDECEA;
+    --navy: #2E3A5F;
+    --shadow: 0 4px 24px rgba(232,98,26,0.10);
+    --radius: 18px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Zen Maru Gothic', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+
+  header { background: linear-gradient(135deg, var(--orange) 0%, #C94A08 100%); color: white; text-align: center; padding: 16px 20px 12px; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 12px rgba(232,98,26,0.3); }
+  header .region { font-size: 12px; opacity: 0.85; letter-spacing: 2px; margin-bottom: 2px; }
+  header h1 { font-size: 20px; font-weight: 900; }
+  header .stage-label { font-size: 11px; opacity: 0.75; margin-top: 2px; }
+
+  .tabs { display: flex; background: white; border-bottom: 2px solid var(--border); position: sticky; top: 72px; z-index: 99; }
+  .tab { flex: 1; padding: 11px 6px; text-align: center; font-size: 13px; font-weight: 700; color: var(--text-sub); cursor: pointer; border-bottom: 3px solid transparent; transition: all 0.2s; margin-bottom: -2px; }
+  .tab.active { color: var(--orange); border-bottom-color: var(--orange); }
+
+  .progress-wrap { background: white; padding: 10px 16px 8px; border-bottom: 1px solid var(--border); }
+  .progress-meta { display: flex; justify-content: space-between; font-size: 12px; color: var(--text-sub); margin-bottom: 5px; }
+  .progress-bar { height: 7px; background: var(--border); border-radius: 99px; overflow: hidden; }
+  .progress-fill { height: 100%; background: linear-gradient(90deg, var(--orange-light), var(--orange)); border-radius: 99px; transition: width 0.4s ease; }
+
+  .dots { display: flex; gap: 5px; justify-content: center; padding: 8px 16px; flex-wrap: wrap; }
+  .dot { width: 26px; height: 26px; border-radius: 50%; border: 2px solid var(--border); background: white; font-size: 10px; font-weight: 700; display: flex; align-items: center; justify-content: center; color: var(--text-sub); cursor: pointer; transition: all 0.2s; }
+  .dot.current { border-color: var(--orange); background: var(--orange); color: white; }
+  .dot.done { border-color: var(--orange); background: var(--orange-pale); color: var(--orange); }
+
+  main { padding: 0 16px 40px; max-width: 640px; margin: 0 auto; }
+  .card { background: var(--card-bg); border-radius: var(--radius); box-shadow: var(--shadow); border: 1px solid var(--border); overflow: hidden; margin-top: 10px; animation: fadeUp 0.3s ease; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+
+  .card-badge { background: linear-gradient(90deg, var(--orange), var(--orange-light)); color: white; font-size: 11px; font-weight: 700; padding: 5px 14px; letter-spacing: 1px; }
+  .card-title { padding: 14px 16px 10px; font-size: 17px; font-weight: 900; line-height: 1.45; border-bottom: 1px dashed var(--border); }
+  .img-placeholder { width: 100%; height: 180px; background: var(--orange-pale); display: flex; align-items: center; justify-content: center; }
+  .card-img { width: 100%; height: 180px; object-fit: cover; display: block; }
+  .img-caption { font-size: 10px; color: var(--text-sub); padding: 3px 12px; text-align: right; background: var(--orange-pale); }
+
+  .card-story { padding: 16px 16px 6px; font-size: 14px; line-height: 2.0; }
+  .card-q { font-weight: 700; color: var(--text); margin-bottom: 4px; }
+  .card-a { font-weight: 700; color: var(--orange); margin-bottom: 12px; }
+  .card-body { white-space: pre-line; color: var(--text); margin-bottom: 10px; }
+  .card-summary { font-weight: 700; color: var(--text); display: block; padding: 10px 16px 14px; border-top: 1px dashed var(--border); margin: 0 -16px; }
+
+  .reality-box { margin: 0 16px 12px; background: var(--orange-pale); border-left: 4px solid var(--orange); border-radius: 10px; padding: 10px 12px; }
+  .reality-label { font-size: 11px; font-weight: 700; color: var(--orange); letter-spacing: 1px; margin-bottom: 5px; }
+  .reality-text { font-size: 13px; line-height: 1.7; }
+  .vocab-box { margin: 0 16px 16px; background: var(--green-light); border-radius: 10px; padding: 10px 12px; }
+  .vocab-label { font-size: 11px; font-weight: 700; color: var(--green); letter-spacing: 1px; margin-bottom: 6px; }
+  .vocab-item { font-size: 12px; line-height: 1.65; margin-bottom: 3px; }
+  .vocab-item strong { color: var(--green); }
+
+  .nav-buttons { display: flex; gap: 10px; padding: 12px 0 0; }
+  .btn { flex: 1; padding: 13px 10px; border-radius: 12px; border: none; font-family: 'Zen Maru Gothic', sans-serif; font-size: 14px; font-weight: 700; cursor: pointer; transition: all 0.2s; }
+  .btn-prev { background: white; border: 2px solid var(--border); color: var(--text-sub); }
+  .btn-prev:hover { border-color: var(--orange); color: var(--orange); }
+  .btn-next { background: linear-gradient(135deg, var(--orange), #C94A08); color: white; box-shadow: 0 4px 14px rgba(232,98,26,0.35); }
+  .btn-next:hover { transform: translateY(-1px); }
+  .btn:disabled { opacity: 0.35; cursor: not-allowed; transform: none !important; }
+
+  .complete-card { background: linear-gradient(135deg, #FFF7F2, #FFEDE0); border: 2px solid var(--orange-light); border-radius: var(--radius); text-align: center; padding: 28px 20px; margin-top: 12px; animation: fadeUp 0.35s ease; }
+  .complete-emoji { font-size: 48px; margin-bottom: 8px; }
+  .complete-stars { font-size: 26px; letter-spacing: 4px; margin-bottom: 12px; }
+  .complete-title { font-size: 20px; font-weight: 900; color: var(--orange); margin-bottom: 8px; }
+  .complete-desc { font-size: 13px; line-height: 1.8; color: var(--text-sub); margin-bottom: 18px; }
+
+  .quiz-header { background: linear-gradient(135deg, var(--navy) 0%, #1A2540 100%); color: white; text-align: center; padding: 14px 20px 10px; margin-top: 12px; border-radius: var(--radius) var(--radius) 0 0; }
+  .quiz-header h2 { font-size: 17px; font-weight: 900; }
+  .quiz-header p { font-size: 11px; opacity: 0.7; margin-top: 2px; }
+  .quiz-card { background: white; border: 1px solid var(--border); border-top: none; border-radius: 0 0 var(--radius) var(--radius); padding: 18px 16px 22px; animation: fadeUp 0.3s ease; }
+  .quiz-q-num { font-size: 11px; color: var(--navy); font-weight: 700; margin-bottom: 7px; letter-spacing: 1px; }
+  .quiz-q-text { font-size: 15px; font-weight: 700; line-height: 1.6; margin-bottom: 14px; }
+  .quiz-options { display: flex; flex-direction: column; gap: 9px; }
+  .quiz-opt { padding: 12px 14px; border-radius: 10px; border: 2px solid var(--border); background: white; font-family: 'Zen Maru Gothic', sans-serif; font-size: 13px; font-weight: 500; cursor: pointer; text-align: left; transition: all 0.2s; }
+  .quiz-opt:hover:not(:disabled) { border-color: var(--navy); background: #F0F3FA; }
+  .quiz-opt.correct { border-color: var(--green) !important; background: var(--green-light) !important; color: var(--green); font-weight: 700; }
+  .quiz-opt.wrong { border-color: var(--red) !important; background: var(--red-light) !important; color: var(--red); }
+  .quiz-opt:disabled { cursor: default; }
+  .quiz-result { margin-top: 12px; padding: 10px 12px; border-radius: 10px; font-size: 13px; line-height: 1.6; display: none; }
+  .quiz-result.show { display: block; }
+  .quiz-result.ok { background: var(--green-light); color: var(--green); border-left: 4px solid var(--green); }
+  .quiz-result.ng { background: var(--red-light); color: var(--red); border-left: 4px solid var(--red); }
+  .quiz-nav { display: flex; justify-content: flex-end; margin-top: 14px; }
+  .btn-quiz-next { padding: 11px 22px; border-radius: 10px; border: none; background: linear-gradient(135deg, var(--navy), #1A2540); color: white; font-family: 'Zen Maru Gothic', sans-serif; font-size: 14px; font-weight: 700; cursor: pointer; display: none; transition: all 0.2s; }
+  .btn-quiz-next:hover { transform: translateY(-1px); }
+
+  .score-card { background: linear-gradient(135deg, var(--navy), #1A2540); color: white; border-radius: var(--radius); text-align: center; padding: 28px 20px; margin-top: 12px; animation: fadeUp 0.35s ease; }
+  .score-num { font-size: 54px; font-weight: 900; color: #FFD700; }
+  .score-label { font-size: 15px; opacity: 0.8; margin-top: -4px; margin-bottom: 12px; }
+  .score-comment { font-size: 14px; line-height: 1.7; margin-bottom: 20px; }
+  .btn-retry { padding: 12px 26px; border-radius: 12px; border: 2px solid rgba(255,255,255,0.4); background: transparent; color: white; font-family: 'Zen Maru Gothic', sans-serif; font-size: 14px; font-weight: 700; cursor: pointer; transition: all 0.2s; }
+  .btn-retry:hover { background: rgba(255,255,255,0.1); }
+  .hidden { display: none !important; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="region">近畿地方</div>
+  <h1>🏯 近畿まるごと雑学</h1>
+  <div class="stage-label">雑学30選 + クイズ15問</div>
+</header>
+
+<div class="tabs">
+  <div class="tab active" id="tab-zatsu" onclick="switchTab('zatsu')">📖 雑学</div>
+  <div class="tab" id="tab-quiz" onclick="switchTab('quiz')">📝 クイズ</div>
+</div>
+
+<div id="zatsu-section">
+  <div class="progress-wrap">
+    <div class="progress-meta"><span>読んだ雑学</span><span id="progress-text">0 / 30</span></div>
+    <div class="progress-bar"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
+  </div>
+  <div class="dots" id="dots"></div>
+  <main>
+    <div id="zatsuqaku-section">
+      <div class="card" id="card"></div>
+      <div class="nav-buttons">
+        <button class="btn btn-prev" id="btn-prev" onclick="go(-1)" disabled>← 前へ</button>
+        <button class="btn btn-next" id="btn-next" onclick="go(1)">次の雑学へ →</button>
+      </div>
+    </div>
+    <div class="complete-card hidden" id="complete-card">
+      <div class="complete-emoji">🎉</div>
+      <div class="complete-stars">⭐⭐⭐⭐⭐</div>
+      <div class="complete-title">30の雑学コンプリート！</div>
+      <div class="complete-desc">近畿地方の自然・歴史・工業・琵琶湖・林業…<br>全部読んだね！<br><br><strong>さあ、クイズで腕試しをしよう！</strong></div>
+      <button class="btn btn-next" onclick="switchTab('quiz')" style="max-width:260px;margin:0 auto;display:block;">クイズに挑戦！ →</button>
+      <div style="margin-top:10px;"><button class="btn btn-prev" onclick="resetZatsuqaku()" style="border:none;background:transparent;font-size:13px;color:var(--text-sub);">もう一度読む 🔄</button></div>
+    </div>
+  </main>
+</div>
+
+<div id="quiz-section" class="hidden">
+  <main>
+    <div class="quiz-header"><h2>📝 近畿地方クイズ</h2><p>雑学で学んだことを試してみよう！全15問</p></div>
+    <div class="quiz-card" id="quiz-card"></div>
+    <div class="score-card hidden" id="score-card">
+      <div class="score-num" id="score-num"></div>
+      <div class="score-label">/ 15問正解</div>
+      <div class="score-comment" id="score-comment"></div>
+      <button class="btn-retry" onclick="retryQuiz()">もう一度チャレンジ 🔄</button>
+      <br><br>
+      <button class="btn-retry" onclick="switchTab('zatsu')" style="font-size:12px;opacity:0.7;">← 雑学に戻る</button>
+    </div>
+  </main>
+</div>
+
+<script>
+const SECTIONS = ["🏔️ 自然環境","🏯 京都・奈良の歴史","🏭 阪神工業地帯","💧 琵琶湖と水","🌲 林業・農業"];
+
+const ITEMS = [
+  {
+    "num": "01",
+    "section": 0,
+    "keyword": "紀伊山地",
+    "emoji": "⛰️",
+    "title": "近畿に、日本最大級の山岳地帯がある",
+    "q": "近畿地方で一番大きな山地ってどこだと思う？",
+    "a": "紀伊山地だよ！本州最大級の山岳地帯なんだ。",
+    "body": "紀伊半島の中心に広がる紀伊山地は、\n標高1,000〜1,900mの山々が連なる本州最大級の山岳地帯だ。\n\n年間降水量は3,000〜4,000mmを超える地域もあり、\n日本でも有数の多雨地帯として知られている。\n\nこの豊富な雨水が急流をつくり、\n熊野川・吉野川などの大河が生まれた。\n\n山が深く険しいため、古くから「聖なる場所」として\n修験道の修行地となってきた。\n熊野古道がその代表例だ。",
+    "summary": "⛰️ 険しい山と豊富な雨が、聖地と大河を生み出したってこと。",
+    "reality": "紀伊山地の大台ヶ原は年間降水量約4,000mmで日本有数の多雨地帯。ユネスコ世界遺産「紀伊山地の霊場と参詣道」として登録されている。",
+    "realityIcon": "🌧️",
+    "vocab": [
+      {
+        "word": "紀伊山地",
+        "def": "紀伊半島の中心部に広がる山岳地帯。本州最大級の原始林を持つ"
+      },
+      {
+        "word": "修験道",
+        "def": "山を修行の場とする日本独自の宗教。険しい山を歩いて修行する"
+      }
+    ]
+  },
+  {
+    "num": "02",
+    "section": 0,
+    "keyword": "大阪平野",
+    "emoji": "🌆",
+    "title": "大阪は、川と海が作った平野だ",
+    "q": "大阪平野って、どうやってできたと思う？",
+    "a": "川が運んだ土砂が海を埋めてできた沖積平野だよ！",
+    "body": "大阪平野は淀川・大和川などが長い年月をかけて\n土砂を運び積み上げた「沖積平野」だ。\n\nかつての大阪は「難波の津」と呼ばれ、\n海と川が入り組んだ水の都だった。\n\n江戸時代には「天下の台所」として\n全国の物資が大阪の水運を通じて集まってきた。\n\n今では陸地になっている場所の多くが、\nもともとは海や湿地だったんだ。",
+    "summary": "🌆 川と時間が海を陸に変えて、大都市の土台を作ったってこと。",
+    "reality": "大阪市の地盤の多くは海面下にあり、ゼロメートル地帯が広がる。江戸時代の大阪には800本以上の橋があり、「水の都」として栄えた。",
+    "realityIcon": "🌊",
+    "vocab": [
+      {
+        "word": "沖積平野",
+        "def": "川が運んだ土砂が堆積してできた平野。農業に向いた肥沃な土地が多い"
+      },
+      {
+        "word": "ゼロメートル地帯",
+        "def": "海面と同じかそれより低い土地。洪水のリスクが高い"
+      }
+    ]
+  },
+  {
+    "num": "03",
+    "section": 0,
+    "keyword": "淀川",
+    "emoji": "💧",
+    "title": "大阪の水は、琵琶湖から来ている",
+    "q": "大阪市民が飲む水って、どこから来ていると思う？",
+    "a": "約半分は琵琶湖が源の淀川から来ているんだよ！",
+    "body": "淀川は琵琶湖を源流として大阪湾に注ぐ川だ。\n全長75kmで、流域人口は約1,100万人。\n\n大阪・京都・兵庫など近畿の人々の生活を支える\n「近畿の母なる川」だ。\n\n琵琶湖から流れ出た水が宇治川・木津川・桂川と合流して淀川になる。\n\n水質管理が非常に重要で、\n琵琶湖の水質が悪化すると\n下流の大阪の水道水にも影響が出る。",
+    "summary": "💧 琵琶湖と淀川がつながって、1,000万人以上の水を支えているってこと。",
+    "reality": "淀川水系の流域人口は約1,100万人で、日本有数の一級河川。琵琶湖の水質保全は滋賀県だけでなく下流の大阪府・京都府にとっても重要課題だ。",
+    "realityIcon": "🚰",
+    "vocab": [
+      {
+        "word": "淀川",
+        "def": "琵琶湖を源流とする川。大阪湾に注ぎ、近畿の水源として重要"
+      },
+      {
+        "word": "流域人口",
+        "def": "その川の水を利用する地域に住む人々の合計数"
+      }
+    ]
+  },
+  {
+    "num": "04",
+    "section": 0,
+    "keyword": "若狭湾",
+    "emoji": "🌊",
+    "title": "近畿の日本海側は、複雑な海岸線を持つ",
+    "q": "福井・京都の日本海側の海岸って、どんな特徴があると思う？",
+    "a": "リアス海岸で入り組んでいて、天然の良港が多いんだ！",
+    "body": "若狭湾は福井県から京都府にかけて広がる日本海の湾で、\n典型的なリアス海岸が続いている。\n\nリアス海岸とは、山地が海に沈んでできた\n複雑に入り組んだ海岸線のこと。\n\n波が穏やかで水深があるため天然の良港が多く、\n古くから朝廷に新鮮な魚介を届ける「御食国（みけつくに）」として\n重要な役割を果たしてきた。\n\n現在も若狭ガニ・サバなどの水産業が盛んだ。",
+    "summary": "🌊 山が海に沈んでできた複雑な海岸が、豊かな漁場を生んだってこと。",
+    "reality": "若狭湾沿岸は「御食国」として奈良・平安時代から朝廷に食材を供給してきた。若狭ガニ（ズワイガニ）や若狭フグが有名で、現在も漁業が盛ん。",
+    "realityIcon": "🦀",
+    "vocab": [
+      {
+        "word": "リアス海岸",
+        "def": "山地が沈んで海が入り込んだ複雑な海岸。波が穏やかで漁港に適する"
+      },
+      {
+        "word": "御食国",
+        "def": "古代に朝廷へ食料を献上した地域。若狭・志摩・淡路が代表的"
+      }
+    ]
+  },
+  {
+    "num": "05",
+    "section": 0,
+    "keyword": "六甲山",
+    "emoji": "🏔️",
+    "title": "六甲山が、神戸の街を作った",
+    "q": "神戸の街ってなんであんな形になったか知ってる？",
+    "a": "六甲山と海に挟まれた細長い土地に発展したからだよ！",
+    "body": "神戸市は北に六甲山（931m）、南に大阪湾があり、\n平地が非常に少ない地形だ。\n\nこの制約の中で街が発展したため、\n東西に細長い独特の都市構造が生まれた。\n\n六甲山から流れ下る急流は洪水のリスクがある一方で、\n花崗岩を含む砂が海に堆積して\n神戸港の埋め立てに使われた。\n\n山を削って海を埋める「六甲山の花崗岩→ポートアイランド」という\n近代的な都市開発の象徴だ。",
+    "summary": "🏔️ 山と海に挟まれた制約が、神戸独自の都市と港を作ったってこと。",
+    "reality": "神戸港の埋め立てには六甲山の花崗岩（まさ土）が使われた。1995年の阪神・淡路大震災では、埋め立て地の液状化が大きな被害を引き起こした。",
+    "realityIcon": "⛰️",
+    "vocab": [
+      {
+        "word": "花崗岩",
+        "def": "マグマが冷えて固まった硬い岩石。風化するとサラサラの砂（まさ土）になる"
+      },
+      {
+        "word": "液状化",
+        "def": "地震で地盤が水を含んだ砂のようになる現象。埋め立て地で起きやすい"
+      }
+    ]
+  },
+  {
+    "num": "06",
+    "section": 0,
+    "keyword": "淡路島",
+    "emoji": "🏝️",
+    "title": "淡路島は、日本神話の「最初の島」だ",
+    "q": "淡路島って、日本神話でどんな存在か知ってる？",
+    "a": "イザナギ・イザナミが最初に作った島とされているんだ！",
+    "body": "日本最古の歴史書「古事記」では、\nイザナギとイザナミの神が最初に作った島が淡路島とされている。\n\n淡路島は兵庫県に属し、瀬戸内海最大の島だ。\n面積は約592km²で、淡路玉ねぎ・淡路牛・淡路鯛などの\n食材の産地として知られている。\n\n明石海峡大橋の開通（1998年）で本州と直結し、\n交通の便が大きく変わった。\n\n神話の舞台から観光・農業の島へと進化している。",
+    "summary": "🏝️ 神話の最初の島が、今は食材と観光で知られる島になっているってこと。",
+    "reality": "淡路島の玉ねぎ生産量は全国トップクラス。温暖な気候と砂質土壌が玉ねぎ栽培に最適で、「淡路玉ねぎ」は甘くて辛みが少ないことで全国的に有名だ。",
+    "realityIcon": "🧅",
+    "vocab": [
+      {
+        "word": "古事記",
+        "def": "712年に完成した日本最古の歴史書。神話から推古天皇の時代までを記す"
+      },
+      {
+        "word": "瀬戸内海",
+        "def": "本州・四国・九州に囲まれた内海。穏やかな海と多くの島が特徴"
+      }
+    ]
+  },
+  {
+    "num": "07",
+    "section": 1,
+    "keyword": "京都市",
+    "emoji": "🏯",
+    "title": "京都は、1,000年以上日本の首都だった",
+    "q": "京都が都だった期間って、どのくらいだと思う？",
+    "a": "794年から1869年まで、実に1,000年以上！",
+    "body": "794年、桓武天皇が平安京を現在の京都に開いた。\nそれから明治天皇が東京に移る1869年まで、\n約1,075年間にわたって京都が日本の都だった。\n\nこれほど長く首都であり続けた都市は、\n世界的にも珍しい。\n\nその間に積み上げられた寺社・文化・伝統は\n今も京都のあちこちに残っており、\n17か所のユネスコ世界文化遺産が証明している。\n\n「古都」としての京都は、\n日本文化の中心であり続けている。",
+    "summary": "🏯 1,000年以上の都の歴史が、今も街の至る所に刻まれているってこと。",
+    "reality": "京都には17か所のユネスコ世界文化遺産がある。年間観光客は約5,000万人（コロナ前）で、オーバーツーリズムが近年の課題になっている。",
+    "realityIcon": "⛩️",
+    "vocab": [
+      {
+        "word": "平安京",
+        "def": "794年に桓武天皇が開いた都。現在の京都市にあたる"
+      },
+      {
+        "word": "オーバーツーリズム",
+        "def": "観光客が過剰に集中して、地域住民の生活や環境に悪影響が出ること"
+      }
+    ]
+  },
+  {
+    "num": "08",
+    "section": 1,
+    "keyword": "奈良市",
+    "emoji": "🦌",
+    "title": "奈良には、1,300年前の都がある",
+    "q": "奈良が都だったのって、どんな時代だか知ってる？",
+    "a": "710〜784年の奈良時代！日本が国家として固まった時代だよ。",
+    "body": "710年、元明天皇が平城京を奈良に開いた。\nこの奈良時代（710〜784年）は、\n日本が律令国家として制度を整えた重要な時代だ。\n\n東大寺・薬師寺・興福寺など多くの大寺院が建立され、\n仏教文化が花開いた。\n\n奈良の大仏（東大寺盧舎那仏）は高さ約15mで、\n当時の国家プロジェクトとして全国から職人・資材が集められた。\n\n奈良公園に約1,300頭いる鹿は、\n春日大社の神の使いとして大切にされてきた。",
+    "summary": "🦌 1,300年前の国家の夢と技術が、今も奈良の街に残っているってこと。",
+    "reality": "東大寺の大仏殿は世界最大級の木造建築。奈良公園の鹿は国の天然記念物で、約1,300頭が自由に歩き回る。春日大社の神鹿として1,000年以上保護されてきた。",
+    "realityIcon": "🏛️",
+    "vocab": [
+      {
+        "word": "律令国家",
+        "def": "法律（律）と行政規則（令）で統治する国家の仕組み。奈良時代に整備された"
+      },
+      {
+        "word": "盧舎那仏",
+        "def": "東大寺の大仏の正式名称。宇宙を照らす仏という意味"
+      }
+    ]
+  },
+  {
+    "num": "09",
+    "section": 1,
+    "keyword": "熊野古道",
+    "emoji": "👣",
+    "title": "世界遺産の「道」が、近畿にある",
+    "q": "熊野古道って、なんで道そのものが世界遺産なの？",
+    "a": "「参詣道」として世界遺産に登録された、世界でも珍しい事例なんだ！",
+    "body": "熊野古道は、京都・大阪・高野山などから\n熊野三山（熊野本宮大社・熊野速玉大社・熊野那智大社）へと\n続く参詣道の総称だ。\n\n2004年に「紀伊山地の霊場と参詣道」として\nユネスコ世界遺産に登録されたが、\n「道」が世界遺産の主体となったのは\nスペインの「サンティアゴ・デ・コンポステーラの巡礼路」に続いて\n世界で2例目だった。\n\n平安時代から上皇・貴族・庶民が歩き続けてきた道が、\n今も山中に残っている。",
+    "summary": "👣 1,000年前から人々が歩き続けてきた道が、今も世界遺産として残っているってこと。",
+    "reality": "熊野古道のルートは複数あり、伊勢路・中辺路・大辺路・小辺路などがある。スペインのサンティアゴ巡礼路と姉妹道提携を結んでいる。",
+    "realityIcon": "🌍",
+    "vocab": [
+      {
+        "word": "熊野三山",
+        "def": "熊野本宮大社・熊野速玉大社・熊野那智大社の3つの神社の総称"
+      },
+      {
+        "word": "参詣道",
+        "def": "神社や寺院への参拝のための道。熊野古道はその代表例"
+      }
+    ]
+  },
+  {
+    "num": "10",
+    "section": 1,
+    "keyword": "法隆寺",
+    "emoji": "🕌",
+    "title": "世界最古の木造建築が、奈良にある",
+    "q": "世界で一番古い木造建築って、どこにあると思う？",
+    "a": "奈良の法隆寺だよ！建立は607年頃とされている。",
+    "body": "法隆寺は607年に聖徳太子が建立したとされる寺院で、\n西院伽藍は現存する世界最古の木造建築群だ。\n\n1993年に日本初のユネスコ世界文化遺産に登録された。\n\n1,400年以上前の建物が今も現存する理由は、\n日本の高い木造建築技術と、\n代々受け継がれてきた丁寧な修理・保存にある。\n\n使われている木材の中には、\n飛鳥時代に伐採されたヒノキがそのまま使われているものもある。",
+    "summary": "🕌 1,400年前の木の建物が今も立っている、日本の技術と保存の力のすごさってこと。",
+    "reality": "法隆寺の五重塔は高さ約32mで、飛鳥時代建立の世界最古の木造塔。使われているヒノキは伐採から1,300年以上経過しているが、今も建物を支えている。",
+    "realityIcon": "🌳",
+    "vocab": [
+      {
+        "word": "伽藍",
+        "def": "寺院の建物の総称。法隆寺西院伽藍は世界最古の木造建築群"
+      },
+      {
+        "word": "飛鳥時代",
+        "def": "6〜7世紀の日本。聖徳太子が活躍し、仏教文化が栄えた時代"
+      }
+    ]
+  },
+  {
+    "num": "11",
+    "section": 1,
+    "keyword": "大阪城",
+    "emoji": "🏰",
+    "title": "大阪城は、天下統一の象徴だった",
+    "q": "大阪城って、誰が建てたか知ってる？",
+    "a": "豊臣秀吉だよ！1583年に築城を始めた。",
+    "body": "豊臣秀吉が1583年に築城を始めた大阪城は、\n当時日本最大の城郭だった。\n\n天守閣は5層8階建てで、\n金箔を貼り付けた豪華な外観だったと言われている。\n\n1615年の大坂夏の陣で豊臣氏が滅亡した後、\n徳川幕府が再建した。\n\n現在の天守閣は1931年に建てられた3代目で、\n内部は博物館になっている。\n\n大阪城公園は年間数百万人が訪れる観光地だ。",
+    "summary": "🏰 天下人の夢と権力が詰まった城が、今は市民の公園になっているってこと。",
+    "reality": "大阪城天守閣は鉄筋コンクリート造り（1931年）で、外観は秀吉時代を参考にしている。大阪城公園は約106万m²で、都市公園として年間多くの市民が利用する。",
+    "realityIcon": "👑",
+    "vocab": [
+      {
+        "word": "城郭",
+        "def": "城と、それを取り囲む堀・石垣・曲輪などの防御施設の総称"
+      },
+      {
+        "word": "大坂夏の陣",
+        "def": "1615年に徳川家康が豊臣氏を滅ぼした戦い。これで江戸幕府の支配が確立した"
+      }
+    ]
+  },
+  {
+    "num": "12",
+    "section": 2,
+    "keyword": "阪神工業地帯",
+    "emoji": "🏭",
+    "title": "阪神工業地帯は、日本の近代産業の出発点だ",
+    "q": "阪神工業地帯って、どのくらいの規模か知ってる？",
+    "a": "かつては京浜・中京と並ぶ日本三大工業地帯の一つだったんだ！",
+    "body": "大阪府・兵庫県を中心に広がる阪神工業地帯は、\n明治時代から日本の産業革命を支えてきた。\n\n繊維・鉄鋼・化学・機械など多様な工業が集積し、\nかつては日本最大の工業地帯だった時期もある。\n\n戦後の高度経済成長期に飛躍的に発展したが、\n1970年代以降の産業構造の変化で\n重化学工業が衰退し、\n現在は先端技術産業や医薬品産業が主力になっている。",
+    "summary": "🏭 近代日本の産業を支えた工業地帯が、今は新しい産業に変わり続けているってこと。",
+    "reality": "大阪は「医薬品の街」として武田薬品・塩野義製薬・大塚製薬など大手製薬会社の本社が集まる。繊維工業から始まった歴史が今も産業の多様性につながっている。",
+    "realityIcon": "💊",
+    "vocab": [
+      {
+        "word": "産業革命",
+        "def": "18〜19世紀に始まった、機械を使った大量生産への転換。日本では明治時代に起きた"
+      },
+      {
+        "word": "重化学工業",
+        "def": "鉄鋼・化学・造船などの重い・大きな製品を作る工業"
+      }
+    ]
+  },
+  {
+    "num": "13",
+    "section": 2,
+    "keyword": "神戸港",
+    "emoji": "⚓",
+    "title": "神戸港は、日本の近代化の玄関口だった",
+    "q": "神戸港って、日本の歴史でどんな役割を果たしたか知ってる？",
+    "a": "1868年の開港から、日本の輸出入の中心を担ってきたんだ！",
+    "body": "1868年に開港した神戸港は、\n横浜港と並ぶ日本最大の貿易港として発展してきた。\n\n明治時代の近代化に必要な機械・原料を輸入し、\n日本製の繊維製品・陶磁器を輸出する\n「近代化の玄関口」だった。\n\n1995年の阪神・淡路大震災で壊滅的な被害を受けたが、\n奇跡的な速さで復興した。\n\n現在はコンテナ港として機能しているが、\n往時の日本一の地位は横浜や東京に譲っている。",
+    "summary": "⚓ 神戸港が日本の近代化を支え、震災から復興した歴史があるってこと。",
+    "reality": "神戸港のコンテナ取扱量はかつてアジア最大だったが、震災後に地位が低下。現在は観光港としての側面も強く、豪華客船が頻繁に寄港する。",
+    "realityIcon": "🚢",
+    "vocab": [
+      {
+        "word": "開港",
+        "def": "外国船が出入りできる港を開くこと。1858年の安政の開国後、神戸など5港が開港した"
+      },
+      {
+        "word": "コンテナ港",
+        "def": "荷物を統一規格のコンテナに入れて船で輸送する港"
+      }
+    ]
+  },
+  {
+    "num": "14",
+    "section": 2,
+    "keyword": "堺市",
+    "emoji": "🔪",
+    "title": "日本の刃物の半分は、堺で作られている",
+    "q": "包丁や刃物の産地として有名な都市はどこだと思う？",
+    "a": "大阪府堺市だよ！職人が作る本格刃物の産地として世界的に有名。",
+    "body": "堺市は15〜16世紀に鉄砲の国産化で発展した刃物技術が\n今も受け継がれ、\n日本を代表する刃物の産地となっている。\n\nプロの料理人が使う和包丁の多くは堺産で、\n海外のシェフからも高い評価を受けている。\n\nまた堺は古墳の街でもあり、\n日本最大の前方後円墳「仁徳天皇陵古墳」がある。\n\n職人の技術と古代の歴史が共存する都市だ。",
+    "summary": "🔪 500年以上続く刃物の技術が、今も世界のシェフに愛されているってこと。",
+    "reality": "堺の刃物シェア（プロ用和包丁）は国内約90%。仁徳天皇陵古墳は全長約486mで、エジプトのクフ王ピラミッドと並ぶ世界最大級の墳墓だ。",
+    "realityIcon": "🏺",
+    "vocab": [
+      {
+        "word": "前方後円墳",
+        "def": "前が四角く後ろが円形の鍵穴型の古墳。日本独自の形で、4〜7世紀に多く作られた"
+      },
+      {
+        "word": "和包丁",
+        "def": "日本の伝統的な包丁。片刃で鋭く、素材ごとに形が異なる"
+      }
+    ]
+  },
+  {
+    "num": "15",
+    "section": 2,
+    "keyword": "東大阪市",
+    "emoji": "🔧",
+    "title": "東大阪は、中小企業が支える「ものづくりの街」だ",
+    "q": "東大阪市って、何で有名か知ってる？",
+    "a": "中小企業が密集する日本最大のものづくりの街だよ！",
+    "body": "東大阪市には約6,000社の製造業企業が集まり、\n「ものづくりのまち」として知られている。\n\n特徴は「中小企業の集積」だ。\n大企業ではなく、数人〜数十人規模の専門技術を持つ\n中小企業が互いに連携してモノを作る。\n\n2009年には東大阪の中小企業が開発した衛星「まいど1号」が\n宇宙に打ち上げられ、\n町工場が宇宙開発に挑戦した事例として世界の注目を集めた。",
+    "summary": "🔧 小さな工場が連携して、宇宙衛星まで作る技術力があるってこと。",
+    "reality": "「まいど1号」は東大阪宇宙開発協同組合の中小企業が開発した人工衛星。2009年1月に打ち上げ成功。下請け構造から自社製品開発へのモデルとして注目された。",
+    "realityIcon": "🚀",
+    "vocab": [
+      {
+        "word": "中小企業",
+        "def": "資本金・従業員数が一定規模以下の企業。日本の製造業を支える重要な存在"
+      },
+      {
+        "word": "ものづくり",
+        "def": "工業製品を丁寧に作る日本の製造文化。高い技術力と職人気質が特徴"
+      }
+    ]
+  },
+  {
+    "num": "16",
+    "section": 2,
+    "keyword": "西陣",
+    "emoji": "🎨",
+    "title": "京都の織物は、1,000年の歴史を持つ",
+    "q": "西陣織って、どんな織物か知ってる？",
+    "a": "1,000年以上の歴史を持つ京都の高級絹織物だよ！",
+    "body": "西陣織は京都市西陣地区で生産される高級絹織物で、\n奈良時代から続く歴史を持つ。\n\n複雑な模様を織り出す高度な技術が特徴で、\n帯・着物・インテリア装飾など様々な用途に使われる。\n\n最盛期には西陣地区だけで数万人の職人が働いていたが、\n着物人口の減少とともに産業規模は縮小している。\n\n一方で西陣織の技術は\nランボルギーニのシート素材など\n現代の高級品にも応用されている。",
+    "summary": "🎨 1,000年の織物技術が、着物から高級車のシートまで進化しているってこと。",
+    "reality": "西陣織の生産額は最盛期（1980年代）に比べ大幅に減少。しかし海外ブランドとのコラボや現代アートへの応用など、新たな活路を開いている。",
+    "realityIcon": "✨",
+    "vocab": [
+      {
+        "word": "西陣織",
+        "def": "京都西陣地区の高級絹織物。複雑な模様と光沢が特徴"
+      },
+      {
+        "word": "帯",
+        "def": "着物を着るときに腰に巻く布。西陣織の帯は高級品として知られる"
+      }
+    ]
+  },
+  {
+    "num": "17",
+    "section": 3,
+    "keyword": "琵琶湖",
+    "emoji": "🌊",
+    "title": "琵琶湖は、日本最大の湖だ",
+    "q": "琵琶湖って、どのくらいの大きさか知ってる？",
+    "a": "滋賀県の面積の約6分の1！日本最大の湖だよ。",
+    "body": "琵琶湖は滋賀県に位置する日本最大の湖で、\n面積は約670km²。\n東京23区の約1.1倍の大きさだ。\n\n水深は最大約104mで、約4,000万年前から存在する\n「古代湖」の一つとされている。\n\n世界の古代湖には独自に進化した固有種が多く、\n琵琶湖にもビワコオオナマズ・ニゴロブナなど\n約60種の固有種・固有亜種が生息している。\n\n近畿1,400万人の水源でもある。",
+    "summary": "🌊 4,000万年前から続く古代湖が、今も1,400万人の水を支えているってこと。",
+    "reality": "琵琶湖の固有種は約60種で、世界の古代湖の中でも生物多様性が高い。1993年にラムサール条約登録湿地に指定された。",
+    "realityIcon": "🐟",
+    "vocab": [
+      {
+        "word": "古代湖",
+        "def": "数百万年以上の歴史を持つ湖。固有の生物が進化しやすい環境を持つ"
+      },
+      {
+        "word": "固有種",
+        "def": "特定の地域にしか存在しない生物種。琵琶湖には約60種の固有種がいる"
+      }
+    ]
+  },
+  {
+    "num": "18",
+    "section": 3,
+    "keyword": "滋賀県",
+    "emoji": "🚣",
+    "title": "琵琶湖の環境問題が、日本を変えた",
+    "q": "琵琶湖で起きた環境問題って、どんなことか知ってる？",
+    "a": "1970年代に赤潮・アオコが大発生して、飲み水が危機になったんだ！",
+    "body": "高度経済成長期、琵琶湖に大量の生活排水・工場排水が流れ込んだ。\n\n1977年には赤潮、1983年にはアオコが大発生して\n湖の水質が深刻に悪化した。\n\n滋賀県民が立ち上がって「石けん運動」を展開し、\nリン（富栄養化の原因）を含む合成洗剤をやめて\n天然石けんを使う運動が広がった。\n\nこれが全国的な環境運動の先駆けとなり、\n1980年には「滋賀県琵琶湖の富栄養化の防止に関する条例」が\n制定された。",
+    "summary": "🚣 市民の行動が法律を動かして、湖と水道を守ったってこと。",
+    "reality": "滋賀県の「石けん運動」は市民運動から条例制定へと発展した先駆的事例。現在、琵琶湖の水質は改善されているが、外来魚（ブラックバスなど）問題が新たな課題となっている。",
+    "realityIcon": "🧼",
+    "vocab": [
+      {
+        "word": "富栄養化",
+        "def": "水中の栄養分が増えすぎて藻類が大量発生する現象。赤潮・アオコの原因"
+      },
+      {
+        "word": "石けん運動",
+        "def": "合成洗剤をやめて天然石けんを使う環境運動。琵琶湖の水質保全のために広まった"
+      }
+    ]
+  },
+  {
+    "num": "19",
+    "section": 3,
+    "keyword": "びわ湖疏水",
+    "emoji": "🏗️",
+    "title": "京都は、琵琶湖から水を引いた",
+    "q": "京都市に琵琶湖の水を引く工事って、いつ行われたか知ってる？",
+    "a": "1890年！明治時代の一大土木工事だったんだ。",
+    "body": "1890年（明治23年）に完成した琵琶湖疏水は、\n琵琶湖から京都へ水を引く全長約20kmの水路だ。\n\n当時は日本初の水力発電に使われ、\n日本初の電気鉄道（京都市電の前身）を動かした。\n\n設計したのは若干21歳の田辺朔郎という技術者で、\n外国人技術者に頼らず日本人だけで完成させた\n近代土木の金字塔とされている。\n\n現在も京都市民の水道・農業用水として使われている。",
+    "summary": "🏗️ 130年以上前の土木工事が、今も京都の水を支え続けているってこと。",
+    "reality": "琵琶湖疏水は現在も毎日約36万m³の水を京都へ送っている。疏水沿いの蹴上（けあげ）インクラインは観光スポットとして人気が高い。",
+    "realityIcon": "💧",
+    "vocab": [
+      {
+        "word": "疏水",
+        "def": "農業・水道・発電などのために引かれた人工の水路"
+      },
+      {
+        "word": "水力発電",
+        "def": "水の流れの力で発電する方法。琵琶湖疏水は日本初の水力発電に使われた"
+      }
+    ]
+  },
+  {
+    "num": "20",
+    "section": 3,
+    "keyword": "近江商人",
+    "emoji": "💰",
+    "title": "近江商人が、日本の商業を変えた",
+    "q": "「三方よし」って言葉、聞いたことある？",
+    "a": "近江商人の商売哲学だよ！「売り手よし・買い手よし・世間よし」。",
+    "body": "滋賀県（旧近江国）から全国に行商した「近江商人」は、\n江戸時代から明治時代にかけて日本最大の商人集団だった。\n\n彼らの商売の哲学が「三方よし」：\n「売り手よし（自分が儲かる）」\n「買い手よし（お客さんが満足する）」\n「世間よし（社会に役立つ）」\n\nこの考え方は現代のCSR（企業の社会的責任）の先駆けとして\n今もビジネスの世界で語り継がれている。\n\n伊藤忠商事・高島屋・西武グループなど\n現代の大企業にも近江商人の流れをくむものがある。",
+    "summary": "💰 江戸時代の商人の哲学が、今の企業経営にも生きているってこと。",
+    "reality": "近江商人の「三方よし」はCSR（企業の社会的責任）の概念に通じるとして、現代のビジネス教育でも頻繁に引用される。伊藤忠商事の創業者も近江商人の出身。",
+    "realityIcon": "🏪",
+    "vocab": [
+      {
+        "word": "近江商人",
+        "def": "滋賀県（近江）出身の行商人。三方よしの哲学で全国で活躍した"
+      },
+      {
+        "word": "CSR",
+        "def": "Corporate Social Responsibilityの略。企業が社会・環境への責任を果たすこと"
+      }
+    ]
+  },
+  {
+    "num": "21",
+    "section": 3,
+    "keyword": "マザーレイク",
+    "emoji": "🌿",
+    "title": "琵琶湖は「マザーレイク」と呼ばれる",
+    "q": "琵琶湖がなぜ「マザーレイク」と呼ばれるか知ってる？",
+    "a": "近畿の「母なる湖」として、水・文化・産業を支えてきたからだよ！",
+    "body": "琵琶湖は「マザーレイク（母なる湖）」と呼ばれ、\n近畿地方の水・文化・産業を支えてきた。\n\n漁業では「鮒ずし（ふなずし）」など\n1,300年以上の歴史を持つ発酵食品が生まれ、\n今も滋賀の伝統食として受け継がれている。\n\n湖上では「湖舟（うみぶね）」による物資輸送が行われ、\n江戸時代の流通を支えた。\n\n近年は水質保全・生態系保護・観光など\n多面的な価値が注目されている。",
+    "summary": "🌿 湖が水だけでなく、食・輸送・文化まで支えてきたってこと。",
+    "reality": "鮒ずしは琵琶湖のニゴロブナを使った発酵食品で、寿司の原型とも言われる。強烈なにおいが特徴で、好き嫌いが分かれる滋賀の伝統料理だ。",
+    "realityIcon": "🐟",
+    "vocab": [
+      {
+        "word": "鮒ずし",
+        "def": "琵琶湖のフナを塩漬け・発酵させた滋賀の伝統食。寿司の原型とされる"
+      },
+      {
+        "word": "マザーレイク",
+        "def": "「母なる湖」を意味し、近畿の水源・文化の源として琵琶湖を称える言葉"
+      }
+    ]
+  },
+  {
+    "num": "22",
+    "section": 4,
+    "keyword": "吉野山",
+    "emoji": "🌸",
+    "title": "吉野山は、日本一の桜の名所だ",
+    "q": "奈良県の吉野山って、なんで有名か知ってる？",
+    "a": "3万本の山桜が咲く、日本一の桜の名所だよ！",
+    "body": "奈良県吉野郡にある吉野山は、\n約3万本の山桜が斜面を埋め尽くす日本最大の桜の名所だ。\n\n下千本・中千本・上千本・奥千本と\n標高差があるため、長い期間桜が楽しめる。\n\n古くは「花の吉野」として万葉集にも詠まれ、\n豊臣秀吉が5,000人を引き連れてお花見をした記録も残っている。\n\n吉野山は修験道の聖地でもあり、\n世界遺産「紀伊山地の霊場と参詣道」にも含まれている。",
+    "summary": "🌸 1,000年以上前から続く桜の名所が、今も毎年花を咲かせているってこと。",
+    "reality": "吉野山の桜は修験道の御神木として植えられたことに始まるとされ、1,300年以上の歴史がある。シロヤマザクラが中心で、ソメイヨシノとは異なる淡いピンクが特徴。",
+    "realityIcon": "🌸",
+    "vocab": [
+      {
+        "word": "山桜",
+        "def": "日本の野生の桜。ソメイヨシノより色が淡く、葉と花が同時に出る"
+      },
+      {
+        "word": "修験道",
+        "def": "山を修行の場とする日本独自の宗教。吉野山は修験道の中心地の一つ"
+      }
+    ]
+  },
+  {
+    "num": "23",
+    "section": 4,
+    "keyword": "吉野杉",
+    "emoji": "🌲",
+    "title": "奈良の森が、日本の木材を支えている",
+    "q": "奈良県の吉野って、林業でも有名なの？",
+    "a": "吉野杉・吉野ヒノキは日本最高級の銘木として知られているよ！",
+    "body": "奈良県吉野地域は、400年以上の歴史を持つ林業の産地だ。\n\n「吉野杉」「吉野ヒノキ」は木目が緻密で美しく、\n日本最高級の木材として料亭・寺社建築・高級家具に使われる。\n\n吉野の林業の特徴は「密植・多間伐」方式。\n1ヘクタールに8,000〜10,000本という高密度で植えて、\n適切に間伐しながら数十〜百年かけて育てる。\n\nこの手間をかけた育て方が、\n年輪が細かく均一な最高品質の木材を生む。",
+    "summary": "🌲 400年かけて育てる丁寧な林業が、日本最高品質の木材を生んでいること。",
+    "reality": "吉野杉は年輪幅が1mm以下のものもあり、強度と美しさを兼ね備えた最高級材。法隆寺などの文化財修理にも使われる。近年は外国産材との競争が課題だ。",
+    "realityIcon": "🔨",
+    "vocab": [
+      {
+        "word": "間伐",
+        "def": "密植した木の一部を切って残りの木の成長を促す作業"
+      },
+      {
+        "word": "密植",
+        "def": "通常より多い本数の苗を植えること。吉野ではこれで木目を細かくする"
+      }
+    ]
+  },
+  {
+    "num": "24",
+    "section": 4,
+    "keyword": "みかん",
+    "emoji": "🍊",
+    "title": "和歌山は、みかん日本一の産地だ",
+    "q": "みかんの生産量日本一って、どの県だと思う？",
+    "a": "和歌山県だよ！長年全国トップの産地なんだ。",
+    "body": "和歌山県は全国みかん生産量の約20%を占める日本一の産地だ。\n\n温暖な気候と紀ノ川・有田川流域の傾斜地が\nみかん栽培に最適の環境を生み出している。\n\n「有田みかん」は糖度が高く皮が薄いことで有名で、\n江戸時代から「紀州みかん」として\n全国に出荷されてきた歴史がある。\n\nみかんの収穫は急斜面での手作業が中心で、\n農家の高齢化と後継者不足が課題になっている。",
+    "summary": "🍊 温暖な気候と急斜面の傾斜地が、日本一のみかんを育てているってこと。",
+    "reality": "和歌山県の有田みかんは全国ブランドで、糖度・皮の薄さで高い評価を受ける。和歌山県はみかんのほかカキ（柿）の生産量も全国1位で、果物王国として知られる。",
+    "realityIcon": "🍊",
+    "vocab": [
+      {
+        "word": "有田みかん",
+        "def": "和歌山県有田地方産のみかん。甘さと皮の薄さで全国的に有名"
+      },
+      {
+        "word": "傾斜地農業",
+        "def": "山の急斜面を利用した農業。水はけが良く日当たりも良い"
+      }
+    ]
+  },
+  {
+    "num": "25",
+    "section": 4,
+    "keyword": "大台ヶ原",
+    "emoji": "🌧️",
+    "title": "近畿に、日本一雨が多い山がある",
+    "q": "大台ヶ原って、どのくらい雨が降るか知ってる？",
+    "a": "年間降水量が約4,000mmで、日本有数の多雨地帯なんだ！",
+    "body": "奈良・三重の県境にある大台ヶ原は\n標高約1,695mの高原で、\n年間降水量が約4,000mm（東京の約2.5倍）という\n日本有数の多雨地帯だ。\n\n太平洋からの湿った空気が紀伊山地にぶつかって上昇し、\n大量の雨を降らせる。\n\nこの豊富な雨水が熊野川・宮川などの急流を生み、\n下流の農業・水道・水力発電を支えている。\n\n一方で近年は林相変化や生態系の乱れが問題になっている。",
+    "summary": "🌧️ 日本一の雨が近畿の川と水道の源泉になっているってこと。",
+    "reality": "大台ヶ原の年間降水量は観測年によって5,000mmを超えることもある。日本百名山の一つで、苔むした原生林が広がる幻想的な景観で知られる。",
+    "realityIcon": "🌲",
+    "vocab": [
+      {
+        "word": "大台ヶ原",
+        "def": "奈良・三重の県境にある高原。日本有数の多雨地帯で原生林が広がる"
+      },
+      {
+        "word": "林相変化",
+        "def": "森林の樹種や状態が変化すること。大台ヶ原ではシカの食害で変化が進む"
+      }
+    ]
+  },
+  {
+    "num": "26",
+    "section": 4,
+    "keyword": "南紀白浜",
+    "emoji": "🏖️",
+    "title": "和歌山に、南国みたいなリゾートがある",
+    "q": "南紀白浜って、何が有名か知ってる？",
+    "a": "日本屈指の白い砂浜と温泉で有名なリゾート地だよ！",
+    "body": "和歌山県白浜町にある南紀白浜は、\n「白良浜」と呼ばれる白い砂浜と豊富な温泉で知られる\n近畿有数のリゾート地だ。\n\n白良浜の砂はオーストラリアのホワイトヘブンビーチと\n姉妹浜の提携を結ぶほど白く美しい。\n\n近年はIT企業のサテライトオフィスの誘致に積極的で、\n温泉とリゾートのある環境でテレワークできる\n「ワーケーション」の先駆け地として注目されている。\n\n和歌山県の観光振興と移住促進の中心地だ。",
+    "summary": "🏖️ 白い砂浜と温泉の観光地が、今はテレワークの場所にも変わりつつあること。",
+    "reality": "白浜町は2019年からワーケーション誘致を積極展開し、約50社以上がサテライトオフィスを開設。パンダで有名なアドベンチャーワールドも白浜にある。",
+    "realityIcon": "🐼",
+    "vocab": [
+      {
+        "word": "ワーケーション",
+        "def": "ワーク（仕事）とバケーション（休暇）を組み合わせた働き方"
+      },
+      {
+        "word": "サテライトオフィス",
+        "def": "企業の本社から離れた場所の業務拠点。テレワーク普及で増加している"
+      }
+    ]
+  },
+  {
+    "num": "27",
+    "section": 4,
+    "keyword": "奈良県",
+    "emoji": "🦌",
+    "title": "奈良は、日本で最も人口流出が多い県の一つだ",
+    "q": "奈良県って、過疎化の問題があるって知ってた？",
+    "a": "大阪・京都のベッドタウンとして発展したが、若者の流出が続いているんだ。",
+    "body": "奈良県は大阪・京都に隣接しているため、\nベッドタウン（住宅地）として発展してきた。\n\nしかし産業が少ないため、\n働く場所を求めて大阪・京都に通勤する人が多く、\n若者の定着率が低い。\n\n南部の山間部では過疎化が特に深刻で、\n限界集落が増えている。\n\n奈良市内は観光客で賑わう一方、\n県全体では人口減少・高齢化が続いている。\n\n観光と産業育成をどう両立するかが課題だ。",
+    "summary": "🦌 観光地として有名でも、産業がなければ若者は出ていくってこと。",
+    "reality": "奈良県の人口は2000年代から減少が続き、2023年時点で約132万人。大阪への通勤者が多く「大阪のベッドタウン」の側面が強い。吉野など南部山間部の過疎化は深刻だ。",
+    "realityIcon": "📉",
+    "vocab": [
+      {
+        "word": "ベッドタウン",
+        "def": "大都市周辺の住宅地として発展した都市。昼間は大都市へ通勤する人が多い"
+      },
+      {
+        "word": "限界集落",
+        "def": "65歳以上の高齢者が人口の半数を超え、共同体の維持が困難になった集落"
+      }
+    ]
+  },
+  {
+    "num": "28",
+    "section": 4,
+    "keyword": "伊賀市",
+    "emoji": "🥷",
+    "title": "忍者の里は、実在した",
+    "q": "伊賀忍者って、実際にどんな人たちだったか知ってる？",
+    "a": "戦国時代に情報収集・破壊工作などを請け負った専門職集団だよ！",
+    "body": "三重県伊賀市（旧伊賀国）は「伊賀忍者」発祥の地として知られる。\n\n忍者（忍術者）は戦国時代に\n諜報・撹乱・暗殺などを請け負った専門家集団だ。\n\n伊賀の地形（山に囲まれた盆地）が\n外部からの侵入を防ぎつつ訓練に適していたため、\n忍者集団が発展したとされる。\n\n伊賀市の「伊賀流忍者博物館」には\n年間数十万人の国内外の観光客が訪れ、\n現在は観光資源として活用されている。",
+    "summary": "🥷 地形が生んだ忍者の技術が、今は観光産業として地域を支えているってこと。",
+    "reality": "伊賀忍者（伊賀者）は江戸幕府に仕えた「御庭番」として採用され、情報収集を担った。現在は外国人観光客にも人気で、忍者ショーが連日行われる。",
+    "realityIcon": "🗡️",
+    "vocab": [
+      {
+        "word": "忍者",
+        "def": "戦国時代に諜報・破壊工作を行った専門家集団。伊賀・甲賀が二大産地"
+      },
+      {
+        "word": "諜報",
+        "def": "敵の情報をひそかに集めること。忍者の主要な任務の一つ"
+      }
+    ]
+  },
+  {
+    "num": "29",
+    "section": 4,
+    "keyword": "大阪府",
+    "emoji": "🌆",
+    "title": "大阪は、日本第2位の経済規模を持つ",
+    "q": "大阪府のGDPって、どのくらいか知ってる？",
+    "a": "約40兆円で、日本全体の約7〜8%！一国に匹敵する規模だよ。",
+    "body": "大阪府のGDP（域内総生産）は約40兆円で、\n東京都に次ぐ日本第2位の経済規模だ。\n\n「大阪単独」で比べると、\nデンマークやフィンランドなど\nヨーロッパの中規模国の経済規模に匹敵する。\n\n商業・サービス業・観光業が中心で、\nインバウンド（外国人観光客）消費が急増している。\n\n2025年には大阪・関西万博が開催され、\n世界からの注目が集まっている。",
+    "summary": "🌆 大阪だけで一国に匹敵する経済規模があるってこと。",
+    "reality": "大阪府のGDPは約40兆円（2021年）。2025年大阪・関西万博のテーマは「いのち輝く未来社会のデザイン」で、約150か国・地域が参加予定。",
+    "realityIcon": "💴",
+    "vocab": [
+      {
+        "word": "GDP",
+        "def": "Gross Domestic Productの略。国や地域で一定期間に生み出された価値の合計"
+      },
+      {
+        "word": "インバウンド",
+        "def": "外国から訪れる観光客のこと。大阪は特に外国人観光客が多い"
+      }
+    ]
+  },
+  {
+    "num": "30",
+    "section": 4,
+    "keyword": "神戸市",
+    "emoji": "🌍",
+    "title": "神戸は、日本一「外国」に近い街だ",
+    "q": "神戸って、なんで異国情緒があると言われるの？",
+    "a": "1868年の開港から外国人が多く住んできた街だからだよ！",
+    "body": "神戸市は1868年の開港以来、\n多くの外国人が居住する国際都市として発展してきた。\n\n北野町の「異人館街」には\n明治時代に建てられた外国人居留地の建物が今も残り、\n観光スポットになっている。\n\n神戸ビーフ・神戸スイーツなど\n外国文化と日本文化が融合した食文化も発展した。\n\n現在も在住外国人比率が高く、\n多文化共生の先進都市として知られている。",
+    "summary": "🌍 150年以上の国際交流の歴史が、神戸独自の文化と街並みを作ったってこと。",
+    "reality": "神戸市の在住外国人は約5万人で、大阪・東京に次ぐ規模。北野の異人館は約30棟が公開されており、年間多くの観光客が訪れる。",
+    "realityIcon": "🏠",
+    "vocab": [
+      {
+        "word": "異人館",
+        "def": "明治時代に外国人居留地に建てられた西洋建築の住宅"
+      },
+      {
+        "word": "多文化共生",
+        "def": "異なる文化・国籍の人々が互いを尊重して共に生きること"
+      }
+    ]
+  }
+];
+
+const QUIZZES = [
+  {
+    "q": "琵琶湖の説明として正しいものはどれか？",
+    "options": [
+      "日本最大の湖で面積は約670km²",
+      "日本最深の湖で水深500m以上",
+      "外国から魚が持ち込まれた人工の湖",
+      "昭和時代に作られた貯水池"
+    ],
+    "ans": 0,
+    "exp": "琵琶湖は面積約670km²の日本最大の湖で、約4,000万年前から存在する古代湖です。近畿1,400万人の水源でもあります。"
+  },
+  {
+    "q": "京都が日本の都だった期間はどれか？",
+    "options": [
+      "約100年",
+      "約300年",
+      "約500年",
+      "約1,075年"
+    ],
+    "ans": 3,
+    "exp": "794年に平安京が開かれてから1869年に天皇が東京へ移るまで、約1,075年間にわたって京都が日本の都でした。"
+  },
+  {
+    "q": "阪神工業地帯の現在の主要産業として正しいものはどれか？",
+    "options": [
+      "石炭・鉄鋼",
+      "先端技術産業・医薬品産業",
+      "繊維・木材",
+      "農業・水産業"
+    ],
+    "ans": 1,
+    "exp": "かつては繊維・鉄鋼が中心でしたが、現在は先端技術産業や医薬品産業（武田薬品・塩野義製薬など）が主力になっています。"
+  },
+  {
+    "q": "琵琶湖疏水の目的として正しいものはどれか？",
+    "options": [
+      "農業用水の確保だけが目的",
+      "水力発電・水道・農業用水など多目的に使われた",
+      "神戸港への輸送ルートとして作られた",
+      "観光目的で作られた水路"
+    ],
+    "ans": 1,
+    "exp": "1890年完成の琵琶湖疏水は日本初の水力発電、水道、農業用水など多目的に使われました。日本初の電気鉄道も動かしました。"
+  },
+  {
+    "q": "熊野古道がユネスコ世界遺産に登録されたことの何が珍しいのか？",
+    "options": [
+      "日本で初めて登録された文化遺産",
+      "道そのものが世界遺産の主体になったことが珍しい",
+      "外国から申請して登録された",
+      "自然遺産として登録された"
+    ],
+    "ans": 1,
+    "exp": "「道」が世界遺産の主体となったのは、スペインのサンティアゴ巡礼路に続いて世界で2例目の珍しいケースです。"
+  },
+  {
+    "q": "近江商人の「三方よし」の内容として正しいものはどれか？",
+    "options": [
+      "速く・安く・大量に",
+      "売り手よし・買い手よし・世間よし",
+      "品質よし・価格よし・サービスよし",
+      "自社よし・取引先よし・株主よし"
+    ],
+    "ans": 1,
+    "exp": "「三方よし」は売り手（自分）・買い手（客）・世間（社会）の三方が満足できる商売をするという近江商人の哲学で、現代のCSRの先駆けとも言われます。"
+  },
+  {
+    "q": "法隆寺の五重塔について正しいものはどれか？",
+    "options": [
+      "江戸時代に建てられた",
+      "コンクリート造りの近代建築",
+      "飛鳥時代建立の世界最古の木造塔",
+      "昭和時代に復元された建物"
+    ],
+    "ans": 2,
+    "exp": "法隆寺の五重塔は飛鳥時代（7世紀）に建立された世界最古の木造塔です。1,400年以上前の木材が今も使われています。"
+  },
+  {
+    "q": "神戸の都市構造が東西に細長くなった理由は？",
+    "options": [
+      "昔から計画的に細長く設計された",
+      "北に六甲山、南に海があり平地が少ないため",
+      "川が東西に流れているから",
+      "東西に鉄道が走っているから"
+    ],
+    "ans": 1,
+    "exp": "神戸は北に六甲山（931m）、南に大阪湾があり、平地が非常に少ないため、東西に細長い独特の都市構造が生まれました。"
+  },
+  {
+    "q": "大阪平野の成り立ちとして正しいものはどれか？",
+    "options": [
+      "火山の噴火でできた",
+      "隕石が落ちてできた",
+      "川が運んだ土砂が堆積した沖積平野",
+      "人工的に埋め立てた土地"
+    ],
+    "ans": 2,
+    "exp": "大阪平野は淀川・大和川などが長年かけて土砂を運び積み上げた「沖積平野」です。かつては海や湿地だった場所が多くあります。"
+  },
+  {
+    "q": "和歌山県のみかん生産量は全国の約何%か？",
+    "options": [
+      "約5%",
+      "約10%",
+      "約20%",
+      "約40%"
+    ],
+    "ans": 2,
+    "exp": "和歌山県は全国みかん生産量の約20%を占める日本一の産地です。有田みかんは甘さと皮の薄さで全国的に知られています。"
+  },
+  {
+    "q": "東大阪市の「まいど1号」とは何か？",
+    "options": [
+      "東大阪で作られた新幹線",
+      "中小企業が開発した人工衛星",
+      "東大阪発祥のラーメンブランド",
+      "大阪万博のマスコット"
+    ],
+    "ans": 1,
+    "exp": "「まいど1号」は東大阪の中小企業が共同開発した人工衛星で、2009年に打ち上げ成功。町工場が宇宙開発に挑戦した事例として世界の注目を集めました。"
+  },
+  {
+    "q": "吉野杉の特徴として正しいものはどれか？",
+    "options": [
+      "成長が早く安価な木材",
+      "密植・多間伐で育てた年輪が細かい最高級材",
+      "外国産木材より安価な量産品",
+      "人工林ではなく天然林から採取する"
+    ],
+    "ans": 1,
+    "exp": "吉野杉は1ヘクタールに8,000〜10,000本の密植・多間伐方式で育て、数十〜百年かけて年輪が細かく均一な最高品質の木材を生産します。"
+  },
+  {
+    "q": "1970年代の琵琶湖の環境問題について正しいものはどれか？",
+    "options": [
+      "地震で湖底が陥没した",
+      "外来魚が大量に放流された",
+      "生活・工場排水で赤潮・アオコが大発生した",
+      "台風で水位が上昇した"
+    ],
+    "ans": 2,
+    "exp": "高度経済成長期に大量の生活・工場排水が流れ込み、赤潮やアオコが大発生。市民の石けん運動から条例制定へと発展した環境問題の先駆的事例となりました。"
+  },
+  {
+    "q": "若狭湾のリアス海岸について正しいものはどれか？",
+    "options": [
+      "人工的に作られた海岸",
+      "山地が海に沈んでできた複雑な海岸線",
+      "砂丘が続く平坦な海岸",
+      "火山島が連なる海岸"
+    ],
+    "ans": 1,
+    "exp": "若狭湾のリアス海岸は山地が海に沈んでできた複雑に入り組んだ海岸線で、波が穏やかで水深があるため天然の良港が多く、「御食国」として古くから朝廷に食材を供給しました。"
+  },
+  {
+    "q": "神戸市が「日本一外国に近い街」と言われる理由は？",
+    "options": [
+      "外国との距離が日本で最も近い",
+      "1868年の開港以来150年以上外国人が多く住んできたから",
+      "外国語が公用語として使われているから",
+      "外国企業だけが集まる特区だから"
+    ],
+    "ans": 1,
+    "exp": "神戸は1868年の開港以来、外国人が多く居住する国際都市として発展。北野の異人館街など外国文化の影響が今も街に残り、多文化共生の先進都市として知られています。"
+  }
+];
+
+let current=0, readFlags=new Array(30).fill(false), quizCurrent=0, quizScore=0, quizAnswered=false;
+const STORAGE_KEY='kinki_v1';
+
+function init() {
+  try {
+    const s=JSON.parse(localStorage.getItem(STORAGE_KEY));
+    if(s&&s.readFlags){readFlags=s.readFlags;const f=readFlags.indexOf(false);current=f===-1?29:f;}
+  }catch(e){}
+  renderDots();renderCard();
+}
+function save(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify({readFlags}));}catch(e){}}
+
+function switchTab(tab){
+  document.getElementById('tab-zatsu').classList.toggle('active',tab==='zatsu');
+  document.getElementById('tab-quiz').classList.toggle('active',tab==='quiz');
+  document.getElementById('zatsu-section').classList.toggle('hidden',tab!=='zatsu');
+  document.getElementById('quiz-section').classList.toggle('hidden',tab!=='quiz');
+  if(tab==='quiz'){quizCurrent=0;quizScore=0;renderQuiz();}
+}
+
+function renderDots(){
+  document.getElementById('dots').innerHTML=ITEMS.map((_,i)=>{
+    let c='dot';if(i===current)c+=' current';else if(readFlags[i])c+=' done';
+    return `<div class="${c}" onclick="jumpTo(${i})">${i+1}</div>`;
+  }).join('');
+}
+function jumpTo(i){readFlags[current]=true;current=i;save();renderDots();renderCard();}
+
+function updateProgress(){
+  const d=readFlags.filter(Boolean).length;
+  document.getElementById('progress-text').textContent=`${d} / 30`;
+  document.getElementById('progress-fill').style.width=`${d/30*100}%`;
+}
+
+function renderCard(){
+  const d=ITEMS[current];updateProgress();
+  document.getElementById('card').innerHTML=`
+    <div class="card-badge">雑学 ${d.num} ／ ${SECTIONS[d.section]}</div>
+    <div class="card-title">${d.title}</div>
+    <div class="img-placeholder" id="img-wrap-${current}"><span style="font-size:14px;color:var(--text-sub)">📷 読み込み中...</span></div>
+    <div class="img-caption" id="img-cap-${current}"></div>
+    <div class="card-story">
+      <div class="card-q">🤔「${d.q}」</div>
+      <div class="card-a">${d.a}</div>
+      <div class="card-body">${d.body}</div>
+    </div>
+    <div class="card-summary">${d.summary}</div>
+    <div class="reality-box">
+      <div class="reality-label">${d.realityIcon} リアリティ DATA</div>
+      <div class="reality-text">${d.reality}</div>
+    </div>
+    <div class="vocab-box">
+      <div class="vocab-label">📖 用語解説</div>
+      ${d.vocab.map(v=>`<div class="vocab-item">・<strong>【${v.word}】</strong>：${v.def}</div>`).join('')}
+    </div>
+  `;
+  document.getElementById('btn-prev').disabled=current===0;
+  document.getElementById('btn-next').textContent=current===29?'✨ 読み終えた！':'次の雑学へ →';
+  loadWikiImage(current,d.keyword,d.emoji);
+}
+
+async function loadWikiImage(idx,keyword,emoji){
+  try{
+    const res=await fetch(`https://ja.wikipedia.org/w/api.php?action=query&titles=${encodeURIComponent(keyword)}&prop=pageimages&format=json&pithumbsize=640&origin=*`);
+    const data=await res.json();
+    const page=Object.values(data.query.pages)[0];
+    const wrap=document.getElementById(`img-wrap-${idx}`);
+    if(!wrap)return;
+    if(page&&page.thumbnail){
+      wrap.innerHTML=`<img class="card-img" src="${page.thumbnail.source}" alt="${keyword}">`;
+      const cap=document.getElementById(`img-cap-${idx}`);
+      if(cap)cap.textContent=`${keyword} © Wikipedia`;
+    }else{wrap.innerHTML=`<div class="img-placeholder"><span style="font-size:48px">${emoji}</span></div>`;}
+  }catch(e){const wrap=document.getElementById(`img-wrap-${idx}`);if(wrap)wrap.innerHTML=`<div class="img-placeholder"><span style="font-size:48px">${emoji}</span></div>`;}
+}
+
+function go(dir){
+  readFlags[current]=true;save();
+  const next=current+dir;
+  if(next<0)return;
+  if(next>=30){
+    document.getElementById('card').style.display='none';
+    document.getElementById('btn-prev').style.display='none';
+    document.getElementById('btn-next').style.display='none';
+    document.getElementById('complete-card').classList.remove('hidden');
+    updateProgress();renderDots();return;
+  }
+  current=next;renderDots();renderCard();
+}
+
+function resetZatsuqaku(){
+  current=0;readFlags=new Array(30).fill(false);save();
+  document.getElementById('card').style.display='';
+  document.getElementById('btn-prev').style.display='';
+  document.getElementById('btn-next').style.display='';
+  document.getElementById('complete-card').classList.add('hidden');
+  renderDots();renderCard();
+}
+
+function renderQuiz(){
+  if(quizCurrent>=QUIZZES.length){showScore();return;}
+  const q=QUIZZES[quizCurrent];quizAnswered=false;
+  document.getElementById('quiz-card').innerHTML=`
+    <div class="quiz-q-num">問題 ${quizCurrent+1} / ${QUIZZES.length}</div>
+    <div class="quiz-q-text">${q.q}</div>
+    <div class="quiz-options">${q.options.map((opt,i)=>`<button class="quiz-opt" onclick="answerQuiz(${i})">${opt}</button>`).join('')}</div>
+    <div class="quiz-result" id="quiz-result"></div>
+    <div class="quiz-nav"><button class="btn-quiz-next" id="quiz-next-btn" onclick="nextQuiz()">${quizCurrent===QUIZZES.length-1?'結果を見る →':'次の問題へ →'}</button></div>
+  `;
+  document.getElementById('score-card').classList.add('hidden');
+}
+
+function answerQuiz(idx){
+  if(quizAnswered)return;quizAnswered=true;
+  const q=QUIZZES[quizCurrent];if(idx===q.ans)quizScore++;
+  document.querySelectorAll('.quiz-opt').forEach((btn,i)=>{
+    btn.disabled=true;
+    if(i===q.ans)btn.classList.add('correct');
+    else if(i===idx&&idx!==q.ans)btn.classList.add('wrong');
+  });
+  const res=document.getElementById('quiz-result');res.classList.add('show');
+  if(idx===q.ans){res.classList.add('ok');res.innerHTML=`✅ 正解！ ${q.exp}`;}
+  else{res.classList.add('ng');res.innerHTML=`❌ 不正解。正解は「${q.options[q.ans]}」<br>${q.exp}`;}
+  document.getElementById('quiz-next-btn').style.display='block';
+}
+
+function nextQuiz(){quizCurrent++;if(quizCurrent>=QUIZZES.length){showScore();return;}renderQuiz();}
+
+function showScore(){
+  document.getElementById('quiz-card').innerHTML='';
+  document.getElementById('score-card').classList.remove('hidden');
+  document.getElementById('score-num').textContent=quizScore;
+  const p=quizScore/QUIZZES.length;
+  document.getElementById('score-comment').textContent=p===1?'満点！九州地方マスター確定！🏆':p>=0.8?'すごい！あと少しで完璧！':p>=0.6?'合格ライン！雑学を読み直してみよう。':p>=0.4?'もう少し！雑学に戻って復習しよう。':'雑学をもう一度ゆっくり読もう！';
+}
+
+function retryQuiz(){quizCurrent=0;quizScore=0;document.getElementById('score-card').classList.add('hidden');renderQuiz();}
+
+init();
+</script>
+</body>
+</html>
