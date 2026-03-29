@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{TITLE}}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --orange: #E8621A;
+    --orange-light: #F5895A;
+    --orange-pale: #FFF0E8;
+    --bg: #FFFBF7;
+    --card-bg: #FFFFFF;
+    --text: #2D1B00;
+    --text-sub: #7A5A3A;
+    --border: #F0D5B8;
+    --green: #2E7D52;
+    --green-light: #E8F5EE;
+    --red: #C0392B;
+    --red-light: #FDECEA;
+    --navy: #2E3A5F;
+    --shadow: 0 4px 24px rgba(232,98,26,0.10);
+    --radius: 18px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Zen Maru Gothic', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+
+  header { background: linear-gradient(135deg, var(--orange) 0%, #C94A08 100%); color: white; text-align: center; padding: 16px 20px 12px; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 12px rgba(232,98,26,0.3); }
+  header .region { font-size: 12px; opacity: 0.85; letter-spacing: 2px; margin-bottom: 2px; }
+  header h1 { font-size: 20px; font-weight: 900; }
+  header .stage-label { font-size: 11px; opacity: 0.75; margin-top: 2px; }
+
+  .tabs { display: flex; background: white; border-bottom: 2px solid var(--border); position: sticky; top: 72px; z-index: 99; }
+  .tab { flex: 1; padding: 11px 6px; text-align: center; font-size: 13px; font-weight: 700; color: var(--text-sub); cursor: pointer; border-bottom: 3px solid transparent; transition: all 0.2s; margin-bottom: -2px; }
+  .tab.active { color: var(--orange); border-bottom-color: var(--orange); }
+
+  .progress-wrap { background: white; padding: 10px 16px 8px; border-bottom: 1px solid var(--border); }
+  .progress-meta { display: flex; justify-content: space-between; font-size: 12px; color: var(--text-sub); margin-bottom: 5px; }
+  .progress-bar { height: 7px; background: var(--border); border-radius: 99px; overflow: hidden; }
+  .progress-fill { height: 100%; background: linear-gradient(90deg, var(--orange-light), var(--orange)); border-radius: 99px; transition: width 0.4s ease; }
+
+  .dots { display: flex; gap: 5px; justify-content: center; padding: 8px 16px; flex-wrap: wrap; }
+  .dot { width: 26px; height: 26px; border-radius: 50%; border: 2px solid var(--border); background: white; font-size: 10px; font-weight: 700; display: flex; align-items: center; justify-content: center; color: var(--text-sub); cursor: pointer; transition: all 0.2s; }
+  .dot.current { border-color: var(--orange); background: var(--orange); color: white; }
+  .dot.done { border-color: var(--orange); background: var(--orange-pale); color: var(--orange); }
+
+  main { padding: 0 16px 40px; max-width: 640px; margin: 0 auto; }
+  .card { background: var(--card-bg); border-radius: var(--radius); box-shadow: var(--shadow); border: 1px solid var(--border); overflow: hidden; margin-top: 10px; animation: fadeUp 0.3s ease; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+
+  .card-badge { background: linear-gradient(90deg, var(--orange), var(--orange-light)); color: white; font-size: 11px; font-weight: 700; padding: 5px 14px; letter-spacing: 1px; }
+  .card-title { padding: 14px 16px 10px; font-size: 17px; font-weight: 900; line-height: 1.45; border-bottom: 1px dashed var(--border); }
+  .img-placeholder { width: 100%; height: 180px; background: var(--orange-pale); display: flex; align-items: center; justify-content: center; }
+  .card-img { width: 100%; height: 180px; object-fit: cover; display: block; }
+  .img-caption { font-size: 10px; color: var(--text-sub); padding: 3px 12px; text-align: right; background: var(--orange-pale); }
+
+  .card-story { padding: 16px 16px 6px; font-size: 14px; line-height: 2.0; }
+  .card-q { font-weight: 700; color: var(--text); margin-bottom: 4px; }
+  .card-a { font-weight: 700; color: var(--orange); margin-bottom: 12px; }
+  .card-body { white-space: pre-line; color: var(--text); margin-bottom: 10px; }
+  .card-summary { font-weight: 700; color: var(--text); display: block; padding: 10px 16px 14px; border-top: 1px dashed var(--border); margin: 0 -16px; }
+
+  .reality-box { margin: 0 16px 12px; background: var(--orange-pale); border-left: 4px solid var(--orange); border-radius: 10px; padding: 10px 12px; }
+  .reality-label { font-size: 11px; font-weight: 700; color: var(--orange); letter-spacing: 1px; margin-bottom: 5px; }
+  .reality-text { font-size: 13px; line-height: 1.7; }
+  .vocab-box { margin: 0 16px 16px; background: var(--green-light); border-radius: 10px; padding: 10px 12px; }
+  .vocab-label { font-size: 11px; font-weight: 700; color: var(--green); letter-spacing: 1px; margin-bottom: 6px; }
+  .vocab-item { font-size: 12px; line-height: 1.65; margin-bottom: 3px; }
+  .vocab-item strong { color: var(--green); }
+
+  .nav-buttons { display: flex; gap: 10px; padding: 12px 0 0; }
+  .btn { flex: 1; padding: 13px 10px; border-radius: 12px; border: none; font-family: 'Zen Maru Gothic', sans-serif; font-size: 14px; font-weight: 700; cursor: pointer; transition: all 0.2s; }
+  .btn-prev { background: white; border: 2px solid var(--border); color: var(--text-sub); }
+  .btn-prev:hover { border-color: var(--orange); color: var(--orange); }
+  .btn-next { background: linear-gradient(135deg, var(--orange), #C94A08); color: white; box-shadow: 0 4px 14px rgba(232,98,26,0.35); }
+  .btn-next:hover { transform: translateY(-1px); }
+  .btn:disabled { opacity: 0.35; cursor: not-allowed; transform: none !important; }
+
+  .complete-card { background: linear-gradient(135deg, #FFF7F2, #FFEDE0); border: 2px solid var(--orange-light); border-radius: var(--radius); text-align: center; padding: 28px 20px; margin-top: 12px; animation: fadeUp 0.35s ease; }
+  .complete-emoji { font-size: 48px; margin-bottom: 8px; }
+  .complete-stars { font-size: 26px; letter-spacing: 4px; margin-bottom: 12px; }
+  .complete-title { font-size: 20px; font-weight: 900; color: var(--orange); margin-bottom: 8px; }
+  .complete-desc { font-size: 13px; line-height: 1.8; color: var(--text-sub); margin-bottom: 18px; }
+
+  .quiz-header { background: linear-gradient(135deg, var(--navy) 0%, #1A2540 100%); color: white; text-align: center; padding: 14px 20px 10px; margin-top: 12px; border-radius: var(--radius) var(--radius) 0 0; }
+  .quiz-header h2 { font-size: 17px; font-weight: 900; }
+  .quiz-header p { font-size: 11px; opacity: 0.7; margin-top: 2px; }
+  .quiz-card { background: white; border: 1px solid var(--border); border-top: none; border-radius: 0 0 var(--radius) var(--radius); padding: 18px 16px 22px; animation: fadeUp 0.3s ease; }
+  .quiz-q-num { font-size: 11px; color: var(--navy); font-weight: 700; margin-bottom: 7px; letter-spacing: 1px; }
+  .quiz-q-text { font-size: 15px; font-weight: 700; line-height: 1.6; margin-bottom: 14px; }
+  .quiz-options { display: flex; flex-direction: column; gap: 9px; }
+  .quiz-opt { padding: 12px 14px; border-radius: 10px; border: 2px solid var(--border); background: white; font-family: 'Zen Maru Gothic', sans-serif; font-size: 13px; font-weight: 500; cursor: pointer; text-align: left; transition: all 0.2s; }
+  .quiz-opt:hover:not(:disabled) { border-color: var(--navy); background: #F0F3FA; }
+  .quiz-opt.correct { border-color: var(--green) !important; background: var(--green-light) !important; color: var(--green); font-weight: 700; }
+  .quiz-opt.wrong { border-color: var(--red) !important; background: var(--red-light) !important; color: var(--red); }
+  .quiz-opt:disabled { cursor: default; }
+  .quiz-result { margin-top: 12px; padding: 10px 12px; border-radius: 10px; font-size: 13px; line-height: 1.6; display: none; }
+  .quiz-result.show { display: block; }
+  .quiz-result.ok { background: var(--green-light); color: var(--green); border-left: 4px solid var(--green); }
+  .quiz-result.ng { background: var(--red-light); color: var(--red); border-left: 4px solid var(--red); }
+  .quiz-nav { display: flex; justify-content: flex-end; margin-top: 14px; }
+  .btn-quiz-next { padding: 11px 22px; border-radius: 10px; border: none; background: linear-gradient(135deg, var(--navy), #1A2540); color: white; font-family: 'Zen Maru Gothic', sans-serif; font-size: 14px; font-weight: 700; cursor: pointer; display: none; transition: all 0.2s; }
+  .btn-quiz-next:hover { transform: translateY(-1px); }
+
+  .score-card { background: linear-gradient(135deg, var(--navy), #1A2540); color: white; border-radius: var(--radius); text-align: center; padding: 28px 20px; margin-top: 12px; animation: fadeUp 0.35s ease; }
+  .score-num { font-size: 54px; font-weight: 900; color: #FFD700; }
+  .score-label { font-size: 15px; opacity: 0.8; margin-top: -4px; margin-bottom: 12px; }
+  .score-comment { font-size: 14px; line-height: 1.7; margin-bottom: 20px; }
+  .btn-retry { padding: 12px 26px; border-radius: 12px; border: 2px solid rgba(255,255,255,0.4); background: transparent; color: white; font-family: 'Zen Maru Gothic', sans-serif; font-size: 14px; font-weight: 700; cursor: pointer; transition: all 0.2s; }
+  .btn-retry:hover { background: rgba(255,255,255,0.1); }
+  .hidden { display: none !important; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="region">{{REGION}}</div>
+  <h1>{{HEADER_TITLE}}</h1>
+  <div class="stage-label">雑学30選 + クイズ15問</div>
+</header>
+
+<div class="tabs">
+  <div class="tab active" id="tab-zatsu" onclick="switchTab('zatsu')">📖 雑学</div>
+  <div class="tab" id="tab-quiz" onclick="switchTab('quiz')">📝 クイズ</div>
+</div>
+
+<div id="zatsu-section">
+  <div class="progress-wrap">
+    <div class="progress-meta"><span>読んだ雑学</span><span id="progress-text">0 / 30</span></div>
+    <div class="progress-bar"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
+  </div>
+  <div class="dots" id="dots"></div>
+  <main>
+    <div id="zatsuqaku-section">
+      <div class="card" id="card"></div>
+      <div class="nav-buttons">
+        <button class="btn btn-prev" id="btn-prev" onclick="go(-1)" disabled>← 前へ</button>
+        <button class="btn btn-next" id="btn-next" onclick="go(1)">次の雑学へ →</button>
+      </div>
+    </div>
+    <div class="complete-card hidden" id="complete-card">
+      <div class="complete-emoji">🎉</div>
+      <div class="complete-stars">⭐⭐⭐⭐⭐</div>
+      <div class="complete-title">30の雑学コンプリート！</div>
+      <div class="complete-desc">{{COMPLETE_DESC}}</div>
+      <button class="btn btn-next" onclick="switchTab('quiz')" style="max-width:260px;margin:0 auto;display:block;">クイズに挑戦！ →</button>
+      <div style="margin-top:10px;"><button class="btn btn-prev" onclick="resetZatsuqaku()" style="border:none;background:transparent;font-size:13px;color:var(--text-sub);">もう一度読む 🔄</button></div>
+    </div>
+  </main>
+</div>
+
+<div id="quiz-section" class="hidden">
+  <main>
+    <div class="quiz-header"><h2>{{QUIZ_HEADER}}</h2><p>雑学で学んだことを試してみよう！全15問</p></div>
+    <div class="quiz-card" id="quiz-card"></div>
+    <div class="score-card hidden" id="score-card">
+      <div class="score-num" id="score-num"></div>
+      <div class="score-label">/ 15問正解</div>
+      <div class="score-comment" id="score-comment"></div>
+      <button class="btn-retry" onclick="retryQuiz()">もう一度チャレンジ 🔄</button>
+      <br><br>
+      <button class="btn-retry" onclick="switchTab('zatsu')" style="font-size:12px;opacity:0.7;">← 雑学に戻る</button>
+    </div>
+  </main>
+</div>
+
+<script>
+const SECTIONS = {{SECTIONS_JSON}};
+
+const ITEMS = {{ITEMS_JSON}};
+
+const QUIZZES = {{QUIZZES_JSON}};
+
+let current=0, readFlags=new Array(30).fill(false), quizCurrent=0, quizScore=0, quizAnswered=false;
+const STORAGE_KEY='{{STORAGE_KEY}}';
+
+function init() {
+  try {
+    const s=JSON.parse(localStorage.getItem(STORAGE_KEY));
+    if(s&&s.readFlags){readFlags=s.readFlags;const f=readFlags.indexOf(false);current=f===-1?29:f;}
+  }catch(e){}
+  renderDots();renderCard();
+}
+function save(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify({readFlags}));}catch(e){}}
+
+function switchTab(tab){
+  document.getElementById('tab-zatsu').classList.toggle('active',tab==='zatsu');
+  document.getElementById('tab-quiz').classList.toggle('active',tab==='quiz');
+  document.getElementById('zatsu-section').classList.toggle('hidden',tab!=='zatsu');
+  document.getElementById('quiz-section').classList.toggle('hidden',tab!=='quiz');
+  if(tab==='quiz'){quizCurrent=0;quizScore=0;renderQuiz();}
+}
+
+function renderDots(){
+  document.getElementById('dots').innerHTML=ITEMS.map((_,i)=>{
+    let c='dot';if(i===current)c+=' current';else if(readFlags[i])c+=' done';
+    return `<div class="${c}" onclick="jumpTo(${i})">${i+1}</div>`;
+  }).join('');
+}
+function jumpTo(i){readFlags[current]=true;current=i;save();renderDots();renderCard();}
+
+function updateProgress(){
+  const d=readFlags.filter(Boolean).length;
+  document.getElementById('progress-text').textContent=`${d} / 30`;
+  document.getElementById('progress-fill').style.width=`${d/30*100}%`;
+}
+
+function renderCard(){
+  const d=ITEMS[current];updateProgress();
+  document.getElementById('card').innerHTML=`
+    <div class="card-badge">雑学 ${d.num} ／ ${SECTIONS[d.section]}</div>
+    <div class="card-title">${d.title}</div>
+    <div class="img-placeholder" id="img-wrap-${current}"><span style="font-size:14px;color:var(--text-sub)">📷 読み込み中...</span></div>
+    <div class="img-caption" id="img-cap-${current}"></div>
+    <div class="card-story">
+      <div class="card-q">🤔「${d.q}」</div>
+      <div class="card-a">${d.a}</div>
+      <div class="card-body">${d.body}</div>
+    </div>
+    <div class="card-summary">${d.summary}</div>
+    <div class="reality-box">
+      <div class="reality-label">${d.realityIcon} リアリティ DATA</div>
+      <div class="reality-text">${d.reality}</div>
+    </div>
+    <div class="vocab-box">
+      <div class="vocab-label">📖 用語解説</div>
+      ${d.vocab.map(v=>`<div class="vocab-item">・<strong>【${v.word}】</strong>：${v.def}</div>`).join('')}
+    </div>
+  `;
+  document.getElementById('btn-prev').disabled=current===0;
+  document.getElementById('btn-next').textContent=current===29?'✨ 読み終えた！':'次の雑学へ →';
+  loadWikiImage(current,d.keyword,d.emoji);
+}
+
+async function loadWikiImage(idx,keyword,emoji){
+  try{
+    const res=await fetch(`https://ja.wikipedia.org/w/api.php?action=query&titles=${encodeURIComponent(keyword)}&prop=pageimages&format=json&pithumbsize=640&origin=*`);
+    const data=await res.json();
+    const page=Object.values(data.query.pages)[0];
+    const wrap=document.getElementById(`img-wrap-${idx}`);
+    if(!wrap)return;
+    if(page&&page.thumbnail){
+      wrap.innerHTML=`<img class="card-img" src="${page.thumbnail.source}" alt="${keyword}">`;
+      const cap=document.getElementById(`img-cap-${idx}`);
+      if(cap)cap.textContent=`${keyword} © Wikipedia`;
+    }else{wrap.innerHTML=`<div class="img-placeholder"><span style="font-size:48px">${emoji}</span></div>`;}
+  }catch(e){const wrap=document.getElementById(`img-wrap-${idx}`);if(wrap)wrap.innerHTML=`<div class="img-placeholder"><span style="font-size:48px">${emoji}</span></div>`;}
+}
+
+function go(dir){
+  readFlags[current]=true;save();
+  const next=current+dir;
+  if(next<0)return;
+  if(next>=30){
+    document.getElementById('card').style.display='none';
+    document.getElementById('btn-prev').style.display='none';
+    document.getElementById('btn-next').style.display='none';
+    document.getElementById('complete-card').classList.remove('hidden');
+    updateProgress();renderDots();return;
+  }
+  current=next;renderDots();renderCard();
+}
+
+function resetZatsuqaku(){
+  current=0;readFlags=new Array(30).fill(false);save();
+  document.getElementById('card').style.display='';
+  document.getElementById('btn-prev').style.display='';
+  document.getElementById('btn-next').style.display='';
+  document.getElementById('complete-card').classList.add('hidden');
+  renderDots();renderCard();
+}
+
+function renderQuiz(){
+  if(quizCurrent>=QUIZZES.length){showScore();return;}
+  const q=QUIZZES[quizCurrent];quizAnswered=false;
+  document.getElementById('quiz-card').innerHTML=`
+    <div class="quiz-q-num">問題 ${quizCurrent+1} / ${QUIZZES.length}</div>
+    <div class="quiz-q-text">${q.q}</div>
+    <div class="quiz-options">${q.options.map((opt,i)=>`<button class="quiz-opt" onclick="answerQuiz(${i})">${opt}</button>`).join('')}</div>
+    <div class="quiz-result" id="quiz-result"></div>
+    <div class="quiz-nav"><button class="btn-quiz-next" id="quiz-next-btn" onclick="nextQuiz()">${quizCurrent===QUIZZES.length-1?'結果を見る →':'次の問題へ →'}</button></div>
+  `;
+  document.getElementById('score-card').classList.add('hidden');
+}
+
+function answerQuiz(idx){
+  if(quizAnswered)return;quizAnswered=true;
+  const q=QUIZZES[quizCurrent];if(idx===q.ans)quizScore++;
+  document.querySelectorAll('.quiz-opt').forEach((btn,i)=>{
+    btn.disabled=true;
+    if(i===q.ans)btn.classList.add('correct');
+    else if(i===idx&&idx!==q.ans)btn.classList.add('wrong');
+  });
+  const res=document.getElementById('quiz-result');res.classList.add('show');
+  if(idx===q.ans){res.classList.add('ok');res.innerHTML=`✅ 正解！ ${q.exp}`;}
+  else{res.classList.add('ng');res.innerHTML=`❌ 不正解。正解は「${q.options[q.ans]}」<br>${q.exp}`;}
+  document.getElementById('quiz-next-btn').style.display='block';
+}
+
+function nextQuiz(){quizCurrent++;if(quizCurrent>=QUIZZES.length){showScore();return;}renderQuiz();}
+
+function showScore(){
+  document.getElementById('quiz-card').innerHTML='';
+  document.getElementById('score-card').classList.remove('hidden');
+  document.getElementById('score-num').textContent=quizScore;
+  const p=quizScore/QUIZZES.length;
+  document.getElementById('score-comment').textContent=p===1?'満点！九州地方マスター確定！🏆':p>=0.8?'すごい！あと少しで完璧！':p>=0.6?'合格ライン！雑学を読み直してみよう。':p>=0.4?'もう少し！雑学に戻って復習しよう。':'雑学をもう一度ゆっくり読もう！';
+}
+
+function retryQuiz(){quizCurrent=0;quizScore=0;document.getElementById('score-card').classList.add('hidden');renderQuiz();}
+
+init();
+</script>
+</body>
+</html>
